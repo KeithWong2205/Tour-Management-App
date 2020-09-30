@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tour_management/controllers/authentication/auth.dart';
+
+//Home screen where there is a bottom tab navi
+class HomeTabNavi extends StatefulWidget {
+  @override
+  State<HomeTabNavi> createState() => _HomeTabNaviState();
+}
+
+class _HomeTabNaviState extends State<HomeTabNavi> {
+  int currentIndex = 0;
+  List<Widget> tabs = [];
+  onTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: RaisedButton(
+            onPressed: () =>
+                BlocProvider.of<AuthBloc>(context).add(LoggedOut())),
+      ),
+    );
+  }
+}

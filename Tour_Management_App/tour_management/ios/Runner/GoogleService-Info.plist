@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>456660906551-kc7nul3ek5mot2ktvhvf167a9tt4ucsk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.456660906551-kc7nul3ek5mot2ktvhvf167a9tt4ucsk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBjtx3N3sKXT4GTJDTeAF6Zu71Sw7Wbjyc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>456660906551</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.keith.tourManagement</string>
+	<key>PROJECT_ID</key>
+	<string>tour-management-app-455e2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tour-management-app-455e2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:456660906551:ios:88c4fecef5a2e17ee945b2</string>
+	<key>DATABASE_URL</key>
+	<string>https://tour-management-app-455e2.firebaseio.com</string>
+</dict>
+</plist>
