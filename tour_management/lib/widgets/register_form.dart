@@ -72,10 +72,10 @@ class _RegisterFormState extends State<RegisterForm> {
                           child: Form(
                               child: ListView(children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
+                                padding: EdgeInsets.symmetric(vertical: 0),
                                 child: Image.asset('assets/logo.png')),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5),
+                                padding: EdgeInsets.symmetric(vertical: 2),
                                 child: TextFormField(
                                     controller: _nameField,
                                     decoration: nameFieldStyle(),
@@ -85,7 +85,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                         FocusScope.of(context)
                                             .requestFocus(phone))),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
+                              padding: EdgeInsets.symmetric(vertical: 2),
                               child: TextFormField(
                                 focusNode: phone,
                                 controller: _phoneField,
@@ -97,7 +97,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
+                              padding: EdgeInsets.symmetric(vertical: 2),
                               child: TextFormField(
                                   focusNode: email,
                                   controller: _emailField,
@@ -115,7 +115,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                           .requestFocus(password)),
                             ),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5),
+                                padding: EdgeInsets.symmetric(vertical: 2),
                                 child: TextFormField(
                                     focusNode: password,
                                     controller: _passwordField,
@@ -141,12 +141,12 @@ class _RegisterFormState extends State<RegisterForm> {
                               ),
                             ),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5),
+                                padding: EdgeInsets.symmetric(vertical: 2),
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text('Already have an account?',
-                                          style: TextStyle(fontSize: 14)),
+                                          style: TextStyle(fontSize: 16)),
                                       PopBackButton()
                                     ]))
                           ])))));

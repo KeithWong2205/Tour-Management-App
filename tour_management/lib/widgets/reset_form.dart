@@ -62,7 +62,7 @@ class _ResetFormState extends State<ResetForm> {
                                 padding: EdgeInsets.symmetric(vertical: 25),
                                 child: Image.asset('assets/logo.png')),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
+                              padding: EdgeInsets.symmetric(vertical: 10),
                               child: TextFormField(
                                 controller: _recoverField,
                                 decoration: emailFieldStyle(),
@@ -81,7 +81,7 @@ class _ResetFormState extends State<ResetForm> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
+                              padding: EdgeInsets.symmetric(vertical: 10),
                               child: ResetButton(
                                 onTapped: isResetButtonEnabled(state)
                                     ? _onSubmitted
@@ -89,12 +89,12 @@ class _ResetFormState extends State<ResetForm> {
                               ),
                             ),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5),
+                                padding: EdgeInsets.symmetric(vertical: 2),
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text('Remember your password?',
-                                          style: TextStyle(fontSize: 14)),
+                                          style: TextStyle(fontSize: 16)),
                                       PopBackButton()
                                     ]))
                           ])))));

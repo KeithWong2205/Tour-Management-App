@@ -6,7 +6,7 @@ InputDecoration emailFieldStyle() {
       fillColor: Colors.white.withOpacity(0.3),
       icon: Icon(
         Icons.mail,
-        color: Colors.black,
+        color: Colors.white,
       ),
       hintText: 'Enter your email',
       labelText: 'Email',
@@ -19,7 +19,7 @@ InputDecoration nameFieldStyle() {
       fillColor: Colors.white.withOpacity(0.3),
       icon: Icon(
         Icons.people,
-        color: Colors.black,
+        color: Colors.white,
       ),
       hintText: 'Enter your name',
       labelText: 'Name',
@@ -32,7 +32,7 @@ InputDecoration phoneFieldStyle() {
       fillColor: Colors.white.withOpacity(0.3),
       icon: Icon(
         Icons.phone,
-        color: Colors.black,
+        color: Colors.white,
       ),
       hintText: 'Enter your phone',
       labelText: 'Phone',
@@ -45,7 +45,7 @@ InputDecoration passswordFieldStyle() {
       fillColor: Colors.white.withOpacity(0.3),
       icon: Icon(
         Icons.lock,
-        color: Colors.black,
+        color: Colors.white,
       ),
       hintText: 'Enter your password',
       labelText: 'Password',

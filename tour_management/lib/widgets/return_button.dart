@@ -6,7 +6,10 @@ class PopBackButton extends StatelessWidget {
     return FlatButton(
       child: Text(
         'Login here!',
-        style: TextStyle(decoration: TextDecoration.underline),
+        style: TextStyle(
+            decoration: TextDecoration.underline,
+            color: Colors.green,
+            fontSize: 16),
       ),
       onPressed: () => Navigator.of(context).pop(),
     );

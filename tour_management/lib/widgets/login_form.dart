@@ -68,10 +68,10 @@ class _LoginFormState extends State<LoginForm> {
                           child: Form(
                               child: ListView(children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 2),
+                                padding: EdgeInsets.symmetric(vertical: 0),
                                 child: Image.asset('assets/logo.png')),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 2),
+                              padding: EdgeInsets.symmetric(vertical: 4),
                               child: TextFormField(
                                 controller: _emailField,
                                 decoration: emailFieldStyle(),
@@ -89,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 2),
+                                padding: EdgeInsets.symmetric(vertical: 4),
                                 child: TextFormField(
                                   focusNode: password,
                                   controller: _passwordField,
@@ -109,14 +109,14 @@ class _LoginFormState extends State<LoginForm> {
                                   },
                                 )),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 2),
+                                padding: EdgeInsets.symmetric(vertical: 4),
                                 child: LoginButton(
                                   onPressed: loginButtonEnabled(state)
                                       ? _onFormSubmitted
                                       : null,
                                 )),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 2),
+                              padding: EdgeInsets.symmetric(vertical: 4),
                               child: ForgotPassButton(firebaseService: _users),
                             ),
                             Padding(
@@ -124,7 +124,10 @@ class _LoginFormState extends State<LoginForm> {
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("Don't have an account?"),
+                                      Text(
+                                        "Don't have an account?",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
                                       RegisterButton(firebaseService: _users)
                                     ]))
                           ])))));

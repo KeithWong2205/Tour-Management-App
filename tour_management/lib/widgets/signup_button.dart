@@ -10,10 +10,10 @@ class SignUpButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       disabledColor: Colors.grey,
-      disabledTextColor: Colors.black,
+      disabledTextColor: Colors.black.withOpacity(0.3),
       height: 50,
-      color: Colors.white,
-      textColor: Colors.blue,
+      color: Colors.yellow,
+      textColor: Colors.black,
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       onPressed: _onPressed,

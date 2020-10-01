@@ -15,7 +15,10 @@ class RegisterButton extends StatelessWidget {
     return FlatButton(
       child: Text(
         'Sign-up here!',
-        style: TextStyle(decoration: TextDecoration.underline),
+        style: TextStyle(
+            decoration: TextDecoration.underline,
+            color: Colors.blue,
+            fontSize: 16),
       ),
       onPressed: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
