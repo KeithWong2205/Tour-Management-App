@@ -4,7 +4,9 @@ import 'package:equatable/equatable.dart';
 //Events on authentication
 @immutable
 abstract class AuthEvent extends Equatable {
-  AuthEvent([List props = const []]) : super(props);
+  const AuthEvent();
+  @override
+  List<Object> get props => [];
 }
 
 //When the app started

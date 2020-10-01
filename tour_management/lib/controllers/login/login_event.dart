@@ -4,14 +4,17 @@ import 'package:equatable/equatable.dart';
 //Events of login
 @immutable
 abstract class LoginEvent extends Equatable {
-  LoginEvent([List props = const []]) : super(props);
+  const LoginEvent();
+  @override
+  List<Object> get props => [];
 }
 
 //When the email is changed
 class EmailChanged extends LoginEvent {
   final String email;
-  EmailChanged({@required this.email}) : super([email]);
-
+  const EmailChanged({@required this.email});
+  @override
+  List<Object> get props => [email];
   @override
   String toString() => 'Email is changed {with email: $email}';
 }
@@ -19,8 +22,9 @@ class EmailChanged extends LoginEvent {
 //When the password is changed
 class PasswordChanged extends LoginEvent {
   final String password;
-  PasswordChanged({@required this.password}) : super([password]);
-
+  const PasswordChanged({@required this.password});
+  @override
+  List<Object> get props => [password];
   @override
   String toString() => 'Password is changes {with password: $password}';
 }
@@ -29,9 +33,9 @@ class PasswordChanged extends LoginEvent {
 class Submitted extends LoginEvent {
   final String email;
   final String password;
-  Submitted({@required this.email, @required this.password})
-      : super([email, password]);
-
+  const Submitted({@required this.email, @required this.password});
+  @override
+  List<Object> get props => [email, password];
   @override
   String toString() =>
       'Login form submitted {email: $email, password: $password}';
@@ -41,9 +45,9 @@ class Submitted extends LoginEvent {
 class LoginWithEmailPassword extends LoginEvent {
   final String email;
   final String password;
-  LoginWithEmailPassword({@required this.email, @required this.password})
-      : super([email, password]);
-
+  const LoginWithEmailPassword({@required this.email, @required this.password});
+  @override
+  List<Object> get props => [email, password];
   @override
   String toString() => 'Login pressed {email: $email, password: $password}';
 }

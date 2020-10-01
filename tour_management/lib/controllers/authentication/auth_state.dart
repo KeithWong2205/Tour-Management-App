@@ -4,7 +4,9 @@ import 'package:equatable/equatable.dart';
 //States of authentication
 @immutable
 abstract class AuthState extends Equatable {
-  AuthState([List props = const []]) : super(props);
+  const AuthState();
+  @override
+  List<Object> get props => [];
 }
 
 //State of uninitialize
@@ -16,7 +18,9 @@ class Uninitialized extends AuthState {
 //State of authenticated aka logged in
 class Authenticated extends AuthState {
   final String displayName;
-  Authenticated(this.displayName) : super([displayName]);
+  const Authenticated(this.displayName);
+  @override
+  List<Object> get props => [displayName];
   @override
   String toString() => 'Authenticated {with displayName: $displayName}';
 }

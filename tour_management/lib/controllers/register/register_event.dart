@@ -4,13 +4,17 @@ import 'package:meta/meta.dart';
 //Events of register scene
 @immutable
 abstract class RegEvent extends Equatable {
-  RegEvent([List props = const []]) : super(props);
+  const RegEvent();
+  @override
+  List<Object> get props => [];
 }
 
 //Event of email change
 class EmailChanged extends RegEvent {
   final String email;
-  EmailChanged({@required this.email}) : super([email]);
+  const EmailChanged({@required this.email});
+  @override
+  List<Object> get props => [email];
   @override
   String toString() => 'Email changed {with email: $email}';
 }
@@ -18,7 +22,9 @@ class EmailChanged extends RegEvent {
 //Event of password change
 class PasswordChanged extends RegEvent {
   final String password;
-  PasswordChanged({@required this.password}) : super([password]);
+  const PasswordChanged({@required this.password});
+  @override
+  List<Object> get props => [password];
   @override
   String toString() => 'Password changed {with password: $password}';
 }
@@ -26,7 +32,9 @@ class PasswordChanged extends RegEvent {
 //Event of name change
 class NameChanged extends RegEvent {
   final String name;
-  NameChanged({@required this.name}) : super([name]);
+  const NameChanged({@required this.name});
+  @override
+  List<Object> get props => [name];
   @override
   String toString() => 'Name changed {with name: $name}';
 }
@@ -34,7 +42,9 @@ class NameChanged extends RegEvent {
 //Event of phone change
 class PhoneChanged extends RegEvent {
   final String phone;
-  PhoneChanged({@required this.phone}) : super([phone]);
+  const PhoneChanged({@required this.phone});
+  @override
+  List<Object> get props => [phone];
   @override
   String toString() => 'Phone changed {with phone: $phone}';
 }
@@ -45,12 +55,13 @@ class Submitted extends RegEvent {
   final String password;
   final String name;
   final String phone;
-  Submitted({
-    @required this.email,
-    @required this.password,
-    @required this.name,
-    @required this.phone,
-  }) : super([email, password, name, phone]);
+  const Submitted(
+      {@required this.email,
+      @required this.password,
+      @required this.name,
+      @required this.phone});
+  @override
+  List<Object> get props => [email, password, name, phone];
   @override
   String toString() =>
       'Submitted {with email: $email, password: $password, name: $name, phone: $phone}';
