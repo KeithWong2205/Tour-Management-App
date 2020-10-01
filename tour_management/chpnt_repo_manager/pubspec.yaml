@@ -1,14 +1,17 @@
 name: chpnt_repo_manager
-description: A new Flutter package.
+description: Package for the checkpoint repository of the manager.
 version: 0.0.1
-author:
-homepage:
+
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
   flutter: ">=1.17.0 <2.0.0"
 
 dependencies:
+  cloud_firestore: ^0.13.6
+  rxdart: ^0.23.1
+  equatable: ^0.3.0
+  firebase_core: ^0.4.0
   flutter:
     sdk: flutter
 
