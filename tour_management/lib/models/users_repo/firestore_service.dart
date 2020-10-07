@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 
 //Firestore service for handling user data
 class FireStoreService {

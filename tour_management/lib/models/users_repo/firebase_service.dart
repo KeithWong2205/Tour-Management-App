@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
+import 'package:tour_management/views/guide_page.dart';
+import 'package:tour_management/views/manager_page.dart';
 
 //Firebase service for login handling
 class FireBaseService {
@@ -63,9 +67,31 @@ class FireBaseService {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
+  //Fetching the user data
   Future _fetchCurrentUser(FirebaseUser user) async {
     if (user != null) {
       _currUser = await _fireStoreService.getUser(user.uid);
     }
+  }
+
+  //Checking user role
+  checkRoleUser(BuildContext context) {
+    FirebaseAuth.instance.currentUser().then((user) {
+      Firestore.instance
+          .collection('users')
+          .where('id', isEqualTo: user.uid)
+          .getDocuments()
+          .then((docs) {
+        if (docs.documents[0].exists) {
+          if (docs.documents[0].data['role'] == 'manager') {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => ManagerCheckPointPage()));
+          } else if (docs.documents[0].data['role'] == 'guide') {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => GuideCheckPointPage()));
+          }
+        }
+      });
+    });
   }
 }

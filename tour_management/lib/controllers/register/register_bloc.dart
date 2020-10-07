@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/controllers/register/register.dart';
 import 'package:tour_management/controllers/controllers.dart';
 

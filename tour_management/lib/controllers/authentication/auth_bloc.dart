@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:tour_management/controllers/authentication/auth.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 
 //Business logic bloc of authentication
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

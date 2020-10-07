@@ -4,7 +4,7 @@ import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/controllers/login/login.dart';
 import 'package:tour_management/styles/styles.dart';
 import 'package:tour_management/widgets/widgets.dart';
-import 'package:user_repository/source/firebase_service.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 
 //Building Login form widget
 class LoginForm extends StatefulWidget {

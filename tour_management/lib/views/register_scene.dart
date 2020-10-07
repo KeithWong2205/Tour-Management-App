@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tour_management/controllers/register/register.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/widgets/widgets.dart';
 
 //Widget for the register scene

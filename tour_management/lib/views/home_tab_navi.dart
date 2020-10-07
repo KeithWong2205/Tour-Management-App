@@ -14,7 +14,7 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: welcomeAppBar(),
-      drawer: mainDrawer(),
+      drawer: MainDrawer(),
       body: Center(
         child: RaisedButton(
             onPressed: () =>

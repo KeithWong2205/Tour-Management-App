@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tour_management/controllers/login/login.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/controllers/controllers.dart';
 
 //Business logic bloc of Login

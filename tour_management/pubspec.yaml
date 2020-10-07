@@ -11,8 +11,8 @@ dependencies:
   flutter_bloc: ^5.0.0
   rxdart: ^0.23.1
   equatable: ^1.0.0
-  user_repository:
-    path: user_repository
+  firebase_auth: ^0.16.0
+  cloud_firestore: ^0.13.6
   chpnt_repo_manager:
     path: chpnt_repo_manager
   flutter:

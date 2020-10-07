@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tour_management/controllers/controllers.dart';
 import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/views/views.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();

@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tour_management/controllers/reset/reset.dart';
 import 'package:tour_management/controllers/controllers.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:tour_management/models/users_repo/users_repo.dart';
 
 //Business logic bloc for reset password
 class ResetBloc extends Bloc<ResetEvent, ResetState> {
