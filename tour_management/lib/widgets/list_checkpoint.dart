@@ -12,11 +12,8 @@ class ListCheckPoints extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CheckPointListBloc, CheckPointListState>(
-      // ignore: missing_return
       builder: (context, state) {
-        if (state is CheckPointListLoadin) {
-          return CircularProgressIndicator();
-        } else if (state is CheckPointListLoaded) {
+        if (state is CheckPointListLoaded) {
           final checkpoints = state.checkpoints;
           return Scaffold(
             body: ListView.builder(
@@ -37,7 +34,9 @@ class ListCheckPoints extends StatelessWidget {
                   onTap: () async {
                     final removedTodo = await Navigator.of(context)
                         .push(MaterialPageRoute(builder: (_) {
-                      return CheckpointDetailScene();
+                      return CheckpointDetailScene(
+                        id: checkpoint.pointId,
+                      );
                     }));
                     if (removedTodo != null) {
                       Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
@@ -57,7 +56,8 @@ class ListCheckPoints extends StatelessWidget {
               },
             ),
           );
-        }
+        } else
+          return CircularProgressIndicator();
       },
     );
   }

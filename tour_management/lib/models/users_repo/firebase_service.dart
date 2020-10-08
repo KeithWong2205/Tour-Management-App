@@ -84,10 +84,10 @@ class FireBaseService {
         if (docs.documents[0].exists) {
           if (docs.documents[0].data['role'] == 'manager') {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => ManagerCheckPointPage()));
+                builder: (context) => ManagerCheckPointPage()));
           } else if (docs.documents[0].data['role'] == 'guide') {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => GuideCheckPointPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => GuideCheckPointPage()));
           }
         }
       });

@@ -46,9 +46,9 @@ class ArchSampleKeys {
   static const statsNumCompleted = Key('__statsCompletedItems__');
 
   // Details Screen
-  static const editTodoFab = Key('__editTodoFab__');
-  static const deleteTodoButton = Key('__deleteTodoFab__');
-  static const todoDetailsScreen = Key('__todoDetailsScreen__');
+  static const editCheckpointFAB = Key('__editTodoFab__');
+  static const deleteCheckpointButton = Key('__deleteTodoFab__');
+  static const checkpointDetailsScene = Key('__todoDetailsScreen__');
   static final detailsTodoItemCheckbox = Key('DetailsTodo__Checkbox');
   static final detailsTodoItemTask = Key('DetailsTodo__Task');
   static final detailsTodoItemPlace = Key('DetailsTodo__Place');
@@ -56,7 +56,7 @@ class ArchSampleKeys {
   static final detailsTodoItemNote = Key('DetailsTodo__Note');
 
   // Add Screen
-  static const addTodoScreen = Key('__addTodoScreen__');
+  static const addCheckpointScene = Key('__addTodoScreen__');
   static const saveNewTodo = Key('__saveNewTodo__');
   static const nameField = Key('__taskField__');
   static const placeField = Key('__placeField__');
@@ -65,6 +65,6 @@ class ArchSampleKeys {
   static const noteField = Key('__noteField__');
 
   // Edit Screen
-  static const editTodoScreen = Key('__editTodoScreen__');
-  static const saveTodoFab = Key('__saveTodoFab__');
+  static const editCheckpointScene = Key('__editTodoScreen__');
+  static const saveCheckpointFAB = Key('__saveTodoFab__');
 }

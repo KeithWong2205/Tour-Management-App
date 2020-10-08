@@ -12,5 +12,4 @@ export './app_bars.dart';
 export './drawer_list.dart';
 export './list_checkpoint.dart';
 export './checkpoint.dart';
-export './datetime_picker.dart';
 //Barrel export widgets
