@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 
+//The drawer for every scene
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -7,16 +7,24 @@ class CheckpointEntity extends Equatable {
   final String pointId;
   final String pointName;
   final String pointLocal;
+  final DateTime pointDatetime;
   final String pointNote;
   final String pointGroup;
   const CheckpointEntity(this.pointComplete, this.pointId, this.pointGroup,
-      this.pointName, this.pointLocal, this.pointNote);
+      this.pointName, this.pointLocal, this.pointDatetime, this.pointNote);
   @override
-  List<Object> get props =>
-      [pointComplete, pointId, pointGroup, pointName, pointLocal, pointNote];
+  List<Object> get props => [
+        pointComplete,
+        pointId,
+        pointGroup,
+        pointName,
+        pointLocal,
+        pointDatetime,
+        pointNote
+      ];
   @override
   String toString() =>
-      'Checkpoint Entity created {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, note: $pointNote}';
+      'Checkpoint Entity created {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote}';
 
   //Map the entity into Json to send to firestore
   Map<String, Object> toJson() {
@@ -26,6 +34,7 @@ class CheckpointEntity extends Equatable {
       'pointGroup': pointGroup,
       'pointName': pointName,
       'pointLocal': pointLocal,
+      'pointDatetime': pointDatetime.toString(),
       'pointNote': pointNote
     };
   }
@@ -38,6 +47,7 @@ class CheckpointEntity extends Equatable {
         json['pointGroup'] as String,
         json['pointName'] as String,
         json['pointLocal'] as String,
+        json['pointDatetime'] as DateTime,
         json['pointNote'] as String);
   }
 
@@ -49,6 +59,7 @@ class CheckpointEntity extends Equatable {
         snapshot.data['pointGroup'],
         snapshot.data['pointName'],
         snapshot.data['pointLocal'],
+        snapshot.data['pointDatetime'],
         snapshot.data['pointNote']);
   }
 
@@ -59,6 +70,7 @@ class CheckpointEntity extends Equatable {
       'pointGroup': pointGroup,
       'pointName': pointName,
       'pointLocal': pointLocal,
+      'pointDatetime': pointDatetime,
       'pointNote': pointNote
     };
   }

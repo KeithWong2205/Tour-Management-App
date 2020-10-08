@@ -3,8 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
-import 'package:tour_management/views/guide_page.dart';
-import 'package:tour_management/views/manager_page.dart';
+import 'package:tour_management/views/views.dart';
 
 //Firebase service for login handling
 class FireBaseService {
@@ -74,7 +73,7 @@ class FireBaseService {
     }
   }
 
-  //Checking user role
+  //Checking user role for checkpoint list
   checkRoleUser(BuildContext context) {
     FirebaseAuth.instance.currentUser().then((user) {
       Firestore.instance

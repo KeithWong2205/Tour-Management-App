@@ -2,6 +2,8 @@ import 'package:meta/meta.dart';
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 
 //Class for the model of the checkpoints
+enum VisibilityFilter { all, active, completed }
+
 @immutable
 class CheckpointModel {
   final bool pointComplete;
@@ -9,16 +11,19 @@ class CheckpointModel {
   final String pointGroup;
   final String pointName;
   final String pointLocal;
+  final DateTime pointDatetime;
   final String pointNote;
   CheckpointModel(this.pointName,
       {this.pointComplete = false,
       String pointId,
       String pointGroup = '0',
       String pointLocal = '',
+      DateTime pointDatetime,
       String pointNote = ''})
       : this.pointId = pointId,
         this.pointGroup = pointGroup ?? '0',
         this.pointLocal = pointLocal ?? '',
+        this.pointDatetime = pointDatetime ?? DateTime.now(),
         this.pointNote = pointNote ?? '';
 
   //Passing the parameters
@@ -28,12 +33,14 @@ class CheckpointModel {
       String name,
       String group,
       String location,
+      DateTime dateTime,
       String note}) {
     return CheckpointModel(name ?? this.pointName,
         pointComplete: complete ?? this.pointComplete,
         pointId: id ?? this.pointId,
         pointGroup: group ?? this.pointGroup,
         pointLocal: location ?? this.pointLocal,
+        pointDatetime: dateTime ?? this.pointDatetime,
         pointNote: note ?? this.pointNote);
   }
 
@@ -45,6 +52,7 @@ class CheckpointModel {
       pointGroup.hashCode ^
       pointName.hashCode ^
       pointLocal.hashCode ^
+      pointDatetime.hashCode ^
       pointNote.hashCode;
 //== operator override
   @override
@@ -57,16 +65,17 @@ class CheckpointModel {
           pointGroup == other.pointGroup &&
           pointName == other.pointName &&
           pointLocal == other.pointLocal &&
+          pointDatetime == other.pointDatetime &&
           pointNote == other.pointNote;
 
   @override
   String toString() =>
-      'Checkpoint Model {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, note: $pointNote}';
+      'Checkpoint Model {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote}';
 
   //Make model into checkpoint entity to send to firestore
   CheckpointEntity toEntity() {
-    return CheckpointEntity(
-        pointComplete, pointId, pointGroup, pointName, pointLocal, pointNote);
+    return CheckpointEntity(pointComplete, pointId, pointGroup, pointName,
+        pointLocal, pointDatetime, pointNote);
   }
 
   //Get the checkpoint model from the entity acquire from firestore
@@ -76,6 +85,7 @@ class CheckpointModel {
         pointId: entity.pointId,
         pointGroup: entity.pointGroup,
         pointLocal: entity.pointLocal,
+        pointDatetime: entity.pointDatetime,
         pointNote: entity.pointNote);
   }
 }

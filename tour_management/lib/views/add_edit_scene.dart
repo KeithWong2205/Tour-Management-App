@@ -1,0 +1,153 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:intl/intl.dart';
+import 'package:tour_management/localization/keys.dart';
+
+typedef OnSaveCallback = Function(String name, String groupID, String location,
+    DateTime dateTime, String note);
+
+class AddEditScene extends StatefulWidget {
+  final bool isEditing;
+  final OnSaveCallback onSave;
+  final CheckpointModel checkpoint;
+
+  AddEditScene(
+      {Key key,
+      @required this.onSave,
+      @required this.isEditing,
+      this.checkpoint})
+      : super(key: key ?? ArchSampleKeys.addTodoScreen);
+  @override
+  _AddEditSceneState createState() => _AddEditSceneState();
+}
+
+class _AddEditSceneState extends State<AddEditScene> {
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _name;
+  String _groupID;
+  String _location;
+  DateTime _dateTime;
+  String _note;
+  final format = DateFormat("yyyy-MM-dd HH:mm");
+  FocusNode groupField;
+  FocusNode locationField;
+  bool get isEditing => widget.isEditing;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            backgroundColor: Colors.redAccent,
+            title: Text(isEditing ? 'Checkpoint Edit' : 'Checkpoint Addition')),
+        body: GestureDetector(
+            onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
+            child: SingleChildScrollView(
+                child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Form(
+                        key: _formKey,
+                        child: ListView(children: [
+                          Text('Checkpoint Name'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            initialValue:
+                                isEditing ? widget.checkpoint.pointName : '',
+                            key: ArchSampleKeys.nameField,
+                            autofocus: !isEditing,
+                            validator: (val) {
+                              return val.trim().isEmpty
+                                  ? 'A name is required'
+                                  : null;
+                            },
+                            onSaved: (value) => _name = value,
+                            onFieldSubmitted: (value) =>
+                                FocusScope.of(context).requestFocus(groupField),
+                          ),
+                          Text('Group of Attendee'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            initialValue:
+                                isEditing ? widget.checkpoint.pointGroup : '',
+                            key: ArchSampleKeys.groupField,
+                            validator: (val) {
+                              return val.trim().isEmpty
+                                  ? 'Group ID is required'
+                                  : null;
+                            },
+                            onSaved: (value) => _groupID = value,
+                            onFieldSubmitted: (value) => FocusScope.of(context)
+                                .requestFocus(locationField),
+                          ),
+                          Text('Checkpoint Location'),
+                          TextFormField(
+                            textInputAction: TextInputAction.done,
+                            initialValue:
+                                isEditing ? widget.checkpoint.pointLocal : '',
+                            key: ArchSampleKeys.placeField,
+                            validator: (val) {
+                              return val.trim().isEmpty
+                                  ? 'Location is required'
+                                  : null;
+                            },
+                            onSaved: (value) => _location = value,
+                            onFieldSubmitted: (value) => FocusScope.of(context)
+                                .requestFocus(new FocusNode()),
+                          ),
+                          Text('Checkpoint Date & Time'),
+                          DateTimeField(
+                            style: TextStyle(
+                                fontSize: 18, fontStyle: FontStyle.italic),
+                            format: format,
+                            onShowPicker: (context, currentValue) async {
+                              final date = await showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(1900),
+                                  initialDate: isEditing
+                                      ? widget.checkpoint.pointDatetime
+                                      : DateTime.now(),
+                                  lastDate: DateTime(2100));
+                              if (date != null) {
+                                final time = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(isEditing
+                                      ? widget.checkpoint.pointDatetime
+                                      : DateTime.now()),
+                                );
+                                return _dateTime =
+                                    DateTimeField.combine(date, time);
+                              } else {
+                                return currentValue;
+                              }
+                            },
+                          ),
+                          Text('Checkpoint Notes'),
+                          TextFormField(
+                            initialValue:
+                                isEditing ? widget.checkpoint.pointNote : '',
+                            key: ArchSampleKeys.noteField,
+                            maxLines: 10,
+                            onSaved: (value) => _note = value,
+                          )
+                        ]))))),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.red,
+          key: isEditing
+              ? ArchSampleKeys.editTodoFab
+              : ArchSampleKeys.saveTodoFab,
+          icon: Icon(isEditing ? Icons.check : Icons.save),
+          foregroundColor: Colors.white,
+          label: Text(isEditing ? 'Done' : 'Save'),
+          onPressed: () {
+            if (_formKey.currentState.validate()) {
+              _formKey.currentState.save();
+              widget.onSave(_name, _groupID, _location, _dateTime, _note);
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Checkpoint Saved'),
+              ));
+              Navigator.pop(context);
+            }
+          },
+        ));
+  }
+}

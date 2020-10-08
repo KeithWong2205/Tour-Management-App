@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 
+//Collection of snackbars
 Widget registerSnack() {
   return SnackBar(
     content: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -54,4 +56,17 @@ Widget failedResetSnack() {
         children: [Text('Failed to send'), Icon(Icons.error)]),
     backgroundColor: Colors.red,
   );
+}
+
+class CheckpointDeleteSnack extends SnackBar {
+  CheckpointDeleteSnack(
+      {Key key,
+      @required CheckpointModel checkpoint,
+      @required VoidCallback onUndo})
+      : super(
+            key: key,
+            content: Text('Checkpoint deleted'),
+            duration: Duration(seconds: 3),
+            backgroundColor: Colors.red,
+            action: SnackBarAction(label: 'Undo', onPressed: onUndo));
 }
