@@ -23,6 +23,7 @@ class CheckpointDetailScene extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text('Checkpoint Details'),
+            backgroundColor: Colors.red,
             actions: [
               IconButton(
                 icon: Icon(Icons.delete),

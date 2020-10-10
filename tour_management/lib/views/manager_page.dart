@@ -15,8 +15,8 @@ class ManagerCheckPointPage extends StatelessWidget {
           Navigator.pushNamed(context, '/addTodo');
         },
         icon: Icon(Icons.add),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.blue,
+        backgroundColor: Colors.red,
+        foregroundColor: Colors.white,
         label: Text('Add C.Point'),
       ),
     );
