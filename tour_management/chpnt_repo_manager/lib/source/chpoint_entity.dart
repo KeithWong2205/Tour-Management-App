@@ -53,13 +53,14 @@ class CheckpointEntity extends Equatable {
 
   //Get the checkpoint entity from firestore document snapshot
   static CheckpointEntity fromSnapshot(DocumentSnapshot snapshot) {
+    DateTime pointDate = snapshot.data['pointDatetime'].toDate();
     return CheckpointEntity(
         snapshot.data['pointComplete'],
         snapshot.documentID,
         snapshot.data['pointGroup'],
         snapshot.data['pointName'],
         snapshot.data['pointLocal'],
-        snapshot.data['pointDatetime'],
+        pointDate,
         snapshot.data['pointNote']);
   }
 

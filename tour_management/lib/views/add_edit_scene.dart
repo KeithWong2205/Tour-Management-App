@@ -141,7 +141,6 @@ class _AddEditSceneState extends State<AddEditScene> {
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
               widget.onSave(_name, _groupID, _location, _dateTime, _note);
-
               Navigator.pop(context);
             }
           },

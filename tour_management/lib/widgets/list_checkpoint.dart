@@ -15,49 +15,47 @@ class ListCheckPoints extends StatelessWidget {
       builder: (context, state) {
         if (state is CheckPointListLoaded) {
           final checkpoints = state.checkpoints;
-          return Scaffold(
-            body: ListView.builder(
-              itemCount: checkpoints.length,
-              itemBuilder: (BuildContext context, int index) {
-                final checkpoint = checkpoints[index];
-                return Checkpoint(
-                  chkpoint: checkpoint,
-                  onDismissed: (direction) {
-                    BlocProvider.of<CheckpointManBloc>(context)
-                        .add(CheckpointManDelete(checkpoint));
+          return ListView.builder(
+            itemCount: checkpoints.length,
+            itemBuilder: (context, index) {
+              final checkpoint = checkpoints[index];
+              return Checkpoint(
+                chkpoint: checkpoint,
+                onDismissed: (direction) {
+                  BlocProvider.of<CheckpointManBloc>(context)
+                      .add(CheckpointManDelete(checkpoint));
+                  Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
+                      checkpoint: checkpoint,
+                      onUndo: () => BlocProvider.of<CheckpointManBloc>(context)
+                          .add(CheckpointManAdded(checkpoint))));
+                },
+                onTap: () async {
+                  final removedTodo = await Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) {
+                    return CheckpointDetailScene(
+                      id: checkpoint.pointId,
+                    );
+                  }));
+                  if (removedTodo != null) {
                     Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
+                        key: ArchSampleKeys.snackbar,
                         checkpoint: checkpoint,
                         onUndo: () =>
                             BlocProvider.of<CheckpointManBloc>(context)
-                                .add(CheckpointManAdded(checkpoint))));
-                  },
-                  onTap: () async {
-                    final removedTodo = await Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) {
-                      return CheckpointDetailScene(
-                        id: checkpoint.pointId,
-                      );
-                    }));
-                    if (removedTodo != null) {
-                      Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
-                          key: ArchSampleKeys.snackbar,
-                          checkpoint: checkpoint,
-                          onUndo: () =>
-                              BlocProvider.of<CheckpointManBloc>(context)
-                                  .add(CheckpointManDelete(checkpoint))));
-                    }
-                  },
-                  onCheckboxChanged: (_) {
-                    BlocProvider.of<CheckpointManBloc>(context).add(
-                        CheckpointManUpdated(checkpoint.copyWith(
-                            complete: !checkpoint.pointComplete)));
-                  },
-                );
-              },
-            ),
+                                .add(CheckpointManDelete(checkpoint))));
+                  }
+                },
+                onCheckboxChanged: (_) {
+                  BlocProvider.of<CheckpointManBloc>(context).add(
+                      CheckpointManUpdated(checkpoint.copyWith(
+                          complete: !checkpoint.pointComplete)));
+                },
+              );
+            },
           );
-        } else
-          return CircularProgressIndicator();
+        } else if (state is CheckPointListLoadin) {
+          return Center(child: CircularProgressIndicator());
+        }
       },
     );
   }
