@@ -1,7 +1,6 @@
 library group_repo;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+//Barrel export group repository
+export './source/firebase_group_service.dart';
+export './source/group_entity.dart';
+export './source/group_model.dart';

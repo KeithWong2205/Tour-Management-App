@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import '../chpnt_repo_manager.dart';
 
 //Class for the model of the checkpoints
 enum VisibilityFilter { all, active, completed }

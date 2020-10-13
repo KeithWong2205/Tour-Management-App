@@ -18,6 +18,8 @@ dependencies:
   grouped_list: ^3.5.0
   chpnt_repo_manager:
     path: chpnt_repo_manager
+  group_repo:
+    path: group_repo
   flutter:
     sdk: flutter
 

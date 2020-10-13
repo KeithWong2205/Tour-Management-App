@@ -1,18 +1,19 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import '../chpnt_repo_manager.dart';
 
+//Class for handling checkpoint to firestore
 class FirebaseCheckpointService {
   final checkpointCollection = Firestore.instance.collection('checkpoints');
 
   //Add a checkpoint to firestore document
-  Future<void> addNewCheckpoint(CheckpointModel checkpoint) {
-    return checkpointCollection.add(checkpoint.toEntity().toDocument());
+  Future<void> addNewCheckpoint(CheckpointModel addedCheckpoint) {
+    return checkpointCollection.add(addedCheckpoint.toEntity().toDocument());
   }
 
   //Delete a checkpoint
-  Future<void> deleteCheckpoint(CheckpointModel checkpoint) async {
-    return checkpointCollection.document(checkpoint.pointId).delete();
+  Future<void> deleteCheckpoint(CheckpointModel deletedCheckpoint) async {
+    return checkpointCollection.document(deletedCheckpoint.pointId).delete();
   }
 
   //Load the checkpoints into a stream

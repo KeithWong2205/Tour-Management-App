@@ -1,7 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:group_repo/group_repo.dart';
-
 void main() {
   test('adds one to input values', () {
     final calculator = Calculator();
@@ -10,4 +8,10 @@ void main() {
     expect(calculator.addOne(0), 1);
     expect(() => calculator.addOne(null), throwsNoSuchMethodError);
   });
+}
+
+/// A Calculator.
+class Calculator {
+  /// Returns [value] plus 1.
+  int addOne(int value) => value + 1;
 }
