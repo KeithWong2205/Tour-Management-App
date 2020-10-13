@@ -26,18 +26,27 @@ class ListCheckPoints extends StatelessWidget {
             order: GroupedListOrder.ASC,
             useStickyGroupSeparators: true,
             groupSeparatorBuilder: (value) => Container(
-              color: Colors.red,
-              child: Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: Text(
-                    value,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  )),
-            ),
+                height: 80,
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        border: Border.all(color: Colors.redAccent),
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            value,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.white,
+                                fontStyle: FontStyle.italic),
+                          )),
+                    ))),
             itemBuilder: (context, element) {
               return Checkpoint(
                 chkpoint: element,

@@ -39,7 +39,8 @@ class _AddEditSceneState extends State<AddEditScene> {
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.redAccent,
-            title: Text(isEditing ? 'Checkpoint Edit' : 'Checkpoint Addition')),
+            title: Text(isEditing ? 'Checkpoint Edit' : 'Checkpoint Addition',
+                style: TextStyle(fontSize: 24))),
         body: GestureDetector(
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: Padding(
@@ -47,7 +48,30 @@ class _AddEditSceneState extends State<AddEditScene> {
                 child: Form(
                     key: _formKey,
                     child: ListView(children: [
-                      Text('Checkpoint Name'),
+                      Container(
+                        height: 250,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(9),
+                            child: Container(
+                              width: 450,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Checkpoint Name',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
                       TextFormField(
                         textInputAction: TextInputAction.next,
                         initialValue:
@@ -63,7 +87,14 @@ class _AddEditSceneState extends State<AddEditScene> {
                         onFieldSubmitted: (value) =>
                             FocusScope.of(context).requestFocus(groupField),
                       ),
-                      Text('Group of Attendee'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Group of Attendee',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
                       TextFormField(
                         textInputAction: TextInputAction.next,
                         initialValue:
@@ -78,7 +109,14 @@ class _AddEditSceneState extends State<AddEditScene> {
                         onFieldSubmitted: (value) =>
                             FocusScope.of(context).requestFocus(locationField),
                       ),
-                      Text('Checkpoint Location'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Checkpoint Location',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
                       TextFormField(
                         textInputAction: TextInputAction.done,
                         initialValue:
@@ -93,7 +131,14 @@ class _AddEditSceneState extends State<AddEditScene> {
                         onFieldSubmitted: (value) => FocusScope.of(context)
                             .requestFocus(new FocusNode()),
                       ),
-                      Text('Checkpoint Date & Time'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Checkpoint Date & Time',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
                       DateTimeField(
                         style: TextStyle(
                             fontSize: 18, fontStyle: FontStyle.italic),
@@ -120,7 +165,14 @@ class _AddEditSceneState extends State<AddEditScene> {
                           }
                         },
                       ),
-                      Text('Checkpoint Notes'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Checkpoint Notes',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
                       TextFormField(
                         initialValue:
                             isEditing ? widget.checkpoint.pointNote : '',

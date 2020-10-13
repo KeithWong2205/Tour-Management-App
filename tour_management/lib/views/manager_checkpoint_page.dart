@@ -5,10 +5,7 @@ class ManagerCheckPointPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Checkpoints Panel'),
-        backgroundColor: Colors.red,
-      ),
+      appBar: managerCheckpointAppbar(),
       body: ListCheckPoints(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

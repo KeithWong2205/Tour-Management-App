@@ -6,3 +6,12 @@ AppBar welcomeAppBar() {
     title: Text('Welcome'),
   );
 }
+
+AppBar managerCheckpointAppbar() {
+  return AppBar(
+      title: Text(
+        'Checkpoint Panel',
+        style: TextStyle(fontSize: 24),
+      ),
+      backgroundColor: Colors.redAccent);
+}

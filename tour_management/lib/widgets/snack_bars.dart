@@ -17,7 +17,7 @@ Widget loginSnack() {
     content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [Text('Login in progress...'), CircularProgressIndicator()]),
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.black,
   );
 }
 
@@ -45,7 +45,7 @@ Widget resetSnack() {
       Text('Sending recover steps to your email...'),
       CircularProgressIndicator()
     ]),
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.black,
   );
 }
 
@@ -65,8 +65,11 @@ class CheckpointDeleteSnack extends SnackBar {
       @required VoidCallback onUndo})
       : super(
             key: key,
-            content: Text('Checkpoint deleted'),
+            content: Text(
+              'Checkpoint deleted',
+              style: TextStyle(color: Colors.redAccent),
+            ),
             duration: Duration(seconds: 3),
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.black,
             action: SnackBarAction(label: 'Undo', onPressed: onUndo));
 }

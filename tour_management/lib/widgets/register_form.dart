@@ -63,7 +63,7 @@ class _RegisterFormState extends State<RegisterForm> {
             bloc: _regBloc,
             builder: (BuildContext context, RegState state) {
               return Container(
-                  decoration: screenBackground(),
+                  color: Colors.blue,
                   child: Padding(
                       padding: EdgeInsets.all(20.0),
                       child: GestureDetector(
@@ -72,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           child: Form(
                               child: ListView(children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 0),
+                                padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
                                 child: Image.asset('assets/logo.png')),
                             Padding(
                                 padding: EdgeInsets.symmetric(vertical: 2),

@@ -8,7 +8,7 @@ class PopBackButton extends StatelessWidget {
         'Login here!',
         style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.green,
+            color: Colors.white,
             fontSize: 16),
       ),
       onPressed: () => Navigator.of(context).pop(),

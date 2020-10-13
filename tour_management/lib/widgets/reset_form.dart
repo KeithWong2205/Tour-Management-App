@@ -15,7 +15,7 @@ class _ResetFormState extends State<ResetForm> {
   ResetBloc _resetBloc;
   bool get isFilled => _recoverField.text.isNotEmpty;
   bool isResetButtonEnabled(ResetState state) =>
-      state.isFormValid && !state.isSubmitting;
+      state.isFormValid && isFilled && !state.isSubmitting;
 
 //Initial state of the form
   @override
@@ -50,7 +50,7 @@ class _ResetFormState extends State<ResetForm> {
             bloc: _resetBloc,
             builder: (BuildContext context, ResetState state) {
               return Container(
-                  decoration: screenBackground(),
+                  color: Colors.blue,
                   child: Padding(
                       padding: EdgeInsets.all(20.0),
                       child: GestureDetector(

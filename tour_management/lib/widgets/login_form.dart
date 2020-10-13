@@ -59,7 +59,7 @@ class _LoginFormState extends State<LoginForm> {
             bloc: _loginBloc,
             builder: (BuildContext context, LoginState state) {
               return Container(
-                  decoration: screenBackground(),
+                  color: Colors.blue,
                   child: Padding(
                       padding: EdgeInsets.all(20.0),
                       child: GestureDetector(

@@ -29,6 +29,7 @@ class Checkpoint extends StatelessWidget {
         leading: Checkbox(
             key: ArchSampleKeys.checkpointItemCheckbox(chkpoint.pointId),
             value: chkpoint.pointComplete,
+            activeColor: Colors.redAccent,
             onChanged: onCheckboxChanged),
         title: Hero(
           tag: '${chkpoint.pointId}__heroTag',
@@ -36,13 +37,16 @@ class Checkpoint extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Text(chkpoint.pointName,
                 key: ArchSampleKeys.checkpointName(chkpoint.pointId),
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
           ),
         ),
         subtitle: Text(
           dateFormat.format(chkpoint.pointDatetime),
           key: ArchSampleKeys.checkpointTime(chkpoint.pointId),
-          style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+          style: TextStyle(
+              fontSize: 14,
+              fontStyle: FontStyle.italic,
+              color: Colors.redAccent),
         ),
       ),
     );

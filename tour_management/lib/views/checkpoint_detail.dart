@@ -22,8 +22,11 @@ class CheckpointDetailScene extends StatelessWidget {
                 orElse: () => null);
         return Scaffold(
           appBar: AppBar(
-            title: Text('Checkpoint Details'),
-            backgroundColor: Colors.red,
+            title: Text(
+              'Checkpoint Details',
+              style: TextStyle(fontSize: 24),
+            ),
+            backgroundColor: Colors.redAccent,
             actions: [
               IconButton(
                 icon: Icon(Icons.delete),
@@ -41,26 +44,115 @@ class CheckpointDetailScene extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Column(
                     children: <Widget>[
-                      ListTile(
-                        title: Text('Checkpoint Name'),
-                        subtitle: Text(checkpoint.pointName),
+                      Container(
+                          height: 250,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.all(9),
+                              child: Container(
+                                width: 450,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(10)),
+                              ),
+                            ),
+                          )),
+                      SizedBox(
+                        height: 10,
                       ),
                       ListTile(
-                        title: Text('Attendee Group'),
-                        subtitle: Text(checkpoint.pointGroup),
+                        title: Text(
+                          'Checkpoint Name',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.redAccent),
+                        ),
+                        subtitle: Text(
+                          checkpoint.pointName,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                       ListTile(
-                        title: Text('Checkpoint Location'),
-                        subtitle: Text(checkpoint.pointLocal),
+                        title: Text(
+                          'Attendee Group',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.redAccent),
+                        ),
+                        subtitle: Text(
+                          checkpoint.pointGroup,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                       ListTile(
-                        title: Text('Checkpoint Date & Time'),
-                        subtitle:
-                            Text(dateFormat.format(checkpoint.pointDatetime)),
+                        title: Text(
+                          'Checkpoint Location',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.redAccent),
+                        ),
+                        subtitle: Text(
+                          checkpoint.pointLocal,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                       ListTile(
-                        title: Text('Checkpoint Note'),
-                        subtitle: Text(checkpoint.pointNote),
+                        title: Text(
+                          'Checkpoint Date & Time',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.redAccent),
+                        ),
+                        subtitle: Text(
+                          dateFormat.format(checkpoint.pointDatetime),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ListTile(
+                        title: Text(
+                          'Checkpoint Note',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.redAccent),
+                        ),
+                        subtitle: Text(
+                          checkpoint.pointNote,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   ),
