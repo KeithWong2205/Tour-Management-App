@@ -1,12 +1,6 @@
 import 'dart:async';
-import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../group_repo.dart';
-import 'group_entity.dart';
-import 'group_entity.dart';
-import 'group_model.dart';
-import 'group_model.dart';
-import 'group_model.dart';
 
 //Class for handling group to firestore
 class FirebaseGroupService {
