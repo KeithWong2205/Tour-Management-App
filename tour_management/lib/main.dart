@@ -41,7 +41,7 @@ class _AppState extends State<App> {
                   checkpointManBloc:
                       BlocProvider.of<CheckpointManBloc>(context)))
         ],
-        child: MaterialApp(routes: {
+        child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
           '/': (context) {
             return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
               if (state is Uninitialized) {

@@ -74,7 +74,7 @@ class FireBaseService {
   }
 
   //Checking user role for checkpoint list
-  checkRoleUser(BuildContext context) {
+  checkRoleCheckpointUser(BuildContext context) {
     FirebaseAuth.instance.currentUser().then((user) {
       Firestore.instance
           .collection('users')
@@ -88,6 +88,26 @@ class FireBaseService {
           } else if (docs.documents[0].data['role'] == 'guide') {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => GuideCheckPointPage()));
+          }
+        }
+      });
+    });
+  }
+
+  checkRoleGroupUser(BuildContext context) {
+    FirebaseAuth.instance.currentUser().then((user) {
+      Firestore.instance
+          .collection('users')
+          .where('id', isEqualTo: user.uid)
+          .getDocuments()
+          .then((docs) {
+        if (docs.documents[0].exists) {
+          if (docs.documents[0].data['role'] == 'manager') {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ManagerGroupPage()));
+          } else if (docs.documents[0].data['role'] == 'guide') {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => GuideGroupPage()));
           }
         }
       });

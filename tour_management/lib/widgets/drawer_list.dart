@@ -46,7 +46,8 @@ class MainDrawer extends StatelessWidget {
                     style: TextStyle(fontSize: 18, color: Colors.red),
                   ),
                   subtitle: Text('View your planned itinerary'),
-                  onTap: () => FireBaseService().checkRoleUser(context))),
+                  onTap: () =>
+                      FireBaseService().checkRoleCheckpointUser(context))),
           Card(
               child: ListTile(
             leading: Icon(
@@ -58,6 +59,7 @@ class MainDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 18, color: Colors.green),
             ),
             subtitle: Text('View information of your group'),
+            onTap: () => FireBaseService().checkRoleGroupUser(context),
           )),
           Card(
               child: ListTile(
