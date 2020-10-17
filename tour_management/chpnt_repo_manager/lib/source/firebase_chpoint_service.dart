@@ -17,11 +17,17 @@ class FirebaseCheckpointService {
   }
 
   //Load the checkpoints into a stream
-  Stream<List<CheckpointModel>> checkpoints() {
-    return checkpointCollection.snapshots().map((snapshot) {
+  Stream<List<CheckpointModel>> checkpoints({String groupId}) {
+    Stream<QuerySnapshot> _query;
+    if (groupId != null && groupId.isNotEmpty) {
+      _query = checkpointCollection.where('pointGroup', isEqualTo: groupId).snapshots();
+    } else {
+      _query = checkpointCollection.snapshots();
+    }
+    return _query.map((snapshot) {
       return snapshot.documents
           .map((doc) =>
-              CheckpointModel.fromEntity(CheckpointEntity.fromSnapshot(doc)))
+          CheckpointModel.fromEntity(CheckpointEntity.fromSnapshot(doc)))
           .toList();
     });
   }

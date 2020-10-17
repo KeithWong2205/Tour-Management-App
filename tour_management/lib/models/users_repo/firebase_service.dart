@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tour_management/helper/SharedPreferencesHelper.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/views/views.dart';
 
@@ -37,7 +39,7 @@ class FireBaseService {
           name: name,
           email: email,
           phone: phone,
-          groupID: '0',
+          groupID: 'Group 1',
           role: 'guide'));
     } catch (e) {
       return e.message;
@@ -46,7 +48,13 @@ class FireBaseService {
 
   //Sign-out
   Future<void> signOutUser() async {
-    return Future.wait([_firebaseAuth.signOut()]);
+    return Future.wait(
+        [
+          _firebaseAuth.signOut().then((value) => {
+            AppDataHelper.clearUser()
+          })
+        ]
+    );
   }
 
   //Check sign-in status
@@ -70,11 +78,12 @@ class FireBaseService {
   Future _fetchCurrentUser(FirebaseUser user) async {
     if (user != null) {
       _currUser = await _fireStoreService.getUser(user.uid);
+      AppDataHelper.setUser(_currUser);
     }
   }
 
   //Checking user role for checkpoint list
-  checkRoleCheckpointUser(BuildContext context) {
+  checkRoleCheckpointUser(BuildContext context) async {
     FirebaseAuth.instance.currentUser().then((user) {
       Firestore.instance
           .collection('users')
@@ -87,14 +96,15 @@ class FireBaseService {
                 builder: (context) => ManagerCheckPointPage()));
           } else if (docs.documents[0].data['role'] == 'guide') {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => GuideCheckPointPage()));
+                MaterialPageRoute(builder: (context) => GuideCheckPointPage())
+            );
           }
         }
       });
     });
   }
 
-  checkRoleGroupUser(BuildContext context) {
+  checkRoleGroupUser(BuildContext context) async {
     FirebaseAuth.instance.currentUser().then((user) {
       Firestore.instance
           .collection('users')

@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
+import 'package:tour_management/helper/SharedPreferencesHelper.dart';
 
 //Checkpoint business bloc
 class CheckpointManBloc extends Bloc<CheckpointManEvent, CheckpointManState> {
@@ -16,7 +17,12 @@ class CheckpointManBloc extends Bloc<CheckpointManEvent, CheckpointManState> {
   @override
   Stream<CheckpointManState> mapEventToState(CheckpointManEvent event) async* {
     if (event is CheckpointManLoaded) {
-      yield* mapCheckpointManLoaded();
+      var _user = await AppDataHelper.getUser();
+      var _groupId = '';
+      if (_user.role == 'guide') {
+        _groupId = _user.groupID;
+      }
+      yield* mapCheckpointManLoaded(groupId: _groupId);
     }
     if (event is CheckpointManAdded) {
       yield* mapCheckpointManAdded(event);
@@ -32,10 +38,10 @@ class CheckpointManBloc extends Bloc<CheckpointManEvent, CheckpointManState> {
     }
   }
 
-  Stream<CheckpointManState> mapCheckpointManLoaded() async* {
+  Stream<CheckpointManState> mapCheckpointManLoaded({String groupId}) async* {
     _checkpointSubscription?.cancel();
     _checkpointSubscription = firebaseCheckpointService
-        .checkpoints()
+        .checkpoints(groupId: groupId)
         .listen((checkpoints) => add(CheckpointListManUpdate(checkpoints)));
   }
 
