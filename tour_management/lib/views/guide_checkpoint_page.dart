@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_management/widgets/list_checkpoint.dart';
 
 class GuideCheckPointPage extends StatelessWidget {
   @override
@@ -7,7 +8,7 @@ class GuideCheckPointPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Guide here'),
       ),
-      body: Container(),
+      body: ListCheckPoints(),
     );
   }
 }
