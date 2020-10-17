@@ -10,8 +10,10 @@ class CheckpointEntity extends Equatable {
   final DateTime pointDatetime;
   final String pointNote;
   final String pointGroup;
+  final double totalRating;
+  final double totalRatingStar;
   const CheckpointEntity(this.pointComplete, this.pointId, this.pointGroup,
-      this.pointName, this.pointLocal, this.pointDatetime, this.pointNote);
+      this.pointName, this.pointLocal, this.pointDatetime, this.pointNote, this.totalRating, this.totalRatingStar);
   @override
   List<Object> get props => [
         pointComplete,
@@ -20,11 +22,13 @@ class CheckpointEntity extends Equatable {
         pointName,
         pointLocal,
         pointDatetime,
-        pointNote
+        pointNote,
+        totalRating,
+        totalRatingStar
       ];
   @override
   String toString() =>
-      'Checkpoint Entity created {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote}';
+      'Checkpoint Entity created {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
 
   //Map the entity into Json to send to firestore
   Map<String, Object> toJson() {
@@ -35,7 +39,8 @@ class CheckpointEntity extends Equatable {
       'pointName': pointName,
       'pointLocal': pointLocal,
       'pointDatetime': pointDatetime.toString(),
-      'pointNote': pointNote
+      'totalRating': totalRating,
+      'totalRatingStar': totalRatingStar
     };
   }
 
@@ -48,7 +53,10 @@ class CheckpointEntity extends Equatable {
         json['pointName'] as String,
         json['pointLocal'] as String,
         json['pointDatetime'] as DateTime,
-        json['pointNote'] as String);
+        json['pointNote'] as String,
+        json['totalRating'] as double,
+        json['totalRatingStar'] as double
+    );
   }
 
   //Get the checkpoint entity from firestore document snapshot
@@ -61,7 +69,9 @@ class CheckpointEntity extends Equatable {
         snapshot.data['pointName'],
         snapshot.data['pointLocal'],
         pointDate,
-        snapshot.data['pointNote']);
+        snapshot.data['pointNote'],
+        snapshot.data['totalRating'],
+        snapshot.data['totalRatingStar']);
   }
 
   //Map checkpoint entity to firestore document
@@ -72,7 +82,9 @@ class CheckpointEntity extends Equatable {
       'pointName': pointName,
       'pointLocal': pointLocal,
       'pointDatetime': pointDatetime,
-      'pointNote': pointNote
+      'pointNote': pointNote,
+      'totalRating': totalRating,
+      'totalRatingStar': totalRatingStar
     };
   }
 }
