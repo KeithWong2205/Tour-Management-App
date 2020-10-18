@@ -61,7 +61,7 @@ class ListCheckPointsManager extends StatelessWidget {
                 onTap: () async {
                   final removedTodo = await Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) {
-                    return CheckpointDetailScene(
+                    return CheckpointDetailSceneManager(
                       id: element.pointId,
                     );
                   }));

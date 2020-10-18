@@ -10,8 +10,8 @@ export './signup_button.dart';
 export './reset_button.dart';
 export './app_bars.dart';
 export './drawer_list.dart';
-export './list_checkpoint_manager.dart';
-export './list_checkpoint_guide.dart';
-export './checkpoint_of_manager.dart';
-export './checkpoint_of_guide.dart';
+export './manager_related/list_checkpoint_manager.dart';
+export './guide_related/list_checkpoint_guide.dart';
+export './manager_related/checkpoint_of_manager.dart';
+export './guide_related/checkpoint_of_guide.dart';
 //Barrel export widgets
