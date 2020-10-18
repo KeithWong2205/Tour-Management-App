@@ -52,7 +52,7 @@ class Checkpoint extends StatelessWidget {
                   color: Colors.blueAccent),
             ),
             trailing: RatingBarIndicator(
-              rating: 4,
+              rating: chkpoint.totalRatingStar / chkpoint.totalRating,
               itemBuilder: (context, index) => Icon(
                 Icons.star,
                 color: Colors.amber,
