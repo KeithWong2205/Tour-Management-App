@@ -7,7 +7,7 @@ AppBar welcomeAppBar() {
   );
 }
 
-AppBar managerCheckpointAppbar() {
+AppBar checkpointAppBar() {
   return AppBar(
       title: Text(
         'Checkpoint Panel',
