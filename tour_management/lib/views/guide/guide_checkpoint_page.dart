@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tour_management/widgets/list_checkpoint.dart';
+import 'package:tour_management/widgets/widgets.dart';
 
 class GuideCheckPointPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Guide here'),
-      ),
-      body: ListCheckPoints(),
+      appBar: checkpointAppBar(),
+      body: ListCheckPointsGuide(),
     );
   }
 }

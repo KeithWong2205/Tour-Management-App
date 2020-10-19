@@ -8,8 +8,8 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/controllers/chpoint_list/chpoint_list.dart';
 
-class ListCheckPoints extends StatelessWidget {
-  ListCheckPoints({Key key}) : super(key: key);
+class ListCheckPointsManager extends StatelessWidget {
+  ListCheckPointsManager({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CheckPointListBloc, CheckPointListState>(
@@ -48,7 +48,7 @@ class ListCheckPoints extends StatelessWidget {
                           )),
                     ))),
             itemBuilder: (context, element) {
-              return Checkpoint(
+              return CheckpointofManager(
                 chkpoint: element,
                 onDismissed: (direction) {
                   BlocProvider.of<CheckpointManBloc>(context)
@@ -61,7 +61,7 @@ class ListCheckPoints extends StatelessWidget {
                 onTap: () async {
                   final removedTodo = await Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) {
-                    return CheckpointDetailScene(
+                    return CheckpointDetailSceneManager(
                       id: element.pointId,
                     );
                   }));

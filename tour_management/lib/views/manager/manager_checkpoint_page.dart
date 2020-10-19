@@ -5,8 +5,8 @@ class ManagerCheckPointPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: managerCheckpointAppbar(),
-      body: ListCheckPoints(),
+      appBar: checkpointAppBar(),
+      body: ListCheckPointsManager(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.pushNamed(context, '/addTodo');
