@@ -57,5 +57,7 @@ BoxDecoration screenBackground() {
       gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Colors.blueGrey, Colors.white]));
+          colors: [Colors.blueGrey, Colors.white]
+      )
+  );
 }
