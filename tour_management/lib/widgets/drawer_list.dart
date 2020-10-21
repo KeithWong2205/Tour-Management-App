@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
+import 'package:tour_management/views/conversation/chat_room.dart';
 
 //The drawer for every scene
 class MainDrawer extends StatelessWidget {
@@ -72,6 +73,7 @@ class MainDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 18, color: Colors.blue),
             ),
             subtitle: Text('Chat with guides & manager'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatRoom())),
           )),
           Card(
             child: ListTile(
