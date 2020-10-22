@@ -26,7 +26,7 @@ class FCMHelper {
     var _firebaseMessaging = _instance.getFirebaseMessaging();
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print("onMessage: $message");
+        print("HTB95-onMessage: $message");
         var _notification = message['notification'];
         _instance.handleShowLocalNotification(
           context: context,
@@ -35,14 +35,14 @@ class FCMHelper {
         );
       },
       onBackgroundMessage: (Map<String, dynamic> message) {
-        print("onBackgroundMessage: $message");
+        print("HTB95-onBackgroundMessage: $message");
         return _instance.handleBackgroundMessage(message);
       },
       onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
+        print("HTB95-onLaunch: $message");
       },
       onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
+        print("HTB95-onResume: $message");
       },
     );
   }
@@ -52,6 +52,10 @@ class FCMHelper {
       const IosNotificationSettings(sound: true, badge: true, alert: true, provisional: false),
     );
     var _serverToken = _instance.serverToken;
+    var _to = to;
+    if (_to.startsWith('/topics/')) {
+      _to = _to.replaceAll(' ', '-');
+    }
     var result = await http.post(
       'https://fcm.googleapis.com/fcm/send',
       headers: <String, String>{
@@ -70,11 +74,16 @@ class FCMHelper {
             'id': '1',
             'status': 'done'
           },
-          'to': to ?? await _instance.getFirebaseMessaging().getToken(),
+          'to': _to ?? '',
         },
       ),
     );
     print('Result: ' + result.toString());
+  }
+
+  static subscribe({String topic}) {
+    var _topic = topic.replaceAll(' ', '-');
+    _instance.getFirebaseMessaging().subscribeToTopic(_topic);
   }
 
   /// MARK: Getter functions

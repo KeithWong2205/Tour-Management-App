@@ -73,10 +73,6 @@ class MainDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 18, color: Colors.blue),
             ),
             subtitle: Text('Chat with guides & manager'),
-            onTap: () => FCMHelper.sendMessage(
-              message: 'This is content from app',
-              title: 'This is title from app'
-            ),
           )),
           Card(
             child: ListTile(
