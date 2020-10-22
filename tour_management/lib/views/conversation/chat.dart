@@ -16,7 +16,7 @@ class _ChatState extends State<Chat> {
 
   Stream<QuerySnapshot> chats;
   TextEditingController messageEditingController = new TextEditingController();
-  final String _userName = FireBaseService().currUser.name;
+  final String _userName = "";
 
   Widget chatMessages(){
     return StreamBuilder(

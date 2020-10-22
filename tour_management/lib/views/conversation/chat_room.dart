@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/views/conversation/search.dart';
-import 'package:tour_management/views/introduction/login_scene.dart';
 
 import 'chat.dart';
 
@@ -14,7 +13,7 @@ class ChatRoom extends StatefulWidget {
 class _ChatRoomState extends State<ChatRoom> {
   Stream chatRooms;
 
-  String _userName = FireBaseService().currUser.name;
+  String _userName = "";
 
   Widget chatRoomsList() {
     return StreamBuilder(
@@ -59,24 +58,12 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          "assets/images/logo.png",
-          height: 40,
-        ),
+        // title: Image.asset(
+        //   "assets/images/logo.png",
+        //   height: 40,
+        // ),
         elevation: 0.0,
         centerTitle: false,
-        actions: [
-          GestureDetector(
-            onTap: () {
-              FireBaseService().signOutUser();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LoginScene()));
-            },
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.exit_to_app)),
-          )
-        ],
       ),
       body: Container(
         child: chatRoomsList(),
