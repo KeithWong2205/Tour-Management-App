@@ -51,11 +51,3 @@ InputDecoration passswordFieldStyle() {
       labelText: 'Password',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)));
 }
-
-BoxDecoration screenBackground() {
-  return BoxDecoration(
-      gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.blueGrey, Colors.white]));
-}

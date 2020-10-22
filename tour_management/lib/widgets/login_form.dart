@@ -75,6 +75,7 @@ class _LoginFormState extends State<LoginForm> {
                               child: TextFormField(
                                 controller: _emailField,
                                 decoration: emailFieldStyle(),
+                                // ignore: deprecated_member_use
                                 autovalidate: true,
                                 autocorrect: false,
                                 textInputAction: TextInputAction.next,
@@ -96,6 +97,7 @@ class _LoginFormState extends State<LoginForm> {
                                   decoration: passswordFieldStyle(),
                                   autocorrect: false,
                                   obscureText: true,
+                                  // ignore: deprecated_member_use
                                   autovalidate: true,
                                   textInputAction: TextInputAction.done,
                                   validator: (_) {

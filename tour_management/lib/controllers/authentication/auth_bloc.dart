@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tour_management/helper/SharedPreferencesHelper.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/views/views.dart';
@@ -13,6 +12,7 @@ class FireBaseService {
   final FireStoreService _fireStoreService = FireStoreService();
   UserModel _currUser;
   UserModel get currUser => _currUser;
+
   //Sign-in using email and password
   Future<void> signInWithEmailPassword(String email, String password) async {
     try {
@@ -48,13 +48,9 @@ class FireBaseService {
 
   //Sign-out
   Future<void> signOutUser() async {
-    return Future.wait(
-        [
-          _firebaseAuth.signOut().then((value) => {
-            AppDataHelper.clearUser()
-          })
-        ]
-    );
+    return Future.wait([
+      _firebaseAuth.signOut().then((value) => {AppDataHelper.clearUser()})
+    ]);
   }
 
   //Check sign-in status
@@ -96,8 +92,7 @@ class FireBaseService {
                 builder: (context) => ManagerCheckPointPage()));
           } else if (docs.documents[0].data['role'] == 'guide') {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => GuideCheckPointPage())
-            );
+                MaterialPageRoute(builder: (context) => GuideCheckPointPage()));
           }
         }
       });
