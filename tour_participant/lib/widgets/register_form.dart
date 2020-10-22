@@ -20,6 +20,15 @@ class _RegisterFormState extends State<RegisterForm> {
   FocusNode email = FocusNode();
   FocusNode password = FocusNode();
   FocusNode phone = FocusNode();
+  String _selectedGroup;
+  String _holder = 'Select your group';
+  List<String> groupNames = [
+    'Group 1',
+    'Group 2',
+    'Group 3',
+    'Group 4',
+    'Group 5'
+  ];
   bool get isFilled =>
       _emailField.text.isNotEmpty &&
       _passwordField.text.isNotEmpty &&
@@ -63,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
             bloc: _regBloc,
             builder: (BuildContext context, RegState state) {
               return Container(
-                  color: Colors.blue,
+                  color: Colors.white,
                   child: Padding(
                       padding: EdgeInsets.all(20.0),
                       child: GestureDetector(
@@ -72,7 +81,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           child: Form(
                               child: ListView(children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+                                padding: EdgeInsets.symmetric(vertical: 0),
                                 child: Image.asset('assets/logo.png')),
                             Padding(
                                 padding: EdgeInsets.symmetric(vertical: 2),
@@ -115,6 +124,24 @@ class _RegisterFormState extends State<RegisterForm> {
                                       FocusScope.of(context)
                                           .requestFocus(password)),
                             ),
+                            Padding(
+                                padding: EdgeInsets.symmetric(vertical: 2),
+                                child: DropdownButtonFormField(
+                                  decoration: groupSelectorFieldStyle(),
+                                  value: _selectedGroup,
+                                  items: groupNames.map((groupName) {
+                                    return DropdownMenuItem(
+                                      value: groupName,
+                                      child: Text('$groupName'),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedGroup = value;
+                                      _holder = _selectedGroup;
+                                    });
+                                  },
+                                )),
                             Padding(
                                 padding: EdgeInsets.symmetric(vertical: 2),
                                 child: TextFormField(
@@ -185,7 +212,8 @@ class _RegisterFormState extends State<RegisterForm> {
         email: _emailField.text,
         password: _passwordField.text,
         name: _nameField.text,
-        phone: _phoneField.text));
+        phone: _phoneField.text,
+        groupId: _holder));
     Navigator.of(context).pop();
   }
 }

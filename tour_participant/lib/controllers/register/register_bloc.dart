@@ -39,7 +39,8 @@ class RegBloc extends Bloc<RegEvent, RegState> {
           email: event.email,
           password: event.password,
           name: event.name,
-          phone: event.phone);
+          phone: event.phone,
+          groupId: event.groupId);
     }
   }
 
@@ -53,11 +54,19 @@ class RegBloc extends Bloc<RegEvent, RegState> {
   }
 
   Stream<RegState> _mapRegFormSubmitted(
-      {String email, String password, String name, String phone}) async* {
+      {String email,
+      String password,
+      String name,
+      String phone,
+      String groupId}) async* {
     yield RegState.loading();
     try {
       await firebaseService.signUpNewUser(
-          email: email, password: password, name: name, phone: phone);
+          email: email,
+          password: password,
+          name: name,
+          phone: phone,
+          groupId: groupId);
       yield RegState.success();
     } catch (_) {
       yield RegState.failure();

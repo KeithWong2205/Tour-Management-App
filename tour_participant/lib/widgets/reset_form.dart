@@ -50,7 +50,7 @@ class _ResetFormState extends State<ResetForm> {
             bloc: _resetBloc,
             builder: (BuildContext context, ResetState state) {
               return Container(
-                  color: Colors.blue,
+                  color: Colors.white,
                   child: Padding(
                       padding: EdgeInsets.all(20.0),
                       child: GestureDetector(
@@ -61,6 +61,9 @@ class _ResetFormState extends State<ResetForm> {
                             Padding(
                                 padding: EdgeInsets.symmetric(vertical: 25),
                                 child: Image.asset('assets/logo.png')),
+                            SizedBox(
+                              height: 60,
+                            ),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
                               child: TextFormField(

@@ -27,7 +27,8 @@ class FirebaseService {
       {@required String email,
       @required String password,
       @required String name,
-      @required String phone}) async {
+      @required String phone,
+      @required String groupId}) async {
     try {
       var registerResult = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -36,8 +37,8 @@ class FirebaseService {
           name: name,
           email: email,
           phone: phone,
-          groupId: 'Group 1',
-          role: 'guide'));
+          groupId: groupId,
+          role: 'student'));
     } catch (e) {
       return e.message;
     }

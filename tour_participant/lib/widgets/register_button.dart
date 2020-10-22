@@ -17,7 +17,7 @@ class RegisterButton extends StatelessWidget {
         'Sign-up here!',
         style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.white,
+            color: Colors.blue,
             fontSize: 16),
       ),
       onPressed: () {

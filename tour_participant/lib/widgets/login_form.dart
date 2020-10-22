@@ -59,7 +59,7 @@ class _LoginFormState extends State<LoginForm> {
             bloc: _loginBloc,
             builder: (BuildContext context, LoginState state) {
               return Container(
-                  color: Colors.blue,
+                  color: Colors.white,
                   child: Padding(
                       padding: EdgeInsets.all(20.0),
                       child: GestureDetector(
@@ -68,10 +68,13 @@ class _LoginFormState extends State<LoginForm> {
                           child: Form(
                               child: ListView(children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 0),
+                                padding: EdgeInsets.symmetric(vertical: 20),
                                 child: Image.asset('assets/logo.png')),
+                            SizedBox(
+                              height: 40,
+                            ),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4),
+                              padding: EdgeInsets.symmetric(vertical: 5),
                               child: TextFormField(
                                 controller: _emailField,
                                 decoration: emailFieldStyle(),
@@ -90,7 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4),
+                                padding: EdgeInsets.symmetric(vertical: 5),
                                 child: TextFormField(
                                   focusNode: password,
                                   controller: _passwordField,
@@ -110,15 +113,18 @@ class _LoginFormState extends State<LoginForm> {
                                         .requestFocus(new FocusNode());
                                   },
                                 )),
+                            SizedBox(
+                              height: 40,
+                            ),
                             Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4),
+                                padding: EdgeInsets.symmetric(vertical: 5),
                                 child: LoginButton(
                                   onPressed: loginButtonEnabled(state)
                                       ? _onFormSubmitted
                                       : null,
                                 )),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4),
+                              padding: EdgeInsets.symmetric(vertical: 5),
                               child: ForgotPassButton(firebaseService: _users),
                             ),
                             Padding(

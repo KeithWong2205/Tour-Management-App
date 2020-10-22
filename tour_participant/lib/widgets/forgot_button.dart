@@ -17,8 +17,8 @@ class ForgotPassButton extends StatelessWidget {
       disabledColor: Colors.grey,
       disabledTextColor: Colors.black,
       height: 50,
-      color: Colors.white,
-      textColor: Colors.red,
+      color: Colors.redAccent,
+      textColor: Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       onPressed: () =>

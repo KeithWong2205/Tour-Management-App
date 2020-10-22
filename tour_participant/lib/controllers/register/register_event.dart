@@ -55,14 +55,16 @@ class Submitted extends RegEvent {
   final String password;
   final String name;
   final String phone;
+  final String groupId;
   const Submitted(
       {@required this.email,
       @required this.password,
       @required this.name,
-      @required this.phone});
+      @required this.phone,
+      @required this.groupId});
   @override
-  List<Object> get props => [email, password, name, phone];
+  List<Object> get props => [email, password, name, phone, groupId];
   @override
   String toString() =>
-      'Submitted {with email: $email, password: $password, name: $name, phone: $phone}';
+      'Submitted {with email: $email, password: $password, name: $name, phone: $phone, groupId: $groupId}';
 }
