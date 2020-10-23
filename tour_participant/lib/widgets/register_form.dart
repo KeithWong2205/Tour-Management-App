@@ -21,7 +21,6 @@ class _RegisterFormState extends State<RegisterForm> {
   FocusNode password = FocusNode();
   FocusNode phone = FocusNode();
   String _selectedGroup;
-  String _holder = 'Select your group';
   List<String> groupNames = [
     'Group 1',
     'Group 2',
@@ -138,7 +137,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                   onChanged: (value) {
                                     setState(() {
                                       _selectedGroup = value;
-                                      _holder = _selectedGroup;
                                     });
                                   },
                                 )),
@@ -213,7 +211,7 @@ class _RegisterFormState extends State<RegisterForm> {
         password: _passwordField.text,
         name: _nameField.text,
         phone: _phoneField.text,
-        groupId: _holder));
+        groupId: _selectedGroup));
     Navigator.of(context).pop();
   }
 }
