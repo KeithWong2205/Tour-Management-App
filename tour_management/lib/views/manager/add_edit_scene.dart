@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_management/localization/keys.dart';
 import 'package:tour_management/styles/styles.dart';
@@ -41,6 +43,56 @@ class _AddEditSceneState extends State<AddEditScene> {
     'Group 4',
     'Group 5'
   ];
+  //Image Picker Function
+  File _image;
+  _imgFromCamera() async {
+    // ignore: deprecated_member_use
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
+    setState(() {
+      _image = image;
+    });
+  }
+
+  _imgFromGallery() async {
+    // ignore: deprecated_member_use
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
+    setState(() {
+      _image = image;
+    });
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   bool get isEditing => widget.isEditing;
   @override
   Widget build(BuildContext context) {
@@ -62,13 +114,35 @@ class _AddEditSceneState extends State<AddEditScene> {
                           alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.all(9),
-                            child: Container(
-                              width: 450,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
+                            child: GestureDetector(
+                                onTap: () => _showPicker(context),
+                                child: Container(
+                                    width: 450,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        border: Border.all(color: Colors.black),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: _image != null
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: Image.file(_image,
+                                                width: 100,
+                                                height: 200,
+                                                fit: BoxFit.fill))
+                                        : Container(
+                                            width: 100,
+                                            height: 200,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey[200],
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.0)),
+                                            child: Icon(
+                                              Icons.camera_alt,
+                                              color: Colors.grey,
+                                            )))),
                           ),
                         ),
                       ),
