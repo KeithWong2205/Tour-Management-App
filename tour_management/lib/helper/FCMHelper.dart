@@ -26,7 +26,6 @@ class FCMHelper {
     var _firebaseMessaging = _instance.getFirebaseMessaging();
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print("HTB95-onMessage: $message");
         var _notification = message['notification'];
         _instance.handleShowLocalNotification(
           context: context,
@@ -35,14 +34,14 @@ class FCMHelper {
         );
       },
       onBackgroundMessage: (Map<String, dynamic> message) {
-        print("HTB95-onBackgroundMessage: $message");
+        print("onBackgroundMessage: $message");
         return _instance.handleBackgroundMessage(message);
       },
       onLaunch: (Map<String, dynamic> message) async {
-        print("HTB95-onLaunch: $message");
+        print("onLaunch: $message");
       },
       onResume: (Map<String, dynamic> message) async {
-        print("HTB95-onResume: $message");
+        print("onResume: $message");
       },
     );
   }
