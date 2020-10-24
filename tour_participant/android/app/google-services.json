@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "456660906551",
+    "firebase_url": "https://tour-management-app-455e2.firebaseio.com",
+    "project_id": "tour-management-app-455e2",
+    "storage_bucket": "tour-management-app-455e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456660906551:android:b545d2b285f569d6e945b2",
+        "android_client_info": {
+          "package_name": "com.keith.tour_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456660906551-clfn7dj7eppuoqrelemfqccjb5b26iqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc9kfdokwP0f-YPyRfNkId1Ss-uNDqN14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456660906551-clfn7dj7eppuoqrelemfqccjb5b26iqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456660906551-v8sh2lbjpit5jb0dt7vklaggu70pq764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.leminh.test"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456660906551:android:b2ea9faec42c8697e945b2",
+        "android_client_info": {
+          "package_name": "com.keith.tour_participant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456660906551-clfn7dj7eppuoqrelemfqccjb5b26iqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc9kfdokwP0f-YPyRfNkId1Ss-uNDqN14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456660906551-clfn7dj7eppuoqrelemfqccjb5b26iqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456660906551-v8sh2lbjpit5jb0dt7vklaggu70pq764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.leminh.test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -52,10 +52,62 @@ InputDecoration passswordFieldStyle() {
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)));
 }
 
-BoxDecoration screenBackground() {
-  return BoxDecoration(
-      gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.blueGrey, Colors.white]));
+InputDecoration checkpointNameFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      icon: Icon(
+        Icons.card_membership,
+        color: Colors.black,
+      ),
+      hintText: 'Please give a brief name',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
+}
+
+InputDecoration checkpointLocationFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      icon: Icon(
+        Icons.add_location,
+        color: Colors.black,
+      ),
+      hintText: 'Where is this place?',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
+}
+
+InputDecoration checkpointDateTimeFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      icon: Icon(
+        Icons.calendar_today,
+        color: Colors.black,
+      ),
+      hintText: 'Tap to select a date & time',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
+}
+
+InputDecoration checkpointGroupFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      icon: Icon(
+        Icons.people,
+        color: Colors.black,
+      ),
+      hintText: 'Tap to select group',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
+}
+
+InputDecoration checkpointNoteFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      icon: Icon(
+        Icons.note,
+        color: Colors.black,
+      ),
+      hintText: 'Do we have any notes?',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
 }

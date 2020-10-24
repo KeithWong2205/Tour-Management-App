@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_management/localization/keys.dart';
+import 'package:tour_management/styles/styles.dart';
 
 typedef OnSaveCallback = Function(String name, String groupID, String location,
     DateTime dateTime, String note);
@@ -33,6 +36,63 @@ class _AddEditSceneState extends State<AddEditScene> {
   final format = DateFormat("yyyy-MM-dd HH:mm");
   FocusNode groupField;
   FocusNode locationField;
+  List<String> groupNames = [
+    'Group 1',
+    'Group 2',
+    'Group 3',
+    'Group 4',
+    'Group 5'
+  ];
+  //Image Picker Function
+  File _image;
+  _imgFromCamera() async {
+    // ignore: deprecated_member_use
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
+    setState(() {
+      _image = image;
+    });
+  }
+
+  _imgFromGallery() async {
+    // ignore: deprecated_member_use
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
+    setState(() {
+      _image = image;
+    });
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   bool get isEditing => widget.isEditing;
   @override
   Widget build(BuildContext context) {
@@ -54,25 +114,43 @@ class _AddEditSceneState extends State<AddEditScene> {
                           alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.all(9),
-                            child: Container(
-                              width: 450,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
+                            child: GestureDetector(
+                                onTap: () => _showPicker(context),
+                                child: Container(
+                                    width: 450,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        border: Border.all(color: Colors.black),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: _image != null
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: Image.file(_image,
+                                                width: 100,
+                                                height: 200,
+                                                fit: BoxFit.fill))
+                                        : Container(
+                                            width: 100,
+                                            height: 200,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey[200],
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.0)),
+                                            child: Icon(
+                                              Icons.camera_alt,
+                                              color: Colors.grey,
+                                            )))),
                           ),
                         ),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Checkpoint Name',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
                       TextFormField(
+                        decoration: checkpointNameFieldStyle(),
                         textInputAction: TextInputAction.next,
                         initialValue:
                             isEditing ? widget.checkpoint.pointName : '',
@@ -90,34 +168,27 @@ class _AddEditSceneState extends State<AddEditScene> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Group of Attendee',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      TextFormField(
-                        textInputAction: TextInputAction.next,
-                        initialValue:
-                            isEditing ? widget.checkpoint.pointGroup : '',
-                        key: ArchSampleKeys.groupField,
-                        validator: (val) {
-                          return val.trim().isEmpty
-                              ? 'Group ID is required'
-                              : null;
+                      DropdownButtonFormField(
+                        decoration: checkpointGroupFieldStyle(),
+                        value:
+                            isEditing ? widget.checkpoint.pointGroup : _groupID,
+                        items: groupNames.map((groupName) {
+                          return DropdownMenuItem(
+                            value: groupName,
+                            child: Text('$groupName'),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            _groupID = value;
+                          });
                         },
-                        onSaved: (value) => _groupID = value,
-                        onFieldSubmitted: (value) =>
-                            FocusScope.of(context).requestFocus(locationField),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Checkpoint Location',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
                       TextFormField(
+                        decoration: checkpointLocationFieldStyle(),
                         textInputAction: TextInputAction.done,
                         initialValue:
                             isEditing ? widget.checkpoint.pointLocal : '',
@@ -134,12 +205,8 @@ class _AddEditSceneState extends State<AddEditScene> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Checkpoint Date & Time',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
                       DateTimeField(
+                        decoration: checkpointDateTimeFieldStyle(),
                         style: TextStyle(
                             fontSize: 18, fontStyle: FontStyle.italic),
                         format: format,
@@ -168,12 +235,8 @@ class _AddEditSceneState extends State<AddEditScene> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Checkpoint Notes',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
                       TextFormField(
+                        decoration: checkpointNoteFieldStyle(),
                         initialValue:
                             isEditing ? widget.checkpoint.pointNote : '',
                         key: ArchSampleKeys.noteField,
