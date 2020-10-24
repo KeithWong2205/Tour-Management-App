@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
+import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/localization/keys.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/widgets.dart';
@@ -67,6 +69,15 @@ class ListCheckPointsGuide extends StatelessWidget {
                   }
                 },
                 onCheckboxChanged: (_) {
+                  AppDataHelper.getUser().then((user) => {
+                    if (user.role != 'manager') {
+                      FCMHelper.sendMessage(
+                          message: "Checkpoint [" + element.pointName + "] changed",
+                          title: element.pointGroup,
+                          to: '/topics/' + element.pointGroup
+                      )
+                    }
+                  });
                   BlocProvider.of<CheckpointManBloc>(context).add(
                       CheckpointManUpdated(
                           element.copyWith(complete: !element.pointComplete)));

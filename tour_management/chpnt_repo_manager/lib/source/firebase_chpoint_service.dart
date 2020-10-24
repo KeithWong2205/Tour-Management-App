@@ -4,7 +4,7 @@ import '../chpnt_repo_manager.dart';
 
 //Class for handling checkpoint to firestore
 class FirebaseCheckpointService {
-  final checkpointCollection = Firestore.instance.collection('checkpoints');
+  final checkpointCollection = FirebaseFirestore.instance.collection('checkpoints');
 
   //Add a checkpoint to firestore document
   Future<void> addNewCheckpoint(CheckpointModel addedCheckpoint) {
@@ -13,7 +13,7 @@ class FirebaseCheckpointService {
 
   //Delete a checkpoint
   Future<void> deleteCheckpoint(CheckpointModel deletedCheckpoint) async {
-    return checkpointCollection.document(deletedCheckpoint.pointId).delete();
+    return checkpointCollection.doc(deletedCheckpoint.pointId).delete();
   }
 
   //Load the checkpoints into a stream
@@ -25,7 +25,7 @@ class FirebaseCheckpointService {
       _query = checkpointCollection.snapshots();
     }
     return _query.map((snapshot) {
-      return snapshot.documents
+      return snapshot.docs
           .map((doc) =>
           CheckpointModel.fromEntity(CheckpointEntity.fromSnapshot(doc)))
           .toList();
@@ -35,7 +35,7 @@ class FirebaseCheckpointService {
   //Update a checkpoint details
   Future<void> updateCheckpoint(CheckpointModel updated) {
     return checkpointCollection
-        .document(updated.pointId)
-        .updateData(updated.toEntity().toDocument());
+        .doc(updated.pointId)
+        .update(updated.toEntity().toDocument());
   }
 }
