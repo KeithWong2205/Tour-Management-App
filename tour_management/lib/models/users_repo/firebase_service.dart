@@ -132,7 +132,7 @@ class FireBaseService {
   getUserInfo(String email) async {
     return Firestore.instance
         .collection("users")
-        .where("userEmail", isEqualTo: email)
+        .where("email", isEqualTo: email)
         .getDocuments()
         .catchError((e) {
       print(e.toString());
@@ -142,18 +142,15 @@ class FireBaseService {
   searchByName(String searchField) {
     return Firestore.instance
         .collection("users")
-        .where('userName', isEqualTo: searchField)
+        .where('name', isEqualTo: searchField)
         .getDocuments();
   }
 
-  Future<bool> addChatRoom(chatRoom, chatRoomId) {
-    Firestore.instance
+   addChatRoom(chatRoom, chatRoomId) async {
+    return await Firestore.instance
         .collection("chatRoom")
         .document(chatRoomId)
-        .setData(chatRoom)
-        .catchError((e) {
-      print(e);
-    });
+        .setData(chatRoom);
   }
 
   getChats(String chatRoomId) async{
@@ -167,7 +164,6 @@ class FireBaseService {
 
 
   Future<void> addMessage(String chatRoomId, chatMessageData){
-
     Firestore.instance.collection("chatRoom")
         .document(chatRoomId)
         .collection("chats")
@@ -177,11 +173,11 @@ class FireBaseService {
   }
 
   Future getUserChats() async {
-    var querySnapshot = await Firestore.instance.collection("users").getDocuments();
+    final QuerySnapshot querySnapshot = await Firestore.instance.collection("users").getDocuments();
     final currentUser = await _firebaseAuth.currentUser();
     await _fetchCurrentUser(currentUser);
     if (_currUser != null && querySnapshot.documents.isNotEmpty){
-      querySnapshot.documents.removeWhere((user) => user.data['id'] != _currUser.id);
+      querySnapshot.documents.removeWhere((user) => user.data['id'] == currentUser.uid);
     }
     return querySnapshot;
   }

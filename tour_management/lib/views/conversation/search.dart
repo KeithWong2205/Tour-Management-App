@@ -1,11 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:tour_management/helper/SharedPreferencesHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
+import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
 
 import 'chat.dart';
 
 class Search extends StatefulWidget {
+  final String currentUid;
+  const Search({this.currentUid});
+
   @override
   _SearchState createState() => _SearchState();
 }
@@ -27,10 +33,11 @@ class _SearchState extends State<Search> {
       await firebaseService.searchByName(searchEditingController.text)
           .then((snapshot){
         searchResultSnapshot = snapshot;
+        searchResultSnapshot.documents.removeWhere((result) => result.data['id'] == widget.currentUid);
         print("$searchResultSnapshot");
         setState(() {
           isLoading = false;
-          haveUserSearched = true;
+          haveUserSearched = searchResultSnapshot.documents.isNotEmpty;
         });
       });
     }
@@ -42,17 +49,22 @@ class _SearchState extends State<Search> {
       itemCount: searchResultSnapshot.documents.length,
         itemBuilder: (context, index){
         return userTile(
-          searchResultSnapshot.documents[index].data["userName"],
-          searchResultSnapshot.documents[index].data["userEmail"],
+          searchResultSnapshot.documents[index].data["name"],
+          searchResultSnapshot.documents[index].data["email"],
+          searchResultSnapshot.documents[index].data["id"],
         );
         }) : Container();
   }
 
   /// 1.create a chatroom, send user to the chatroom, other userdetails
-  sendMessage(String userName){
-    List<String> users = [firebaseService.currUser.name ,userName];
+  sendMessage(String userId){
+    AppDataHelper.getUser().then((user) => handleSendMessage(user.id, userId));
+  }
 
-    String chatRoomId = getChatRoomId(firebaseService.currUser.name,userName);
+  void handleSendMessage(String uid1, String uid2){
+    List<String> users = [uid1 , uid2];
+
+    String chatRoomId = HelperFunctions.createChatRoomId(uid1, uid2);
 
     Map<String, dynamic> chatRoom = {
       "users": users,
@@ -62,15 +74,15 @@ class _SearchState extends State<Search> {
     firebaseService.addChatRoom(chatRoom, chatRoomId);
 
     Navigator.push(context, MaterialPageRoute(
-      builder: (context) => Chat(
-        chatRoomId: chatRoomId,
-      )
+        builder: (context) => Chat(
+          chatRoomId: chatRoomId,
+        )
     ));
-
   }
 
-  Widget userTile(String userName,String userEmail){
+  Widget userTile(String userName,String userEmail, String userId){
     return Container(
+      color: Colors.grey,
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
         children: [
@@ -96,7 +108,7 @@ class _SearchState extends State<Search> {
           Spacer(),
           GestureDetector(
             onTap: (){
-              sendMessage(userName);
+              sendMessage(userId);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
@@ -116,22 +128,6 @@ class _SearchState extends State<Search> {
     );
   }
 
-
-  getChatRoomId(String a, String b) {
-    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-      return "$b\_$a";
-    } else {
-      return "$a\_$b";
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +141,7 @@ class _SearchState extends State<Search> {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              color: Color(0x54FFFFFF),
+              color: Color(0xff007EF4),
               child: Row(
                 children: [
                   Expanded(
@@ -181,7 +177,7 @@ class _SearchState extends State<Search> {
                           borderRadius: BorderRadius.circular(40)
                         ),
                         padding: EdgeInsets.all(12),
-                        child: Image.asset("assets/images/search_white.png",
+                        child: Image.asset("assets/search_white.png",
                           height: 25, width: 25,)),
                   )
                 ],

@@ -41,13 +41,13 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   void initState() {
     final currentUser = AppDataHelper.getUser();
-    currentUser.then((value) => _userId = value.id);
-    getUserInfogetChats();
+    currentUser.then((value) =>  getUserInfogetChats(value.id));
     super.initState();
   }
 
-  getUserInfogetChats() async {
+  getUserInfogetChats(String uid) async {
     // _userName = await HelperFunctions.getUserNameSharedPreference();
+    _userId = uid;
     FireBaseService().getUserChats().then((snapshots) {
       setState(() {
         chatRooms = Stream<QuerySnapshot>.value(snapshots);
@@ -73,7 +73,7 @@ class _ChatRoomState extends State<ChatRoom> {
         child: Icon(Icons.search),
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Search()));
+              context, MaterialPageRoute(builder: (context) => Search(currentUid: _userId)));
         },
       ),
     );
@@ -86,17 +86,30 @@ class ChatRoomsTile extends StatelessWidget {
 
   ChatRoomsTile({this.userName,@required this.chatRoomId});
 
+   Future handleOnCreateChatRoom(BuildContext context) async {
+    List<String> users = chatRoomId.split('_');
+    users.sort();
+    Map<String, dynamic> chatRoom = {
+      "users": users,
+      "chatRoomId" : chatRoomId,
+    };
+    await FireBaseService().addChatRoom(chatRoom, chatRoomId);
+  }
+
+  Future<void> handleOnOpenChat(BuildContext context) async {
+    final chatRoomRef = Firestore.instance.collection('chatRoom').document(chatRoomId);
+    final snapshot = await chatRoomRef.get();
+    if(!snapshot.exists){
+      await handleOnCreateChatRoom(context);
+    }
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => Chat(chatRoomId: chatRoomId, )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(
-            builder: (context) => Chat(
-              chatRoomId: chatRoomId,
-              chatRoomName: userName,
-            )
-        ));
-      },
+      onTap: () => handleOnOpenChat(context),
       child: Card(
         child:  Container(
           color: Colors.white,
