@@ -12,6 +12,7 @@ class FireBaseService {
   final FireStoreService _fireStoreService = FireStoreService();
   UserModel _currUser;
   UserModel get currUser => _currUser;
+
   //Sign-in using email and password
   Future<void> signInWithEmailPassword(String email, String password) async {
     try {
@@ -47,13 +48,9 @@ class FireBaseService {
 
   //Sign-out
   Future<void> signOutUser() async {
-    return Future.wait(
-        [
-          _firebaseAuth.signOut().then((value) => {
-            AppDataHelper.clearUser()
-          })
-        ]
-    );
+    return Future.wait([
+      _firebaseAuth.signOut().then((value) => {AppDataHelper.clearUser()})
+    ]);
   }
 
   //Check sign-in status

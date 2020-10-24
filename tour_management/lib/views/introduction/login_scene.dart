@@ -21,7 +21,6 @@ class _LoginSceneState extends State<LoginScene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
       // ignore: missing_required_param
       body: BlocProvider<LoginBloc>(
         create: (context) {
