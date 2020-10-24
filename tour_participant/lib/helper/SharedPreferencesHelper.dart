@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tour_management/models/users_repo/user_model.dart';
-
+import 'package:tour_participant/models/student_repo/student_repo.dart';
 
 class AppDataHelper {
-
   static final AppDataHelper _instance = AppDataHelper._internal();
 
   var _sharedPreferences;
@@ -30,18 +28,19 @@ class AppDataHelper {
   }
 
   /// MARK: Getter functions (Static)
-  static Future<UserModel> getUser() {
+  static Future<Student> getUser() async {
     return _instance.getSharedPreferences().then((preferences) {
       String jsonString = preferences.getString('user_data');
       Map<String, dynamic> jsonMap = json.decode(jsonString);
-      return UserModel.fromData(jsonMap);
+      return Student.fromData(jsonMap);
     });
   }
 
   /// MARK: Setter functions
-  static Future<void> setUser(UserModel user) {
+  static Future<void> setUser(Student user) async {
     return _instance.getSharedPreferences().then((preferences) => {
-      preferences.setString('user_data', user == null ? '' : json.encode(user.toJson()))
-    });
+          preferences.setString(
+              'user_data', user == null ? '' : json.encode(user.toJson()))
+        });
   }
 }

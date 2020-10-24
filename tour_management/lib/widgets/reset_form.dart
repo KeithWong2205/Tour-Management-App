@@ -66,6 +66,7 @@ class _ResetFormState extends State<ResetForm> {
                               child: TextFormField(
                                 controller: _recoverField,
                                 decoration: emailFieldStyle(),
+                                // ignore: deprecated_member_use
                                 autovalidate: true,
                                 autocorrect: false,
                                 textInputAction: TextInputAction.next,

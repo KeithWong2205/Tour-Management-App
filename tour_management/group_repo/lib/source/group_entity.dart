@@ -30,8 +30,8 @@ class GroupEntity extends Equatable {
 
   //Get the group entity from the document snapshot
   static GroupEntity fromSnapshot(DocumentSnapshot snapshot) {
-    return GroupEntity(snapshot.data['groupId'], snapshot.data['groupNumber'],
-        snapshot.data['groupSchool']);
+    return GroupEntity(snapshot.data()['groupId'], snapshot.data()['groupNumber'],
+        snapshot.data()['groupSchool']);
   }
 
   //Map group entity into document on firestore

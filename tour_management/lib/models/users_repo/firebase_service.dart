@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:tour_management/helper/SharedPreferencesHelper.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/views/views.dart';
 
@@ -12,6 +12,7 @@ class FireBaseService {
   final FireStoreService _fireStoreService = FireStoreService();
   UserModel _currUser;
   UserModel get currUser => _currUser;
+
   //Sign-in using email and password
   Future<void> signInWithEmailPassword(String email, String password) async {
     try {
@@ -47,25 +48,21 @@ class FireBaseService {
 
   //Sign-out
   Future<void> signOutUser() async {
-    return Future.wait(
-        [
-          _firebaseAuth.signOut().then((value) => {
-            AppDataHelper.clearUser()
-          })
-        ]
-    );
+    return Future.wait([
+      _firebaseAuth.signOut().then((value) => {AppDataHelper.clearUser()})
+    ]);
   }
 
   //Check sign-in status
   Future<bool> signedInStatus() async {
-    final currentUser = await _firebaseAuth.currentUser();
+    final currentUser = _firebaseAuth.currentUser;
     await _fetchCurrentUser(currentUser);
     return currentUser != null;
   }
 
   //Get user from database
   Future<String> getUser() async {
-    return (await _firebaseAuth.currentUser()).email;
+    return (_firebaseAuth.currentUser).email;
   }
 
   //Reset password
@@ -74,7 +71,7 @@ class FireBaseService {
   }
 
   //Fetching the user data
-  Future _fetchCurrentUser(FirebaseUser user) async {
+  Future _fetchCurrentUser(User user) async {
     if (user != null) {
       _currUser = await _fireStoreService.getUser(user.uid);
       AppDataHelper.setUser(_currUser);
@@ -83,43 +80,41 @@ class FireBaseService {
 
   //Checking user role for checkpoint list
   checkRoleCheckpointUser(BuildContext context) async {
-    FirebaseAuth.instance.currentUser().then((user) {
-      Firestore.instance
-          .collection('users')
-          .where('id', isEqualTo: user.uid)
-          .getDocuments()
-          .then((docs) {
-        if (docs.documents[0].exists) {
-          if (docs.documents[0].data['role'] == 'manager') {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ManagerCheckPointPage()));
-          } else if (docs.documents[0].data['role'] == 'guide') {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => GuideCheckPointPage())
-            );
-          }
+    var user = FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: user.uid)
+        .get()
+        .then((docs) {
+      if (docs.docs[0].exists) {
+        if (docs.docs[0].data()['role'] == 'manager') {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ManagerCheckPointPage()));
+        } else if (docs.docs[0].data()['role'] == 'guide') {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => GuideCheckPointPage())
+          );
         }
-      });
+      }
     });
   }
 
   checkRoleGroupUser(BuildContext context) async {
-    FirebaseAuth.instance.currentUser().then((user) {
-      Firestore.instance
-          .collection('users')
-          .where('id', isEqualTo: user.uid)
-          .getDocuments()
-          .then((docs) {
-        if (docs.documents[0].exists) {
-          if (docs.documents[0].data['role'] == 'manager') {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ManagerGroupPage()));
-          } else if (docs.documents[0].data['role'] == 'guide') {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => GuideGroupPage()));
-          }
+    var user = FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: user.uid)
+        .get()
+        .then((docs) {
+      if (docs.docs[0].exists) {
+        if (docs.docs[0].data()['role'] == 'manager') {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ManagerGroupPage()));
+        } else if (docs.docs[0].data()['role'] == 'guide') {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => GuideGroupPage()));
         }
-      });
+      }
     });
   }
 
