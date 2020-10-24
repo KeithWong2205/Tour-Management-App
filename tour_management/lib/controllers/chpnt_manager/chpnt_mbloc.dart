@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
-import 'package:tour_management/helper/SharedPreferencesHelper.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
 
 //Checkpoint business bloc
 class CheckpointManBloc extends Bloc<CheckpointManEvent, CheckpointManState> {

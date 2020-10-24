@@ -5,7 +5,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/localization/keys.dart';
-import 'package:tour_management/views/views.dart';
 
 class CheckpointDetailSceneGuide extends StatelessWidget {
   final String id;

@@ -32,7 +32,7 @@ class CheckpointofManager extends StatelessWidget {
                 key: ArchSampleKeys.checkpointItemCheckbox(chkpoint.pointId),
                 value: chkpoint.pointComplete,
                 activeColor: Colors.redAccent,
-                onChanged: onCheckboxChanged),
+                onChanged: null),
             title: Hero(
               tag: '${chkpoint.pointId}__heroTag',
               child: Container(

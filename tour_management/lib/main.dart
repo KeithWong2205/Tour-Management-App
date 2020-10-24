@@ -1,4 +1,5 @@
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,23 @@ import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 
-void main() {
+Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
+  if (message.containsKey('data')) {
+    // Handle data message
+    // final dynamic data = message['data'];
+  }
+
+  if (message.containsKey('notification')) {
+    // Handle notification message
+    // final dynamic notification = message['notification'];
+  }
+
+  // Or do other work.
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
   runApp(App());
 }

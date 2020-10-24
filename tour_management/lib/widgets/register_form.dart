@@ -102,6 +102,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   focusNode: email,
                                   controller: _emailField,
                                   decoration: emailFieldStyle(),
+                                  // ignore: deprecated_member_use
                                   autovalidate: true,
                                   autocorrect: false,
                                   textInputAction: TextInputAction.next,
@@ -122,6 +123,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     decoration: passswordFieldStyle(),
                                     autocorrect: false,
                                     obscureText: true,
+                                    // ignore: deprecated_member_use
                                     autovalidate: true,
                                     textInputAction: TextInputAction.done,
                                     validator: (_) {
