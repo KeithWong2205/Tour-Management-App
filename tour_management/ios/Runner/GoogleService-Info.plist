@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>456660906551-kc7nul3ek5mot2ktvhvf167a9tt4ucsk.apps.googleusercontent.com</string>
+	<string>456660906551-v8sh2lbjpit5jb0dt7vklaggu70pq764.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.456660906551-kc7nul3ek5mot2ktvhvf167a9tt4ucsk</string>
+	<string>com.googleusercontent.apps.456660906551-v8sh2lbjpit5jb0dt7vklaggu70pq764</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBjtx3N3sKXT4GTJDTeAF6Zu71Sw7Wbjyc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.keith.tourManagement</string>
+	<string>com.leminh.test</string>
 	<key>PROJECT_ID</key>
 	<string>tour-management-app-455e2</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:456660906551:ios:88c4fecef5a2e17ee945b2</string>
+	<string>1:456660906551:ios:0977e34056f5529de945b2</string>
 	<key>DATABASE_URL</key>
 	<string>https://tour-management-app-455e2.firebaseio.com</string>
 </dict>

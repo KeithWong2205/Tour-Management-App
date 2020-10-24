@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
+import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/widgets/widgets.dart';
 import 'package:tour_management/controllers/authentication/auth.dart';
 
@@ -21,5 +23,16 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
                 BlocProvider.of<AuthBloc>(context).add(LoggedOut())),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    FCMHelper.configure(context);
+    AppDataHelper.getUser().then((user) => {
+      FCMHelper.subscribe(
+          topic: user.groupID
+      ),
+    });
   }
 }

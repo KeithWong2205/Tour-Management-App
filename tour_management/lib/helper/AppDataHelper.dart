@@ -7,7 +7,7 @@ class AppDataHelper {
 
   static final AppDataHelper _instance = AppDataHelper._internal();
 
-  var _sharedPreferences;
+  SharedPreferences _sharedPreferences;
 
   /// MARK: Constructor
   factory AppDataHelper() {

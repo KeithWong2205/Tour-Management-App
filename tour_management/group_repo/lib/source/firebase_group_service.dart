@@ -4,7 +4,7 @@ import '../group_repo.dart';
 
 //Class for handling group to firestore
 class FirebaseGroupService {
-  final groupCollection = Firestore.instance.collection('groups');
+  final groupCollection = FirebaseFirestore.instance.collection('groups');
 
   //Adding a new group item to collection
   Future<void> addNewGroup(GroupModel addedGroup) {
@@ -13,13 +13,13 @@ class FirebaseGroupService {
 
   //Deleting a group item from collection
   Future<void> deleteGroup(GroupModel deletedGroup) {
-    return groupCollection.document(deletedGroup.groupId).delete();
+    return groupCollection.doc(deletedGroup.groupId).delete();
   }
 
   //Load the groups onto the view
   Stream<List<GroupModel>> groups() {
     return groupCollection.snapshots().map((snapshot) {
-      return snapshot.documents
+      return snapshot.docs
           .map((doc) => GroupModel.fromEntity(GroupEntity.fromSnapshot(doc)))
           .toList();
     });
@@ -28,7 +28,7 @@ class FirebaseGroupService {
   //Update a group detail
   Future<void> updateGroup(GroupModel updatedGroup) {
     return groupCollection
-        .document(updatedGroup.groupId)
-        .updateData(updatedGroup.toEntity().toDocument());
+        .doc(updatedGroup.groupId)
+        .update(updatedGroup.toEntity().toDocument());
   }
 }
