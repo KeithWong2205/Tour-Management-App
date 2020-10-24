@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tour_management/helper/SharedPreferencesHelper.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/views/views.dart';
@@ -177,10 +176,17 @@ class FireBaseService {
     });
   }
 
-  getUserChats(String itIsMyName) async {
-    return await Firestore.instance
-        .collection("chatRoom")
-        .where('users', arrayContains: itIsMyName)
-        .snapshots();
+  Future getUserChats() async {
+    var querySnapshot = await Firestore.instance.collection("users").getDocuments();
+    final currentUser = await _firebaseAuth.currentUser();
+    await _fetchCurrentUser(currentUser);
+    if (_currUser != null && querySnapshot.documents.isNotEmpty){
+      querySnapshot.documents.removeWhere((user) => user.data['id'] != _currUser.id);
+    }
+    return querySnapshot;
+  }
+
+  Future<FirebaseUser> getCurrentUser() async {
+    return await FirebaseAuth.instance.currentUser();
   }
 }

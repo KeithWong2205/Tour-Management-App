@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tour_management/helper/SharedPreferencesHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/views/conversation/search.dart';
@@ -12,8 +14,7 @@ class ChatRoom extends StatefulWidget {
 
 class _ChatRoomState extends State<ChatRoom> {
   Stream chatRooms;
-
-  String _userName = "";
+  String _userId = "";
 
   Widget chatRoomsList() {
     return StreamBuilder(
@@ -21,15 +22,15 @@ class _ChatRoomState extends State<ChatRoom> {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(
-            itemCount: snapshot.data.documents.length,
+            itemCount: snapshot.data.documents != null ? snapshot.data.documents.length : 0,
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return ChatRoomsTile(
-                userName: snapshot.data.documents[index].data['chatRoomId']
-                    .toString()
-                    .replaceAll("_", "")
-                    .replaceAll(_userName, ""),
-                chatRoomId: snapshot.data.documents[index].data["chatRoomId"],
+                userName: snapshot.data.documents[index].data['name'],
+                chatRoomId: HelperFunctions.createChatRoomId(
+                    snapshot.data.documents[index].data['id']
+                    , _userId
+                ),
               );
             })
             : Container();
@@ -39,17 +40,17 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   void initState() {
+    final currentUser = AppDataHelper.getUser();
+    currentUser.then((value) => _userId = value.id);
     getUserInfogetChats();
     super.initState();
   }
 
   getUserInfogetChats() async {
-    _userName = await HelperFunctions.getUserNameSharedPreference();
-    FireBaseService().getUserChats(_userName).then((snapshots) {
+    // _userName = await HelperFunctions.getUserNameSharedPreference();
+    FireBaseService().getUserChats().then((snapshots) {
       setState(() {
-        chatRooms = snapshots;
-        print(
-            "we got the data + ${chatRooms.toString()} this is name  $_userName");
+        chatRooms = Stream<QuerySnapshot>.value(snapshots);
       });
     });
   }
@@ -92,39 +93,44 @@ class ChatRoomsTile extends StatelessWidget {
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => Chat(
               chatRoomId: chatRoomId,
+              chatRoomName: userName,
             )
         ));
       },
-      child: Container(
-        color: Colors.black26,
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-        child: Row(
-          children: [
-            Container(
-              height: 30,
-              width: 30,
-              decoration: BoxDecoration(
-                  color: Color(0xff007EF4),
-                  borderRadius: BorderRadius.circular(30)),
-              child: Text(userName.substring(0, 1),
-                  textAlign: TextAlign.center,
+      child: Card(
+        child:  Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          child: Row(
+            children: [
+              Container(
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                    color: Color(0xff007EF4),
+                    borderRadius: BorderRadius.circular(30)),
+                child: Center(
+                  child: Text(userName.substring(0, 1),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontFamily: 'OverpassRegular',
+                          fontWeight: FontWeight.w300)),
+                ),
+              ),
+              SizedBox(
+                width: 12,
+              ),
+              Text(userName,
+                  textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 16,
                       fontFamily: 'OverpassRegular',
-                      fontWeight: FontWeight.w300)),
-            ),
-            SizedBox(
-              width: 12,
-            ),
-            Text(userName,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'OverpassRegular',
-                    fontWeight: FontWeight.w300))
-          ],
+                      fontWeight: FontWeight.w300))
+            ],
+          ),
         ),
       ),
     );

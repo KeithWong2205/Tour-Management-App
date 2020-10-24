@@ -14,7 +14,7 @@ class FireStoreService {
   }
 
   //Get user from collection
-  Future getUser(String uid) async {
+  Future<UserModel> getUser(String uid) async {
     try {
       var userData = await _userCollectionReference.document(uid).get();
       return UserModel.fromData(userData.data);
@@ -23,3 +23,7 @@ class FireStoreService {
     }
   }
 }
+
+  Future getAllUser() async {
+    return Firestore.instance.collection('users').getDocuments();
+  }

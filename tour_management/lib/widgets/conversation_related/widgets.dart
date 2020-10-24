@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-Widget appBarMain(BuildContext context) {
+Widget appBarMain(BuildContext context, {String title = ""}) {
   return AppBar(
-    // title: Image.asset(
-    //   "assets/images/logo.png",
-    //   height: 40,
-    // ),
+    title: Text(title, style: biggerTextStyle(),),
     elevation: 0.0,
     centerTitle: false,
   );

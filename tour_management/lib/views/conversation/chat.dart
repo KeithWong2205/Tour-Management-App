@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tour_management/helper/SharedPreferencesHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
 
 class Chat extends StatefulWidget {
   final String chatRoomId;
-
-  Chat({this.chatRoomId});
+  final String chatRoomName;
+  Chat({this.chatRoomId, this.chatRoomName});
 
   @override
   _ChatState createState() => _ChatState();
@@ -16,7 +17,7 @@ class _ChatState extends State<Chat> {
 
   Stream<QuerySnapshot> chats;
   TextEditingController messageEditingController = new TextEditingController();
-  final String _userName = "";
+  String _userId = "";
 
   Widget chatMessages(){
     return StreamBuilder(
@@ -27,7 +28,7 @@ class _ChatState extends State<Chat> {
             itemBuilder: (context, index){
               return MessageTile(
                 message: snapshot.data.documents[index].data["message"],
-                sendByMe: _userName == snapshot.data.documents[index].data["sendBy"],
+                sendByMe: _userId == snapshot.data.documents[index].data["sendBy"],
               );
             }) : Container();
       },
@@ -37,7 +38,7 @@ class _ChatState extends State<Chat> {
   addMessage() {
     if (messageEditingController.text.isNotEmpty) {
       Map<String, dynamic> chatMessageMap = {
-        "sendBy": _userName,
+        "sendBy": _userId,
         "message": messageEditingController.text,
         'time': DateTime
             .now()
@@ -52,8 +53,15 @@ class _ChatState extends State<Chat> {
     }
   }
 
+  void handleInitChatInfo(String uid){
+    _userId = uid;
+
+  }
+
   @override
   void initState() {
+    final currentUser = AppDataHelper.getUser();
+    currentUser.then((value) => handleInitChatInfo(value.id));
     FireBaseService().getChats(widget.chatRoomId).then((val) {
       setState(() {
         chats = val;
@@ -65,7 +73,7 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context),
+      appBar: appBarMain(context, title: widget.chatRoomName),
       body: Container(
         child: Stack(
           children: [
@@ -77,11 +85,12 @@ class _ChatState extends State<Chat> {
                   .width,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                color: Color(0x54FFFFFF),
+                color: Color(0xff007EF4),
                 child: Row(
                   children: [
                     Expanded(
                         child: TextField(
+                          cursorColor: Colors.black,
                           controller: messageEditingController,
                           style: simpleTextStyle(),
                           decoration: InputDecoration(
@@ -113,7 +122,7 @@ class _ChatState extends State<Chat> {
                               borderRadius: BorderRadius.circular(40)
                           ),
                           padding: EdgeInsets.all(12),
-                          child: Image.asset("assets/images/send.png",
+                          child: Image.asset("assets/send.png",
                             height: 25, width: 25,)),
                     ),
                   ],
