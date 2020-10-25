@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_participant/views/views.dart';
 
 //The drawer for every scene
 class MainDrawer extends StatelessWidget {
