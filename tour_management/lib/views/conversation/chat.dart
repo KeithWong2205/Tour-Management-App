@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tour_management/helper/SharedPreferencesHelper.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
 
@@ -26,8 +26,8 @@ class _ChatState extends State<Chat> {
             itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index){
               return MessageTile(
-                message: snapshot.data.documents[index].data["message"],
-                sendByMe: _userId == snapshot.data.documents[index].data["sendBy"],
+                message: snapshot.data.documents[index].data()["message"],
+                sendByMe: _userId == snapshot.data.documents[index].data()["sendBy"],
               );
             }) : Container();
       },

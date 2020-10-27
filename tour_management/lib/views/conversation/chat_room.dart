@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tour_management/helper/SharedPreferencesHelper.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/views/conversation/search.dart';
@@ -26,9 +26,9 @@ class _ChatRoomState extends State<ChatRoom> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return ChatRoomsTile(
-                userName: snapshot.data.documents[index].data['name'],
+                userName: snapshot.data.documents[index].data()['name'],
                 chatRoomId: HelperFunctions.createChatRoomId(
-                    snapshot.data.documents[index].data['id']
+                    snapshot.data.documents[index].data()['id']
                     , _userId
                 ),
               );

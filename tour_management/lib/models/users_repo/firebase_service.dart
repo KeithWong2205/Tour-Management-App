@@ -169,15 +169,15 @@ class FireBaseService {
 
   Future getUserChats() async {
     final QuerySnapshot querySnapshot = await Firestore.instance.collection("users").getDocuments();
-    final currentUser = await _firebaseAuth.currentUser();
+    final currentUser = await _firebaseAuth.currentUser;
     await _fetchCurrentUser(currentUser);
     if (_currUser != null && querySnapshot.documents.isNotEmpty){
-      querySnapshot.documents.removeWhere((user) => user.data['id'] == currentUser.uid);
+      querySnapshot.documents.removeWhere((user) => user.data()['id'] == currentUser.uid);
     }
     return querySnapshot;
   }
 
   Future<FirebaseUser> getCurrentUser() async {
-    return await FirebaseAuth.instance.currentUser();
+    return await FirebaseAuth.instance.currentUser;
   }
 }

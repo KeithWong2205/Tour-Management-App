@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tour_management/helper/SharedPreferencesHelper.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
@@ -33,7 +33,7 @@ class _SearchState extends State<Search> {
       await firebaseService.searchByName(searchEditingController.text)
           .then((snapshot){
         searchResultSnapshot = snapshot;
-        searchResultSnapshot.documents.removeWhere((result) => result.data['id'] == widget.currentUid);
+        searchResultSnapshot.documents.removeWhere((result) => result.data()['id'] == widget.currentUid);
         print("$searchResultSnapshot");
         setState(() {
           isLoading = false;
@@ -49,9 +49,9 @@ class _SearchState extends State<Search> {
       itemCount: searchResultSnapshot.documents.length,
         itemBuilder: (context, index){
         return userTile(
-          searchResultSnapshot.documents[index].data["name"],
-          searchResultSnapshot.documents[index].data["email"],
-          searchResultSnapshot.documents[index].data["id"],
+          searchResultSnapshot.documents[index].data()["name"],
+          searchResultSnapshot.documents[index].data()["email"],
+          searchResultSnapshot.documents[index].data()["id"],
         );
         }) : Container();
   }
