@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tour_management/models/users_repo/users_repo.dart';
+import 'package:tour_participant/views/views.dart';
 
 //The drawer for every scene
 class MainDrawer extends StatelessWidget {
@@ -46,21 +46,8 @@ class MainDrawer extends StatelessWidget {
                     style: TextStyle(fontSize: 18, color: Colors.red),
                   ),
                   subtitle: Text('View your planned itinerary'),
-                  onTap: () =>
-                      FireBaseService().checkRoleCheckpointUser(context))),
-          Card(
-              child: ListTile(
-            leading: Icon(
-              Icons.people,
-              color: Colors.green,
-            ),
-            title: Text(
-              'Attendee Group',
-              style: TextStyle(fontSize: 18, color: Colors.green),
-            ),
-            subtitle: Text('View information of your group'),
-            onTap: () => FireBaseService().checkRoleGroupUser(context),
-          )),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CheckpointPageStudent())))),
           Card(
               child: ListTile(
             leading: Icon(

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tour_management/helper/AppDataHelper.dart';
-import 'package:tour_management/helper/FCMHelper.dart';
-import 'package:tour_management/localization/keys.dart';
-import 'package:tour_management/views/views.dart';
-import 'package:tour_management/widgets/widgets.dart';
+import 'package:tour_participant/localization/keys.dart';
+import 'package:tour_participant/views/views.dart';
+import 'package:tour_participant/widgets/widgets.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
-import 'package:tour_management/controllers/chpoint_list/chpoint_list.dart';
+import 'package:tour_participant/controllers/chkpoint_list/chkpoint_list.dart';
+import 'package:tour_participant/controllers/chkpoint_manager/chkpoint_man.dart';
 
-class ListCheckPointsGuide extends StatelessWidget {
-  ListCheckPointsGuide({Key key}) : super(key: key);
+class ListCheckpointsStudent extends StatelessWidget {
+  ListCheckpointsStudent({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CheckPointListBloc, CheckPointListState>(
@@ -50,12 +48,12 @@ class ListCheckPointsGuide extends StatelessWidget {
                           )),
                     ))),
             itemBuilder: (context, element) {
-              return CheckpointofGuide(
+              return CheckpointofStudent(
                 chkpoint: element,
                 onTap: () async {
                   final removedTodo = await Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) {
-                    return CheckpointDetailSceneGuide(
+                    return CheckpointDetailScene(
                       id: element.pointId,
                     );
                   }));
@@ -67,22 +65,6 @@ class ListCheckPointsGuide extends StatelessWidget {
                             BlocProvider.of<CheckpointManBloc>(context)
                                 .add(CheckpointManDelete(element))));
                   }
-                },
-                onCheckboxChanged: (_) {
-                  AppDataHelper.getUser().then((user) => {
-                        if (user.role != 'manager')
-                          {
-                            FCMHelper.sendMessage(
-                                message: "Checkpoint [" +
-                                    element.pointName +
-                                    "] changed",
-                                title: element.pointGroup,
-                                to: '/topics/' + element.pointGroup)
-                          }
-                      });
-                  BlocProvider.of<CheckpointManBloc>(context).add(
-                      CheckpointManUpdated(
-                          element.copyWith(complete: !element.pointComplete)));
                 },
               );
             },
