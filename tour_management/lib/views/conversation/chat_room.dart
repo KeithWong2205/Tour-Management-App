@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/views/conversation/search.dart';
@@ -40,19 +40,13 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   void initState() {
-    final currentUser = AppDataHelper.getUser();
-    currentUser.then((value) =>  getUserInfogetChats(value.id));
-    super.initState();
-  }
-
-  getUserInfogetChats(String uid) async {
-    // _userName = await HelperFunctions.getUserNameSharedPreference();
-    _userId = uid;
+    _userId = FirebaseAuth.instance.currentUser.uid;
     FireBaseService().getUserChats().then((snapshots) {
       setState(() {
         chatRooms = Stream<QuerySnapshot>.value(snapshots);
       });
     });
+    super.initState();
   }
 
   @override
@@ -97,7 +91,7 @@ class ChatRoomsTile extends StatelessWidget {
   }
 
   Future<void> handleOnOpenChat(BuildContext context) async {
-    final chatRoomRef = Firestore.instance.collection('chatRoom').document(chatRoomId);
+    final chatRoomRef = FirebaseFirestore.instance.collection('chatRoom').doc(chatRoomId);
     final snapshot = await chatRoomRef.get();
     if(!snapshot.exists){
       await handleOnCreateChatRoom(context);

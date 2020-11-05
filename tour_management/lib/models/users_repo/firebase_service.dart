@@ -119,39 +119,39 @@ class FireBaseService {
   }
 
   Future<void> addUserInfo(userData) async {
-    Firestore.instance.collection("users").add(userData).catchError((e) {
+    FirebaseFirestore.instance.collection("users").add(userData).catchError((e) {
       print(e.toString());
     });
   }
 
   getUserInfo(String email) async {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection("users")
         .where("email", isEqualTo: email)
-        .getDocuments()
+        .get()
         .catchError((e) {
       print(e.toString());
     });
   }
 
   searchByName(String searchField) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection("users")
         .where('name', isEqualTo: searchField)
-        .getDocuments();
+        .get();
   }
 
    addChatRoom(chatRoom, chatRoomId) async {
-    return await Firestore.instance
+    return await FirebaseFirestore.instance
         .collection("chatRoom")
-        .document(chatRoomId)
-        .setData(chatRoom);
+        .doc(chatRoomId)
+        .set(chatRoom);
   }
 
   getChats(String chatRoomId) async{
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection("chatRoom")
-        .document(chatRoomId)
+        .doc(chatRoomId)
         .collection("chats")
         .orderBy('time')
         .snapshots();
@@ -159,8 +159,8 @@ class FireBaseService {
 
 
   Future<void> addMessage(String chatRoomId, chatMessageData){
-    Firestore.instance.collection("chatRoom")
-        .document(chatRoomId)
+    FirebaseFirestore.instance.collection("chatRoom")
+        .doc(chatRoomId)
         .collection("chats")
         .add(chatMessageData).catchError((e){
       print(e.toString());
@@ -168,16 +168,6 @@ class FireBaseService {
   }
 
   Future getUserChats() async {
-    final QuerySnapshot querySnapshot = await Firestore.instance.collection("users").getDocuments();
-    final currentUser = await _firebaseAuth.currentUser;
-    await _fetchCurrentUser(currentUser);
-    if (_currUser != null && querySnapshot.documents.isNotEmpty){
-      querySnapshot.documents.removeWhere((user) => user.data()['id'] == currentUser.uid);
-    }
-    return querySnapshot;
-  }
-
-  Future<FirebaseUser> getCurrentUser() async {
-    return await FirebaseAuth.instance.currentUser;
+    return FirebaseFirestore.instance.collection("users").get() ;
   }
 }
