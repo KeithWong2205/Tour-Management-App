@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
+import 'package:tour_management/helper/FirebaseStorageHelper.dart';
 import 'package:tour_management/localization/keys.dart';
 import 'package:tour_management/views/views.dart';
 
@@ -25,8 +26,7 @@ class CheckpointDetailSceneManager extends StatefulWidget {
 
 class _CheckpointDetailSceneManagerState extends State<CheckpointDetailSceneManager> {
 
-  File _imageSelected;
-  final picker = ImagePicker();
+  String _photoUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class _CheckpointDetailSceneManagerState extends State<CheckpointDetailSceneMana
                             child: Padding(
                               padding: const EdgeInsets.all(9),
                               child: Container(
-                                child: _imageSelected != null ? Image.file(_imageSelected) : Container(),
+                                child: _photoUrl != null ? Image.network(_photoUrl) : Container(),
                                 decoration: BoxDecoration(
                                     color: Colors.grey,
                                     border: Border.all(color: Colors.black),
@@ -251,12 +251,12 @@ class _CheckpointDetailSceneManagerState extends State<CheckpointDetailSceneMana
   }
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _imageSelected = File(pickedFile.path);
-      } else {
-        print('No image selected.');
+    FirebaseStorageHelper.pickAndUploadImage().then((url) {
+      if (url != null) {
+        print("getImage result => " + url);
+        setState(() {
+          _photoUrl = url;
+        });
       }
     });
   }
