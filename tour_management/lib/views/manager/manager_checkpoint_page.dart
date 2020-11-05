@@ -6,6 +6,7 @@ class ManagerCheckPointPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: checkpointAppBar(),
+      drawer: MainDrawer(),
       body: ListCheckPointsManager(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

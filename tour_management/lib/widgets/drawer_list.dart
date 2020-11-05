@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
+import 'package:tour_management/views/profile_page.dart';
 
 //The drawer for every scene
 class MainDrawer extends StatelessWidget {
@@ -84,8 +87,19 @@ class MainDrawer extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: Colors.amber),
               ),
               subtitle: Text('View your own profile'),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ProfilePage())),
             ),
-          )
+          ),
+          SizedBox(height: 200),
+          Card(
+              child: ListTile(
+                  leading: Icon(Icons.exit_to_app),
+                  title: Text("Log out"),
+                  onTap: () {
+                    Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                    BlocProvider.of<AuthBloc>(context).add(LoggedOut());
+                  }))
         ],
       ),
     );

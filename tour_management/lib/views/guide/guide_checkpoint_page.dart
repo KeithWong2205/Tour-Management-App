@@ -6,6 +6,7 @@ class GuideCheckPointPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: checkpointAppBar(),
+      drawer: MainDrawer(),
       body: ListCheckPointsGuide(),
     );
   }
