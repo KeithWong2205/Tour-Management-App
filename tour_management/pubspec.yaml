@@ -19,7 +19,7 @@ dependencies:
   datetime_picker_formfield: ^1.0.0
   flutter_rating_bar: ^3.0.1+1
   grouped_list: ^3.5.0
-  image_picker: ^0.6.6+5
+  image_picker: ^0.6.7+12
   chpnt_repo_manager:
     path: chpnt_repo_manager
   flutter:
