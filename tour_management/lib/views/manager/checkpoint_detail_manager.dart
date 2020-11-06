@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/helper/FirebaseStorageHelper.dart';
 import 'package:tour_management/localization/keys.dart';
 import 'package:tour_management/views/views.dart';
@@ -61,26 +61,23 @@ class _CheckpointDetailSceneManagerState extends State<CheckpointDetailSceneMana
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    GestureDetector(
-                      child: Container(
-                          height: 250,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.all(9),
-                              child: Container(
-                                child: _photoUrl != null ? Image.network(_photoUrl) : Container(),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    border: Border.all(color: Colors.black),
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                                width: 450,
+                    Container(
+                        height: 250,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(9),
+                            child: Container(
+                              child: checkpoint.pointPhotoUrl != null && checkpoint.pointPhotoUrl.isNotEmpty ? Image.network(checkpoint.pointPhotoUrl) : Container(),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(10)
                               ),
+                              width: 450,
                             ),
-                          )
-                      ),
-                      onTap: getImage,
+                          ),
+                        )
                     ),
                     SizedBox(
                       height: 10,
@@ -231,14 +228,15 @@ class _CheckpointDetailSceneManagerState extends State<CheckpointDetailSceneMana
                     .push(MaterialPageRoute(builder: (context) {
                   return AddEditScene(
                     key: ArchSampleKeys.editCheckpointScene,
-                    onSave: (name, groupID, location, dateTime, note) {
+                    onSave: (name, groupID, location, dateTime, note, photoUrl) {
                       BlocProvider.of<CheckpointManBloc>(context).add(
                           CheckpointManUpdated(checkpoint.copyWith(
                               name: name,
                               group: groupID,
                               location: location,
                               dateTime: dateTime,
-                              note: note)));
+                              note: note,
+                              photoUrl: photoUrl)));
                     },
                     isEditing: true,
                     checkpoint: checkpoint,
@@ -248,16 +246,5 @@ class _CheckpointDetailSceneManagerState extends State<CheckpointDetailSceneMana
         );
       },
     );
-  }
-
-  Future getImage() async {
-    FirebaseStorageHelper.pickAndUploadImage().then((url) {
-      if (url != null) {
-        print("getImage result => " + url);
-        setState(() {
-          _photoUrl = url;
-        });
-      }
-    });
   }
 }

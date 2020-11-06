@@ -73,7 +73,7 @@ class _AppState extends State<App> {
           '/addTodo': (context) {
             return AddEditScene(
               isEditing: false,
-              onSave: (name, groupID, location, dateTime, note) {
+              onSave: (name, groupID, location, dateTime, note, photoUrl) {
                 BlocProvider.of<CheckpointManBloc>(context).add(
                     CheckpointManAdded(CheckpointModel(name,
                         pointGroup: groupID,

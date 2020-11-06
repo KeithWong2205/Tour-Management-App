@@ -5,16 +5,16 @@ import 'package:image_picker/image_picker.dart';
 
 class FirebaseStorageHelper {
 
-  static Future<String> pickAndUploadImage({String filename, ImageSource source = ImageSource.gallery}) async {
-    File file = await pickImage(source: source);
+  static Future<String> pickAndUploadImage({String filename, int quality, ImageSource source = ImageSource.gallery}) async {
+    File file = await pickImage(quality: quality, source: source);
     if (file != null) {
       return await uploadImage(file: file, filename: filename);
     }
     return null;
   }
 
-  static Future<File> pickImage({ImageSource source = ImageSource.gallery}) async {
-    PickedFile pickedFile = await ImagePicker().getImage(source: source);
+  static Future<File> pickImage({int quality = 100, ImageSource source = ImageSource.gallery}) async {
+    PickedFile pickedFile = await ImagePicker().getImage(imageQuality: quality, source: source);
     if (pickedFile != null) {
       return File(pickedFile.path);
     }

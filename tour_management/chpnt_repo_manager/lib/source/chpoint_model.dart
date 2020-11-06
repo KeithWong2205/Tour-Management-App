@@ -13,6 +13,7 @@ class CheckpointModel {
   final String pointLocal;
   final DateTime pointDatetime;
   final String pointNote;
+  final String pointPhotoUrl;
   final double totalRating;
   final double totalRatingStar;
   CheckpointModel(this.pointName,
@@ -22,6 +23,7 @@ class CheckpointModel {
       String pointLocal = '',
       DateTime pointDatetime,
       String pointNote = '',
+      String pointPhotoUrl = '',
       double totalRating,
       double totalRatingStar})
       : this.pointId = pointId,
@@ -29,6 +31,7 @@ class CheckpointModel {
         this.pointLocal = pointLocal ?? '',
         this.pointDatetime = pointDatetime ?? DateTime.now(),
         this.pointNote = pointNote ?? '',
+        this.pointPhotoUrl = pointPhotoUrl ?? '',
         this.totalRating = totalRating ?? 1,
         this.totalRatingStar = totalRatingStar ?? 2.5;
 
@@ -41,6 +44,7 @@ class CheckpointModel {
       String location,
       DateTime dateTime,
       String note,
+      String photoUrl,
       double totalRating,
       double totalRatingStar}) {
     return CheckpointModel(name ?? this.pointName,
@@ -50,6 +54,7 @@ class CheckpointModel {
         pointLocal: location ?? this.pointLocal,
         pointDatetime: dateTime ?? this.pointDatetime,
         pointNote: note ?? this.pointNote,
+        pointPhotoUrl: photoUrl ?? this.pointPhotoUrl,
         totalRating: totalRating ?? this.totalRating,
         totalRatingStar: totalRatingStar ?? this.totalRatingStar);
   }
@@ -64,6 +69,7 @@ class CheckpointModel {
       pointLocal.hashCode ^
       pointDatetime.hashCode ^
       pointNote.hashCode ^
+      pointPhotoUrl.hashCode ^
       totalRating.hashCode ^
       totalRatingStar.hashCode;
 //== operator override
@@ -79,17 +85,18 @@ class CheckpointModel {
           pointLocal == other.pointLocal &&
           pointDatetime == other.pointDatetime &&
           pointNote == other.pointNote &&
+          pointPhotoUrl == other.pointPhotoUrl &&
           totalRating == other.totalRating &&
           totalRatingStar == other.totalRatingStar;
 
   @override
   String toString() =>
-      'Checkpoint Model {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
+      'Checkpoint Model {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, photoUrl: $pointPhotoUrl, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
 
   //Make model into checkpoint entity to send to firestore
   CheckpointEntity toEntity() {
     return CheckpointEntity(pointComplete, pointId, pointGroup, pointName,
-        pointLocal, pointDatetime, pointNote, totalRating, totalRatingStar);
+        pointLocal, pointDatetime, pointNote, pointPhotoUrl, totalRating, totalRatingStar);
   }
 
   //Get the checkpoint model from the entity acquire from firestore
@@ -101,6 +108,7 @@ class CheckpointModel {
         pointLocal: entity.pointLocal,
         pointDatetime: entity.pointDatetime,
         pointNote: entity.pointNote,
+        pointPhotoUrl: entity.pointPhotoUrl,
         totalRating: entity.totalRating,
         totalRatingStar: entity.totalRatingStar);
   }

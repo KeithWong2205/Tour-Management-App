@@ -30,4 +30,8 @@ class UserModel {
       'role': role,
     };
   }
+
+  bool isManager() {
+    return role == "manager";
+  }
 }
