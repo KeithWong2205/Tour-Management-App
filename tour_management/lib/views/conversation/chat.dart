@@ -24,6 +24,7 @@ class _ChatState extends State<Chat> {
     return StreamBuilder(
       stream: chats,
       builder: (context, snapshot){
+        _scrollToEnd();
         return snapshot.hasData ?  ListView.builder(
             controller: _scrollController,
             itemCount: snapshot.data.documents.length,
@@ -71,13 +72,6 @@ class _ChatState extends State<Chat> {
       setState(() {
         chats = val;
       });
-    });
-    FirebaseFirestore.instance
-        .collection("chatRoom")
-        .doc(widget.chatRoomId)
-        .collection("chats")
-        .orderBy('time').snapshots().listen((event) {
-      _scrollToEnd();
     });
   }
 

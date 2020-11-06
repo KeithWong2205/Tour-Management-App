@@ -31,6 +31,7 @@ class _ChatRoomState extends State<ChatRoom> {
                     snapshot.data.documents[index].data()['id']
                     , _userId
                 ),
+                isCurrentUser: snapshot.data.documents[index].data()['id'] == _userId,
               );
             })
             : Container();
@@ -78,7 +79,9 @@ class ChatRoomsTile extends StatelessWidget {
   final String userName;
   final String chatRoomId;
 
-  ChatRoomsTile({this.userName,@required this.chatRoomId});
+  final bool isCurrentUser;
+
+  ChatRoomsTile({this.userName,@required this.chatRoomId, @required this.isCurrentUser});
 
    Future handleOnCreateChatRoom(BuildContext context) async {
     List<String> users = chatRoomId.split('_');
@@ -102,44 +105,48 @@ class ChatRoomsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => handleOnOpenChat(context),
-      child: Card(
-        child:  Container(
-          color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          child: Row(
-            children: [
-              Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                    color: Color(0xff007EF4),
-                    borderRadius: BorderRadius.circular(30)),
-                child: Center(
-                  child: Text(userName.substring(0, 1),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontFamily: 'OverpassRegular',
-                          fontWeight: FontWeight.w300)),
-                ),
-              ),
-              SizedBox(
-                width: 12,
-              ),
-              Text(userName,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontFamily: 'OverpassRegular',
-                      fontWeight: FontWeight.w300))
-            ],
-          ),
-        ),
-      ),
-    );
+     if (isCurrentUser) {
+       return Container();
+     } else {
+       return GestureDetector(
+         onTap: () => handleOnOpenChat(context),
+         child: Card(
+           child:  Container(
+             color: Colors.white,
+             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+             child: Row(
+               children: [
+                 Container(
+                   height: 30,
+                   width: 30,
+                   decoration: BoxDecoration(
+                       color: Color(0xff007EF4),
+                       borderRadius: BorderRadius.circular(30)),
+                   child: Center(
+                     child: Text(userName.substring(0, 1),
+                         textAlign: TextAlign.center,
+                         style: TextStyle(
+                             color: Colors.black,
+                             fontSize: 16,
+                             fontFamily: 'OverpassRegular',
+                             fontWeight: FontWeight.w300)),
+                   ),
+                 ),
+                 SizedBox(
+                   width: 12,
+                 ),
+                 Text(userName,
+                     textAlign: TextAlign.start,
+                     style: TextStyle(
+                         color: Colors.black,
+                         fontSize: 16,
+                         fontFamily: 'OverpassRegular',
+                         fontWeight: FontWeight.w300))
+               ],
+             ),
+           ),
+         ),
+       );
+     }
   }
 }
