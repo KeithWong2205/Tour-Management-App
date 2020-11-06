@@ -33,11 +33,11 @@ class _SearchState extends State<Search> {
       await firebaseService.searchByName(searchEditingController.text)
           .then((snapshot){
         searchResultSnapshot = snapshot;
-        searchResultSnapshot.documents.removeWhere((result) => result.data()['id'] == widget.currentUid);
+        searchResultSnapshot.docs.removeWhere((result) => result.data()['id'] == widget.currentUid);
         print("$searchResultSnapshot");
         setState(() {
           isLoading = false;
-          haveUserSearched = searchResultSnapshot.documents.isNotEmpty;
+          haveUserSearched = searchResultSnapshot.docs.isNotEmpty;
         });
       });
     }
@@ -46,12 +46,12 @@ class _SearchState extends State<Search> {
   Widget userList(){
     return haveUserSearched ? ListView.builder(
       shrinkWrap: true,
-      itemCount: searchResultSnapshot.documents.length,
+      itemCount: searchResultSnapshot.docs.length,
         itemBuilder: (context, index){
         return userTile(
-          searchResultSnapshot.documents[index].data()["name"],
-          searchResultSnapshot.documents[index].data()["email"],
-          searchResultSnapshot.documents[index].data()["id"],
+          searchResultSnapshot.docs[index].data()["name"],
+          searchResultSnapshot.docs[index].data()["email"],
+          searchResultSnapshot.docs[index].data()["id"],
         );
         }) : Container();
   }
