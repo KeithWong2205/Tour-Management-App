@@ -117,4 +117,57 @@ class FireBaseService {
       }
     });
   }
+
+  Future<void> addUserInfo(userData) async {
+    FirebaseFirestore.instance.collection("users").add(userData).catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  getUserInfo(String email) async {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .where("email", isEqualTo: email)
+        .get()
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  searchByName(String searchField) {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .where('name', isEqualTo: searchField)
+        .get();
+  }
+
+   addChatRoom(chatRoom, chatRoomId) async {
+    return await FirebaseFirestore.instance
+        .collection("chatRoom")
+        .doc(chatRoomId)
+        .set(chatRoom);
+  }
+
+  getChats(String chatRoomId) async{
+    return FirebaseFirestore.instance
+        .collection("chatRoom")
+        .doc(chatRoomId)
+        .collection("chats")
+        .orderBy('time')
+        .snapshots();
+  }
+
+
+  Future<void> addMessage(String chatRoomId, chatMessageData){
+    FirebaseFirestore.instance.collection("chatRoom")
+        .doc(chatRoomId)
+        .collection("chats")
+        .add(chatMessageData).catchError((e){
+      print(e.toString());
+    });
+  }
+
+  Future getUserChats() async {
+    return FirebaseFirestore.instance.collection("users").get() ;
+  }
 }

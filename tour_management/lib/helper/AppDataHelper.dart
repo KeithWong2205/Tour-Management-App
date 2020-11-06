@@ -30,7 +30,7 @@ class AppDataHelper {
   }
 
   /// MARK: Getter functions (Static)
-  static Future<UserModel> getUser() async {
+  static Future<UserModel> getUser() {
     return _instance.getSharedPreferences().then((preferences) {
       String jsonString = preferences.getString('user_data');
       Map<String, dynamic> jsonMap = json.decode(jsonString);
@@ -39,7 +39,7 @@ class AppDataHelper {
   }
 
   /// MARK: Setter functions
-  static Future<void> setUser(UserModel user) async {
+  static Future<void> setUser(UserModel user) {
     return _instance.getSharedPreferences().then((preferences) => {
       preferences.setString('user_data', user == null ? '' : json.encode(user.toJson()))
     });
