@@ -5,11 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:tour_management/helper/FirebaseStorageHelper.dart';
 import 'package:tour_management/localization/keys.dart';
 import 'package:tour_management/styles/styles.dart';
 
 typedef OnSaveCallback = Function(String name, String groupID, String location,
-    DateTime dateTime, String note);
+    DateTime dateTime, String note, String photoUrl);
 
 class AddEditScene extends StatefulWidget {
   final bool isEditing;
@@ -44,22 +45,26 @@ class _AddEditSceneState extends State<AddEditScene> {
     'Group 5'
   ];
   //Image Picker Function
-  File _image;
+  String _photoUrl;
   _imgFromCamera() async {
-    // ignore: deprecated_member_use
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
-    setState(() {
-      _image = image;
+    FirebaseStorageHelper.pickAndUploadImage(quality: 50, source: ImageSource.camera).then((url) {
+      if (url != null) {
+        print("getImage result => " + url);
+        setState(() {
+          _photoUrl = url;
+        });
+      }
     });
   }
 
   _imgFromGallery() async {
-    // ignore: deprecated_member_use
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
-    setState(() {
-      _image = image;
+    FirebaseStorageHelper.pickAndUploadImage(source: ImageSource.gallery).then((url) {
+      if (url != null) {
+        print("getImage result => " + url);
+        setState(() {
+          _photoUrl = url;
+        });
+      }
     });
   }
 
@@ -123,11 +128,11 @@ class _AddEditSceneState extends State<AddEditScene> {
                                         border: Border.all(color: Colors.black),
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: _image != null
+                                    child: _photoUrl != null && _photoUrl.isNotEmpty
                                         ? ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
-                                            child: Image.file(_image,
+                                            child: Image.network(_photoUrl,
                                                 width: 100,
                                                 height: 200,
                                                 fit: BoxFit.fill))
@@ -255,10 +260,16 @@ class _AddEditSceneState extends State<AddEditScene> {
           onPressed: () {
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
-              widget.onSave(_name, _groupID, _location, _dateTime, _note);
+              widget.onSave(_name, _groupID, _location, _dateTime, _note, _photoUrl);
               Navigator.pop(context);
             }
           },
         ));
+  }
+
+  @override
+  void initState() {
+    _photoUrl = widget.checkpoint.pointPhotoUrl;
+    super.initState();
   }
 }

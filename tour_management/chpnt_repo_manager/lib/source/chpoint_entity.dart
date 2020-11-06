@@ -10,10 +10,11 @@ class CheckpointEntity extends Equatable {
   final DateTime pointDatetime;
   final String pointNote;
   final String pointGroup;
+  final String pointPhotoUrl;
   final double totalRating;
   final double totalRatingStar;
   const CheckpointEntity(this.pointComplete, this.pointId, this.pointGroup,
-      this.pointName, this.pointLocal, this.pointDatetime, this.pointNote, this.totalRating, this.totalRatingStar);
+      this.pointName, this.pointLocal, this.pointDatetime, this.pointNote, this.pointPhotoUrl, this.totalRating, this.totalRatingStar);
   @override
   List<Object> get props => [
         pointComplete,
@@ -23,12 +24,13 @@ class CheckpointEntity extends Equatable {
         pointLocal,
         pointDatetime,
         pointNote,
+        pointPhotoUrl,
         totalRating,
         totalRatingStar
       ];
   @override
   String toString() =>
-      'Checkpoint Entity created {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
+      'Checkpoint Entity created {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, photoUrl: $pointPhotoUrl, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
 
   //Map the entity into Json to send to firestore
   Map<String, Object> toJson() {
@@ -39,6 +41,7 @@ class CheckpointEntity extends Equatable {
       'pointName': pointName,
       'pointLocal': pointLocal,
       'pointDatetime': pointDatetime.toString(),
+      'pointPhotoUrl': pointPhotoUrl,
       'totalRating': totalRating,
       'totalRatingStar': totalRatingStar
     };
@@ -54,6 +57,7 @@ class CheckpointEntity extends Equatable {
         json['pointLocal'] as String,
         json['pointDatetime'] as DateTime,
         json['pointNote'] as String,
+        json['pointPhotoUrl'] as String,
         json['totalRating'] as double,
         json['totalRatingStar'] as double
     );
@@ -70,6 +74,7 @@ class CheckpointEntity extends Equatable {
         snapshot.data()['pointLocal'],
         pointDate,
         snapshot.data()['pointNote'],
+        snapshot.data()['pointPhotoUrl'],
         snapshot.data()['totalRating'],
         snapshot.data()['totalRatingStar']);
   }
@@ -83,6 +88,7 @@ class CheckpointEntity extends Equatable {
       'pointLocal': pointLocal,
       'pointDatetime': pointDatetime,
       'pointNote': pointNote,
+      'pointPhotoUrl': pointPhotoUrl,
       'totalRating': totalRating,
       'totalRatingStar': totalRatingStar
     };
