@@ -88,12 +88,11 @@ class FireBaseService {
         .then((docs) {
       if (docs.docs[0].exists) {
         if (docs.docs[0].data()['role'] == 'manager') {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ManagerCheckPointPage()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ManagerCheckPointPage()));
         } else if (docs.docs[0].data()['role'] == 'guide') {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => GuideCheckPointPage())
-          );
+              MaterialPageRoute(builder: (context) => GuideCheckPointPage()));
         }
       }
     });
@@ -111,15 +110,18 @@ class FireBaseService {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => ManagerGroupPage()));
         } else if (docs.docs[0].data()['role'] == 'guide') {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => GuideGroupPage()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => GuideGroupPage()));
         }
       }
     });
   }
 
   Future<void> addUserInfo(userData) async {
-    FirebaseFirestore.instance.collection("users").add(userData).catchError((e) {
+    FirebaseFirestore.instance
+        .collection("users")
+        .add(userData)
+        .catchError((e) {
       print(e.toString());
     });
   }
@@ -137,18 +139,19 @@ class FireBaseService {
   searchByName(String searchField) {
     return FirebaseFirestore.instance
         .collection("users")
-        .where('name', isGreaterThanOrEqualTo: searchField).where('name', isLessThanOrEqualTo: searchField + '~')
+        .where('name', isGreaterThanOrEqualTo: searchField)
+        .where('name', isLessThanOrEqualTo: searchField + '~')
         .get();
   }
 
-   addChatRoom(chatRoom, chatRoomId) async {
+  addChatRoom(chatRoom, chatRoomId) async {
     return await FirebaseFirestore.instance
         .collection("chatRoom")
         .doc(chatRoomId)
         .set(chatRoom);
   }
 
-  getChats(String chatRoomId) async{
+  getChats(String chatRoomId) async {
     return FirebaseFirestore.instance
         .collection("chatRoom")
         .doc(chatRoomId)
@@ -157,17 +160,19 @@ class FireBaseService {
         .snapshots();
   }
 
-
-  Future<void> addMessage(String chatRoomId, chatMessageData){
-    FirebaseFirestore.instance.collection("chatRoom")
+  // ignore: missing_return
+  Future<void> addMessage(String chatRoomId, chatMessageData) {
+    FirebaseFirestore.instance
+        .collection("chatRoom")
         .doc(chatRoomId)
         .collection("chats")
-        .add(chatMessageData).catchError((e){
+        .add(chatMessageData)
+        .catchError((e) {
       print(e.toString());
     });
   }
 
   Future getUserChats() async {
-    return FirebaseFirestore.instance.collection("users").get() ;
+    return FirebaseFirestore.instance.collection("users").get();
   }
 }

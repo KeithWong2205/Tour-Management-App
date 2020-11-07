@@ -1,6 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
-class HelperFunctions{
+class HelperFunctions {
   //
   // static String sharedPreferenceUserLoggedInKey = "ISLOGGEDIN";
   // static String sharedPreferenceUserNameKey = "USERNAMEKEY";
@@ -40,10 +38,9 @@ class HelperFunctions{
   //   return await preferences.getString(sharedPreferenceUserEmailKey);
   // }
 
-  static String createChatRoomId(String id1, String id2){
+  static String createChatRoomId(String id1, String id2) {
     final listIds = List<String>.from([id1, id2], growable: false);
     listIds.sort();
     return listIds[0] + '_' + listIds[1];
   }
-
 }
