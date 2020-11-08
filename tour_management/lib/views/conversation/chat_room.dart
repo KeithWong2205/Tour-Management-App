@@ -32,6 +32,7 @@ class _ChatRoomState extends State<ChatRoom> {
                     , _userId
                 ),
                 isCurrentUser: snapshot.data.documents[index].data()['id'] == _userId,
+                receiverId: snapshot.data.documents[index].data()['id'],
               );
             })
             : Container();
@@ -78,10 +79,11 @@ class _ChatRoomState extends State<ChatRoom> {
 class ChatRoomsTile extends StatelessWidget {
   final String userName;
   final String chatRoomId;
+  final String receiverId;
 
   final bool isCurrentUser;
 
-  ChatRoomsTile({this.userName,@required this.chatRoomId, @required this.isCurrentUser});
+  ChatRoomsTile({this.userName,@required this.chatRoomId, @required this.isCurrentUser, @required this.receiverId});
 
    Future handleOnCreateChatRoom(BuildContext context) async {
     List<String> users = chatRoomId.split('_');
@@ -100,7 +102,7 @@ class ChatRoomsTile extends StatelessWidget {
       await handleOnCreateChatRoom(context);
     }
     Navigator.push(context, MaterialPageRoute(
-        builder: (context) => Chat(chatRoomId: chatRoomId, )));
+        builder: (context) => Chat(chatRoomId: chatRoomId, receiverId: receiverId)));
   }
 
   @override

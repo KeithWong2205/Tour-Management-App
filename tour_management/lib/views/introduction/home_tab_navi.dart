@@ -33,6 +33,9 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
       FCMHelper.subscribe(
           topic: user.groupID
       ),
+      FCMHelper.subscribe(
+          topic: user.id
+      ),
     });
   }
 }

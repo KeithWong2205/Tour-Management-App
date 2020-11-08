@@ -64,7 +64,7 @@ class _SearchState extends State<Search> {
   }
 
   void handleSendMessage(String uid1, String uid2) {
-    List<String> users = [uid1, uid2];
+    List<String> users = [uid1, uid2]; // uid2 is receiverId
 
     String chatRoomId = HelperFunctions.createChatRoomId(uid1, uid2);
 
@@ -80,6 +80,7 @@ class _SearchState extends State<Search> {
         MaterialPageRoute(
             builder: (context) => Chat(
                   chatRoomId: chatRoomId,
+                  receiverId: uid2,
                 )));
   }
 

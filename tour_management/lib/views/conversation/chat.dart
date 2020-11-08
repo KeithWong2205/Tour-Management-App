@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
+import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
 
 class Chat extends StatefulWidget {
   final String chatRoomId;
-  Chat({this.chatRoomId});
+  final String receiverId;
+  Chat({this.chatRoomId, this.receiverId});
 
   @override
   _ChatState createState() => _ChatState();
@@ -17,6 +20,7 @@ class _ChatState extends State<Chat> {
   TextEditingController messageEditingController = new TextEditingController();
   ScrollController _scrollController = new ScrollController();
   String _userId = "";
+  String _userName = "";
 
   Widget chatMessages() {
     return StreamBuilder(
@@ -40,22 +44,33 @@ class _ChatState extends State<Chat> {
   }
 
   addMessage() {
-    if (messageEditingController.text.isNotEmpty) {
+    var message = messageEditingController.text;
+    if (message.isNotEmpty) {
       Map<String, dynamic> chatMessageMap = {
         "sendBy": _userId,
-        "message": messageEditingController.text,
+        "message": message,
         'time': DateTime.now().millisecondsSinceEpoch,
       };
 
       FireBaseService().addMessage(widget.chatRoomId, chatMessageMap);
+      if (widget.receiverId.isNotEmpty) {
+        FCMHelper.sendMessage(
+            message: message,
+            title: _userName ?? "Unknown User",
+            to: '/topics/' + widget.receiverId
+        );
+      }
       setState(() {
         messageEditingController.text = "";
       });
     }
   }
 
-  void handleInitChatInfo(String uid) {
-    _userId = uid;
+  void handleInitChatInfo(User user) {
+    _userId = user.uid;
+    AppDataHelper.getUser().then((userData) => {
+      _userName = userData.name
+    });
   }
 
   void _scrollToEnd() async {
@@ -68,7 +83,7 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     super.initState();
-    handleInitChatInfo(FirebaseAuth.instance.currentUser.uid);
+    handleInitChatInfo(FirebaseAuth.instance.currentUser);
     FireBaseService().getChats(widget.chatRoomId).then((val) {
       setState(() {
         chats = val;
