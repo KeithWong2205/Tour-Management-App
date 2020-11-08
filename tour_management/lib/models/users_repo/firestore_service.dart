@@ -8,9 +8,7 @@ class FireStoreService {
 
   //Create user in the collection
   Future createUser(UserModel userModel) async {
-    await _userCollectionReference
-        .doc(userModel.id)
-        .set(userModel.toJson());
+    await _userCollectionReference.doc(userModel.id).set(userModel.toJson());
   }
 
   //Get user from collection
@@ -24,6 +22,7 @@ class FireStoreService {
   }
 }
 
-  Future getAllUser() async {
-    return Firestore.instance.collection('users').getDocuments();
-  }
+Future getAllUser() async {
+  // ignore: deprecated_member_use
+  return Firestore.instance.collection('users').getDocuments();
+}

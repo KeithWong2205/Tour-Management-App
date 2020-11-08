@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -47,7 +46,9 @@ class _AddEditSceneState extends State<AddEditScene> {
   //Image Picker Function
   String _photoUrl;
   _imgFromCamera() async {
-    FirebaseStorageHelper.pickAndUploadImage(quality: 50, source: ImageSource.camera).then((url) {
+    FirebaseStorageHelper.pickAndUploadImage(
+            quality: 50, source: ImageSource.camera)
+        .then((url) {
       if (url != null) {
         print("getImage result => " + url);
         setState(() {
@@ -58,7 +59,8 @@ class _AddEditSceneState extends State<AddEditScene> {
   }
 
   _imgFromGallery() async {
-    FirebaseStorageHelper.pickAndUploadImage(source: ImageSource.gallery).then((url) {
+    FirebaseStorageHelper.pickAndUploadImage(source: ImageSource.gallery)
+        .then((url) {
       if (url != null) {
         print("getImage result => " + url);
         setState(() {
@@ -128,7 +130,8 @@ class _AddEditSceneState extends State<AddEditScene> {
                                         border: Border.all(color: Colors.black),
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: _photoUrl != null && _photoUrl.isNotEmpty
+                                    child: _photoUrl != null &&
+                                            _photoUrl.isNotEmpty
                                         ? ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
@@ -260,7 +263,8 @@ class _AddEditSceneState extends State<AddEditScene> {
           onPressed: () {
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
-              widget.onSave(_name, _groupID, _location, _dateTime, _note, _photoUrl);
+              widget.onSave(
+                  _name, _groupID, _location, _dateTime, _note, _photoUrl);
               Navigator.pop(context);
             }
           },

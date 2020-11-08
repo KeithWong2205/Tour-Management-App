@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,17 +21,20 @@ class _ChatState extends State<Chat> {
   Widget chatMessages() {
     return StreamBuilder(
       stream: chats,
-      builder: (context, snapshot){
+      builder: (context, snapshot) {
         _scrollToEnd();
-        return snapshot.hasData ?  ListView.builder(
-            controller: _scrollController,
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: (context, index){
-              return MessageTile(
-                message: snapshot.data.documents[index].data()["message"],
-                sendByMe: _userId == snapshot.data.documents[index].data()["sendBy"],
-              );
-            }) : Container();
+        return snapshot.hasData
+            ? ListView.builder(
+                controller: _scrollController,
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  return MessageTile(
+                    message: snapshot.data.documents[index].data()["message"],
+                    sendByMe: _userId ==
+                        snapshot.data.documents[index].data()["sendBy"],
+                  );
+                })
+            : Container();
       },
     );
   }
@@ -58,7 +59,7 @@ class _ChatState extends State<Chat> {
   }
 
   void _scrollToEnd() async {
-    Future.delayed(Duration(milliseconds: 200), (){
+    Future.delayed(Duration(milliseconds: 200), () {
       _scrollController.animateTo(_scrollController.position.maxScrollExtent,
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     });
