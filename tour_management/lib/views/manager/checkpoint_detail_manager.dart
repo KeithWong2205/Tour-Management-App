@@ -7,11 +7,22 @@ import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/localization/keys.dart';
 import 'package:tour_management/views/views.dart';
 
-class CheckpointDetailSceneManager extends StatelessWidget {
+class CheckpointDetailSceneManager extends StatefulWidget {
   final String id;
   final dateFormat = new DateFormat('yyyy-HH-dd HH:mm');
+
   CheckpointDetailSceneManager({Key key, @required this.id})
       : super(key: key ?? ArchSampleKeys.checkpointDetailsScene);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CheckpointDetailSceneManagerState();
+  }
+}
+
+class _CheckpointDetailSceneManagerState
+    extends State<CheckpointDetailSceneManager> {
+  String _photoUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +30,7 @@ class CheckpointDetailSceneManager extends StatelessWidget {
       builder: (context, state) {
         final checkpoint = (state as CheckpointManLoadSuccess)
             .checkpoints
-            .firstWhere((checkpoint) => checkpoint.pointId == id,
+            .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
           appBar: AppBar(
@@ -53,11 +64,15 @@ class CheckpointDetailSceneManager extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(9),
                                 child: Container(
-                                  width: 450,
+                                  child: checkpoint.pointPhotoUrl != null &&
+                                          checkpoint.pointPhotoUrl.isNotEmpty
+                                      ? Image.network(checkpoint.pointPhotoUrl)
+                                      : Container(),
                                   decoration: BoxDecoration(
                                       color: Colors.grey,
                                       border: Border.all(color: Colors.black),
                                       borderRadius: BorderRadius.circular(10)),
+                                  width: 450,
                                 ),
                               ),
                             )),
@@ -161,7 +176,8 @@ class CheckpointDetailSceneManager extends StatelessWidget {
                                   fontSize: 16, color: Colors.redAccent),
                             ),
                             subtitle: Text(
-                              dateFormat.format(checkpoint.pointDatetime),
+                              widget.dateFormat
+                                  .format(checkpoint.pointDatetime),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 22,
@@ -210,14 +226,16 @@ class CheckpointDetailSceneManager extends StatelessWidget {
                           .push(MaterialPageRoute(builder: (context) {
                         return AddEditScene(
                           key: ArchSampleKeys.editCheckpointScene,
-                          onSave: (name, groupID, location, dateTime, note) {
+                          onSave: (name, groupID, location, dateTime, note,
+                              photoUrl) {
                             BlocProvider.of<CheckpointManBloc>(context).add(
                                 CheckpointManUpdated(checkpoint.copyWith(
                                     name: name,
                                     group: groupID,
                                     location: location,
                                     dateTime: dateTime,
-                                    note: note)));
+                                    note: note,
+                                    photoUrl: photoUrl)));
                           },
                           isEditing: true,
                           checkpoint: checkpoint,
