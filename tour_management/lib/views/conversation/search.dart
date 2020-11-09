@@ -33,11 +33,11 @@ class _SearchState extends State<Search> {
       await firebaseService.searchByName(searchEditingController.text)
           .then((snapshot){
         searchResultSnapshot = snapshot;
-        searchResultSnapshot.documents.removeWhere((result) => result.data()['id'] == widget.currentUid);
+        searchResultSnapshot.docs.removeWhere((result) => result.data()['id'] == widget.currentUid);
         print("$searchResultSnapshot");
         setState(() {
           isLoading = false;
-          haveUserSearched = searchResultSnapshot.documents.isNotEmpty;
+          haveUserSearched = searchResultSnapshot.docs.isNotEmpty;
         });
       });
     }
@@ -46,12 +46,12 @@ class _SearchState extends State<Search> {
   Widget userList(){
     return haveUserSearched ? ListView.builder(
       shrinkWrap: true,
-      itemCount: searchResultSnapshot.documents.length,
+      itemCount: searchResultSnapshot.docs.length,
         itemBuilder: (context, index){
         return userTile(
-          searchResultSnapshot.documents[index].data()["name"],
-          searchResultSnapshot.documents[index].data()["email"],
-          searchResultSnapshot.documents[index].data()["id"],
+          searchResultSnapshot.docs[index].data()["name"],
+          searchResultSnapshot.docs[index].data()["email"],
+          searchResultSnapshot.docs[index].data()["id"],
         );
         }) : Container();
   }
@@ -82,7 +82,8 @@ class _SearchState extends State<Search> {
 
   Widget userTile(String userName,String userEmail, String userId){
     return Container(
-      color: Colors.grey,
+      color: Colors.white,
+      margin: EdgeInsets.symmetric(vertical: 4.0),
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
         children: [
@@ -92,14 +93,14 @@ class _SearchState extends State<Search> {
               Text(
                 userName,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16
                 ),
               ),
               Text(
                 userEmail,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16
                 ),
               )
@@ -114,6 +115,8 @@ class _SearchState extends State<Search> {
               padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
               decoration: BoxDecoration(
                   color: Colors.blue,
+                  border: Border.all(width: 1.0,
+                  color: Colors.white70),
                   borderRadius: BorderRadius.circular(24)
               ),
               child: Text("Message",
@@ -131,7 +134,62 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context),
+      appBar: AppBar(
+        title: Container(
+          padding: EdgeInsets.symmetric(vertical: 2.0),
+          child: Row(
+            children: [
+              Expanded(
+                  child: Container(
+                    height: 42.0,
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24.0),
+                        border: Border.all(color: Colors.white70, width: 2.0)
+                    ),
+                    child: TextField(
+                      controller: searchEditingController,
+                      style: simpleTextStyle(),
+                      decoration: InputDecoration(
+                          hintText: "Search username ...",
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                          border: InputBorder.none
+                      ),
+                    ),
+                  )
+              ),
+              SizedBox(width: 8.0, height: 8.0,),
+              GestureDetector(
+                onTap: (){
+                  initiateSearch();
+                },
+                child: Container(
+                    height: 42,
+                    width: 42,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              const Color(0x36FFFFFF),
+                              const Color(0x0FFFFFFF)
+                            ],
+                            begin: FractionalOffset.topLeft,
+                            end: FractionalOffset.bottomRight
+                        ),
+                        borderRadius: BorderRadius.circular(40)
+                    ),
+                    padding: EdgeInsets.all(12),
+                    child: Image.asset("assets/search_white.png",
+                      height: 24, width: 24,)),
+              )
+            ],
+          ),
+        ),
+        elevation: 0.0,
+      ),
       body: isLoading ? Container(
         child: Center(
           child: CircularProgressIndicator(),
@@ -139,50 +197,6 @@ class _SearchState extends State<Search> {
       ) :  Container(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              color: Color(0xff007EF4),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: searchEditingController,
-                      style: simpleTextStyle(),
-                      decoration: InputDecoration(
-                        hintText: "search username ...",
-                        hintStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                        border: InputBorder.none
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      initiateSearch();
-                    },
-                    child: Container(
-                      height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              const Color(0x36FFFFFF),
-                              const Color(0x0FFFFFFF)
-                            ],
-                            begin: FractionalOffset.topLeft,
-                            end: FractionalOffset.bottomRight
-                          ),
-                          borderRadius: BorderRadius.circular(40)
-                        ),
-                        padding: EdgeInsets.all(12),
-                        child: Image.asset("assets/search_white.png",
-                          height: 25, width: 25,)),
-                  )
-                ],
-              ),
-            ),
             userList()
           ],
         ),
