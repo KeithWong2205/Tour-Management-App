@@ -139,7 +139,7 @@ class FireBaseService {
   searchByName(String searchField) {
     return FirebaseFirestore.instance
         .collection("users")
-        .where('name', isGreaterThanOrEqualTo: searchField)
+        .where('name', isGreaterThanOrEqualTo: searchField.toUpperCase())
         .where('name', isLessThanOrEqualTo: searchField + '~')
         .get();
   }
