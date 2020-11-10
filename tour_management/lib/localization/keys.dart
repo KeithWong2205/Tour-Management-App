@@ -11,6 +11,12 @@ class ArchSampleKeys {
   static const snackbar = Key('__snackbar__');
   static Key snackbarAction(String id) => Key('__snackbar_action_${id}__');
 
+  // Filters
+  static const filterButton = Key('__filterButton__');
+  static const allFilter = Key('__allFilter__');
+  static const guideTypeFilter = Key('__activeFilter__');
+  static const participantTypeFilter = Key('__completedFilter__');
+
   // Todos
   static const checkpointList = Key('__todoList__');
   static const checkpointsLoading = Key('__todosLoading__');

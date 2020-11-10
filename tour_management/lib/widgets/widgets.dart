@@ -14,4 +14,5 @@ export './manager_related/list_checkpoint_manager.dart';
 export './guide_related/list_checkpoint_guide.dart';
 export './manager_related/checkpoint_of_manager.dart';
 export './guide_related/checkpoint_of_guide.dart';
+export './manager_related/user_item.dart';
 //Barrel export widgets

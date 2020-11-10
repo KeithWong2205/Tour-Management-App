@@ -22,6 +22,7 @@ class CheckpointDetailSceneManager extends StatefulWidget {
 
 class _CheckpointDetailSceneManagerState
     extends State<CheckpointDetailSceneManager> {
+  // ignore: unused_field
   String _photoUrl;
 
   @override
@@ -66,7 +67,8 @@ class _CheckpointDetailSceneManagerState
                                 child: Container(
                                   child: checkpoint.pointPhotoUrl != null &&
                                           checkpoint.pointPhotoUrl.isNotEmpty
-                                      ? Image.network(checkpoint.pointPhotoUrl)
+                                      ? Image.network(checkpoint.pointPhotoUrl,
+                                          fit: BoxFit.fill)
                                       : Container(),
                                   decoration: BoxDecoration(
                                       color: Colors.grey,

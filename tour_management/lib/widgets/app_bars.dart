@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_management/widgets/group_filter_button.dart';
 
 //Collection of app bars
 AppBar welcomeAppBar() {
@@ -14,4 +15,18 @@ AppBar checkpointAppBar() {
         style: TextStyle(fontSize: 24),
       ),
       backgroundColor: Colors.redAccent);
+}
+
+AppBar groupAppBar() {
+  return AppBar(
+      title: Text(
+        'Group Panel',
+        style: TextStyle(fontSize: 24),
+      ),
+      actions: [
+        FilterButton(
+          visible: true,
+        )
+      ],
+      backgroundColor: Colors.green);
 }

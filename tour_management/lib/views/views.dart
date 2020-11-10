@@ -10,4 +10,5 @@ export './manager/manager_group_page.dart';
 export './guide/checkpoint_detail_guide.dart';
 export './guide/guide_group_page.dart';
 export './guide/guide_checkpoint_page.dart';
+export './manager/user_detail_scene.dart';
 //Barrel export views

@@ -2,9 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tour_management/models/users_repo/user_model.dart';
 
-
 class AppDataHelper {
-
   static final AppDataHelper _instance = AppDataHelper._internal();
 
   SharedPreferences _sharedPreferences;
@@ -41,7 +39,8 @@ class AppDataHelper {
   /// MARK: Setter functions
   static Future<void> setUser(UserModel user) {
     return _instance.getSharedPreferences().then((preferences) => {
-      preferences.setString('user_data', user == null ? '' : json.encode(user.toJson()))
-    });
+          preferences.setString('user_data',
+              user == null ? '' : json.encode(user.toEntity().toJson()))
+        });
   }
 }

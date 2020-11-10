@@ -7,6 +7,9 @@ import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/controllers/chpoint_list/chpoint_list.dart';
 import 'package:tour_management/controllers/controllers.dart';
 import 'package:tour_management/controllers/authentication/auth.dart';
+import 'package:tour_management/controllers/group_list/group_list.dart';
+import 'package:tour_management/controllers/group_manager/group_man_bloc.dart';
+import 'package:tour_management/controllers/group_manager/group_man_event.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 
@@ -39,6 +42,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final FireBaseService firebaseService = FireBaseService();
+  final FireStoreService userFireStoreService = FireStoreService();
   final FirebaseCheckpointService firebaseCheckpointService =
       FirebaseCheckpointService();
 
@@ -56,7 +60,15 @@ class _AppState extends State<App> {
           BlocProvider<CheckPointListBloc>(
               create: (context) => CheckPointListBloc(
                   checkpointManBloc:
-                      BlocProvider.of<CheckpointManBloc>(context)))
+                      BlocProvider.of<CheckpointManBloc>(context))),
+          BlocProvider<GroupManBloc>(
+              create: (context) =>
+                  GroupManBloc(userFirestoreService: userFireStoreService)
+                    ..add(GroupManLoaded())),
+          BlocProvider<GroupListBloc>(
+            create: (context) => GroupListBloc(
+                groupManBloc: BlocProvider.of<GroupManBloc>(context)),
+          )
         ],
         child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
           '/': (context) {

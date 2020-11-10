@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class FCMHelper {
-
   static final FCMHelper _instance = FCMHelper._internal();
 
   FirebaseMessaging _firebaseMessaging;
-  
-  final String serverToken = 'AAAAalMccjc:APA91bEbJGk5CE8Cfs6Kiotzdggld2b4kBohXdE1L2H-24kS2XQTfsZF8zef08UaTvH4jJx-qROwJmE1Uu8JWarIw3UAKjgGha4iA8FpJpQQOa9yfHzafqEvlyFwzFvx6aKqRQUxijqx';
+
+  final String serverToken =
+      'AAAAalMccjc:APA91bEbJGk5CE8Cfs6Kiotzdggld2b4kBohXdE1L2H-24kS2XQTfsZF8zef08UaTvH4jJx-qROwJmE1Uu8JWarIw3UAKjgGha4iA8FpJpQQOa9yfHzafqEvlyFwzFvx6aKqRQUxijqx';
 
   /// MARK: Constructor
   factory FCMHelper() {
@@ -48,8 +48,9 @@ class FCMHelper {
 
   static void sendMessage({String message, String title, String to}) async {
     await _instance.getFirebaseMessaging().requestNotificationPermissions(
-      const IosNotificationSettings(sound: true, badge: true, alert: true, provisional: false),
-    );
+          const IosNotificationSettings(
+              sound: true, badge: true, alert: true, provisional: false),
+        );
     var _serverToken = _instance.serverToken;
     var _to = to;
     if (_to.startsWith('/topics/')) {
@@ -96,31 +97,31 @@ class FCMHelper {
   /// MARK: Handle functions
   Future<dynamic> handleBackgroundMessage(Map<String, dynamic> message) async {
     if (message.containsKey('data')) {
+      // ignore: unused_local_variable
       final dynamic data = message['data'];
     }
 
     if (message.containsKey('notification')) {
+      // ignore: unused_local_variable
       final dynamic notification = message['notification'];
     }
 
     // Or do other work.
   }
 
-  void handleShowLocalNotification({BuildContext context, String message, String title}) {
+  void handleShowLocalNotification(
+      {BuildContext context, String message, String title}) {
     showDialog(
         context: context,
         builder: (_) => new CupertinoAlertDialog(
-          actions: [
-            FlatButton(
-              child: Text("OK"),
-              onPressed: () => {
-                Navigator.of(context).pop()
-              },
-            ),
-          ],
-          content: new Text(message),
-          title: new Text(title),
-        )
-    );
+              actions: [
+                FlatButton(
+                  child: Text("OK"),
+                  onPressed: () => {Navigator.of(context).pop()},
+                ),
+              ],
+              content: new Text(message),
+              title: new Text(title),
+            ));
   }
 }
