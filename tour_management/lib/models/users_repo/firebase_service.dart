@@ -70,6 +70,11 @@ class FireBaseService {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
+  Future getCurrentUser() async {
+    // ignore: await_only_futures
+    return await _firebaseAuth.currentUser;
+  }
+
   //Fetching the user data
   Future _fetchCurrentUser(User user) async {
     if (user != null) {

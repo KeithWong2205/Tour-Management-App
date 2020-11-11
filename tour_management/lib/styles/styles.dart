@@ -111,3 +111,27 @@ InputDecoration checkpointNoteFieldStyle() {
       hintText: 'Do we have any notes?',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
 }
+
+InputDecoration profileNameFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      icon: Icon(
+        Icons.person,
+        color: Colors.black,
+      ),
+      hintText: 'Please give a brief name',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
+}
+
+InputDecoration profilePhoneFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      icon: Icon(
+        Icons.phone,
+        color: Colors.black,
+      ),
+      hintText: 'Please give a phone number',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
+}

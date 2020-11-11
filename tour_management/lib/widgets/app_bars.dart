@@ -30,3 +30,17 @@ AppBar groupAppBar() {
       ],
       backgroundColor: Colors.green);
 }
+
+AppBar profileAppBar() {
+  return AppBar(
+    title: Text("Profile Panel"),
+    backgroundColor: Colors.amber,
+  );
+}
+
+AppBar profileEditAppBar() {
+  return AppBar(
+    title: Text("Edit Profile"),
+    backgroundColor: Colors.amber,
+  );
+}

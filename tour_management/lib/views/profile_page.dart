@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/widgets.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -6,10 +7,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(),
-      appBar: AppBar(
-        title: Text("Profile Panel"),
-        backgroundColor: Colors.amber,
-      ),
+      appBar: profileAppBar(),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
@@ -54,7 +52,10 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: null,
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => ProfileEditScene()));
+        },
         label: Text("Edit Profile"),
         icon: Icon(Icons.edit),
         backgroundColor: Colors.amber,
