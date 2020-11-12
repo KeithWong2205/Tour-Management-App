@@ -6,6 +6,7 @@ class ManagerGroupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green[50],
       appBar: groupAppBar(),
       drawer: MainDrawer(),
       body: ListGroupManager(),

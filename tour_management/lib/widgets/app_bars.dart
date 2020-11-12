@@ -33,14 +33,23 @@ AppBar groupAppBar() {
 
 AppBar profileAppBar() {
   return AppBar(
-    title: Text("Profile Panel"),
+    title: Text("Profile Panel", style: TextStyle(fontSize: 24)),
     backgroundColor: Colors.amber,
   );
 }
 
 AppBar profileEditAppBar() {
   return AppBar(
-    title: Text("Edit Profile"),
+    title: Text("Edit Profile", style: TextStyle(fontSize: 24)),
     backgroundColor: Colors.amber,
   );
+}
+
+AppBar feedbackAppBar() {
+  return AppBar(
+      title: Text(
+        'Feedback Panel',
+        style: TextStyle(fontSize: 24),
+      ),
+      backgroundColor: Colors.redAccent);
 }

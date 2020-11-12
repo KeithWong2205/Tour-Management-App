@@ -72,6 +72,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber[50],
       appBar: profileEditAppBar(),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
@@ -152,7 +153,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
           icon: Icon(Icons.save),
           backgroundColor: Colors.amber,
           foregroundColor: Colors.white,
-          label: Text('Save Info')),
+          label: Text('Save')),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/widgets.dart';
 
@@ -6,8 +8,24 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber[50],
       drawer: MainDrawer(),
-      appBar: profileAppBar(),
+      appBar: AppBar(
+        title: Text("Profile Panel", style: TextStyle(fontSize: 24)),
+        backgroundColor: Colors.amber,
+        actions: [
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                BlocProvider.of<AuthBloc>(context).add(LoggedOut());
+              },
+              child: Icon(
+                Icons.exit_to_app,
+                size: 26,
+                color: Colors.white,
+              ))
+        ],
+      ),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
@@ -56,7 +74,7 @@ class ProfilePage extends StatelessWidget {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (_) => ProfileEditScene()));
         },
-        label: Text("Edit Profile"),
+        label: Text("Edit"),
         icon: Icon(Icons.edit),
         backgroundColor: Colors.amber,
       ),

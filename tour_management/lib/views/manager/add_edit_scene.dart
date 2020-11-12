@@ -104,14 +104,22 @@ class _AddEditSceneState extends State<AddEditScene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.red[50],
         appBar: AppBar(
+            automaticallyImplyLeading: false,
+            actions: [
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: Icon(Icons.cancel, size: 24, color: Colors.white),
+              )
+            ],
             backgroundColor: Colors.redAccent,
             title: Text(isEditing ? 'Checkpoint Edit' : 'Checkpoint Addition',
                 style: TextStyle(fontSize: 24))),
         body: GestureDetector(
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(5.0),
                 child: Form(
                     key: _formKey,
                     child: ListView(children: [
@@ -120,7 +128,7 @@ class _AddEditSceneState extends State<AddEditScene> {
                         child: Align(
                           alignment: Alignment.center,
                           child: Padding(
-                            padding: const EdgeInsets.all(9),
+                            padding: const EdgeInsets.all(0),
                             child: GestureDetector(
                                 onTap: () => _showPicker(context),
                                 child: Container(
@@ -136,7 +144,9 @@ class _AddEditSceneState extends State<AddEditScene> {
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
                                             child: Image.network(_photoUrl,
-                                                width: 100,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 height: 200,
                                                 fit: BoxFit.fill))
                                         : Container(

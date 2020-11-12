@@ -34,6 +34,7 @@ class _CheckpointDetailSceneManagerState
             .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
+          backgroundColor: Colors.red[50],
           appBar: AppBar(
             title: Text(
               'Checkpoint Details',
@@ -81,14 +82,32 @@ class _CheckpointDetailSceneManagerState
                         SizedBox(
                           height: 10,
                         ),
-                        RatingBarIndicator(
-                          rating: 4,
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 50,
+                        Row(
+                          children: [
+                            Padding(
+                                padding: EdgeInsets.all(5),
+                                child: RatingBarIndicator(
+                                  rating: 4,
+                                  itemBuilder: (context, index) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  itemCount: 5,
+                                  itemSize: 50,
+                                )),
+                            Padding(
+                                padding: EdgeInsets.all(5),
+                                child: RaisedButton(
+                                  color: Colors.red,
+                                  textColor: Colors.white,
+                                  onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              FeedBackCollectionScene())),
+                                  child: Text('View feedback',
+                                      style: TextStyle(fontSize: 14)),
+                                )),
+                          ],
                         ),
                         Card(
                           child: ListTile(
@@ -218,7 +237,7 @@ class _CheckpointDetailSceneManagerState
           floatingActionButton: FloatingActionButton.extended(
               key: ArchSampleKeys.editCheckpointFAB,
               icon: Icon(Icons.edit),
-              label: Text('Edit C.Point'),
+              label: Text('Edit'),
               backgroundColor: Colors.redAccent,
               foregroundColor: Colors.white,
               onPressed: checkpoint == null

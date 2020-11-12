@@ -5,6 +5,7 @@ class ManagerCheckPointPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.red[50],
       appBar: checkpointAppBar(),
       drawer: MainDrawer(),
       body: ListCheckPointsManager(),
@@ -15,7 +16,7 @@ class ManagerCheckPointPage extends StatelessWidget {
         icon: Icon(Icons.add),
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
-        label: Text('Add C.Point'),
+        label: Text('Add'),
       ),
     );
   }
