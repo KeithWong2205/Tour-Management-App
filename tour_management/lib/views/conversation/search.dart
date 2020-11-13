@@ -133,6 +133,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Container(
           padding: EdgeInsets.symmetric(vertical: 2.0),
