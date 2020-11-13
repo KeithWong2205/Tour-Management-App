@@ -55,10 +55,7 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Image.asset(
-        //   "assets/images/logo.png",
-        //   height: 40,
-        // ),
+        title: Text("Chat Panel"),
         elevation: 0.0,
         centerTitle: false,
       ),
@@ -102,7 +99,7 @@ class ChatRoomsTile extends StatelessWidget {
       await handleOnCreateChatRoom(context);
     }
     Navigator.push(context, MaterialPageRoute(
-        builder: (context) => Chat(chatRoomId: chatRoomId, receiverId: receiverId)));
+        builder: (context) => Chat(chatRoomId: chatRoomId, receiverId: receiverId, receiverName: userName,)));
   }
 
   @override

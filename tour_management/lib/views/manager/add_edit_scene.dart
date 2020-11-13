@@ -283,7 +283,11 @@ class _AddEditSceneState extends State<AddEditScene> {
 
   @override
   void initState() {
-    _photoUrl = widget.checkpoint.pointPhotoUrl;
+    if (widget.checkpoint != null && widget.checkpoint.pointPhotoUrl != null) {
+      _photoUrl = widget.checkpoint.pointPhotoUrl;
+    } else {
+      _photoUrl = "";
+    }
     super.initState();
   }
 }

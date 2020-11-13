@@ -91,7 +91,8 @@ class _AppState extends State<App> {
                         pointGroup: groupID,
                         pointLocal: location,
                         pointDatetime: dateTime,
-                        pointNote: note)));
+                        pointNote: note,
+                        pointPhotoUrl: "")));
               },
             );
           }

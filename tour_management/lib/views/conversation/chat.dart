@@ -9,7 +9,8 @@ import 'package:tour_management/widgets/conversation_related/widgets.dart';
 class Chat extends StatefulWidget {
   final String chatRoomId;
   final String receiverId;
-  Chat({this.chatRoomId, this.receiverId});
+  final String receiverName;
+  Chat({this.chatRoomId, this.receiverId, this.receiverName});
 
   @override
   _ChatState createState() => _ChatState();
@@ -94,7 +95,7 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context),
+      appBar: appBarMain(context, title: widget.receiverName),
       body: Container(
         child: Column(
           children: [
