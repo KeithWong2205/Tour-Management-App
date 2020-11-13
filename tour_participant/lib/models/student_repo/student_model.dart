@@ -4,11 +4,11 @@ class Student {
   final String name;
   final String email;
   final String phone;
-  final String groupId;
+  final String groupID;
   final String role;
 
   Student(
-      {this.id, this.name, this.email, this.phone, this.groupId, this.role});
+      {this.id, this.name, this.email, this.phone, this.groupID, this.role});
 
   //Get student model data from firestore data
   Student.fromData(Map<String, dynamic> data)
@@ -16,7 +16,7 @@ class Student {
         name = data['name'],
         email = data['email'],
         phone = data['phone'],
-        groupId = data['groupId'],
+        groupID = data['groupID'],
         role = data['role'];
 
   //Map student data to Json to send to firestore
@@ -26,7 +26,7 @@ class Student {
       'name': name,
       'email': email,
       'phone': phone,
-      'groupId': groupId,
+      'groupID': groupID,
       'role': role
     };
   }

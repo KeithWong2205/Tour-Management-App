@@ -37,7 +37,7 @@ class FirebaseService {
           name: name,
           email: email,
           phone: phone,
-          groupId: groupId,
+          groupID: groupId,
           role: 'student'));
     } catch (e) {
       return e.message;

@@ -26,6 +26,7 @@ class ListCheckPointsManager extends StatelessWidget {
             order: GroupedListOrder.ASC,
             useStickyGroupSeparators: true,
             groupSeparatorBuilder: (value) => Container(
+                color: Colors.red[50],
                 height: 80,
                 child: Align(
                     alignment: Alignment.center,

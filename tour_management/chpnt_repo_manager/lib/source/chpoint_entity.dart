@@ -13,8 +13,17 @@ class CheckpointEntity extends Equatable {
   final String pointPhotoUrl;
   final double totalRating;
   final double totalRatingStar;
-  const CheckpointEntity(this.pointComplete, this.pointId, this.pointGroup,
-      this.pointName, this.pointLocal, this.pointDatetime, this.pointNote, this.pointPhotoUrl, this.totalRating, this.totalRatingStar);
+  const CheckpointEntity(
+      this.pointComplete,
+      this.pointId,
+      this.pointGroup,
+      this.pointName,
+      this.pointLocal,
+      this.pointDatetime,
+      this.pointNote,
+      this.pointPhotoUrl,
+      this.totalRating,
+      this.totalRatingStar);
   @override
   List<Object> get props => [
         pointComplete,
@@ -59,8 +68,7 @@ class CheckpointEntity extends Equatable {
         json['pointNote'] as String,
         json['pointPhotoUrl'] as String,
         json['totalRating'] as double,
-        json['totalRatingStar'] as double
-    );
+        json['totalRatingStar'] as double);
   }
 
   //Get the checkpoint entity from firestore document snapshot

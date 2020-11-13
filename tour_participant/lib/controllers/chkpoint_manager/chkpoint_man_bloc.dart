@@ -18,7 +18,7 @@ class CheckpointManBloc extends Bloc<CheckpointManEvent, CheckpointManState> {
   Stream<CheckpointManState> mapEventToState(CheckpointManEvent event) async* {
     if (event is CheckpointManLoaded) {
       var _user = await AppDataHelper.getUser();
-      var _groupId = _user.groupId;
+      var _groupId = _user.groupID;
       yield* mapCheckpointManLoaded(groupId: _groupId);
     }
     if (event is CheckpointManAdded) {

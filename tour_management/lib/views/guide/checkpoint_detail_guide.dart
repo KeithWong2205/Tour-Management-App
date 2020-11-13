@@ -6,11 +6,23 @@ import 'package:intl/intl.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/localization/keys.dart';
 
-class CheckpointDetailSceneGuide extends StatelessWidget {
+class CheckpointDetailSceneGuide extends StatefulWidget {
   final String id;
   final dateFormat = new DateFormat('yyyy-HH-dd HH:mm');
+
   CheckpointDetailSceneGuide({Key key, @required this.id})
       : super(key: key ?? ArchSampleKeys.checkpointDetailsScene);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CheckpointDetailSceneGuideState();
+  }
+}
+
+class _CheckpointDetailSceneGuideState
+    extends State<CheckpointDetailSceneGuide> {
+  // ignore: unused_field
+  String _photoUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +30,7 @@ class CheckpointDetailSceneGuide extends StatelessWidget {
       builder: (context, state) {
         final checkpoint = (state as CheckpointManLoadSuccess)
             .checkpoints
-            .firstWhere((checkpoint) => checkpoint.pointId == id,
+            .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
           appBar: AppBar(
@@ -27,6 +39,16 @@ class CheckpointDetailSceneGuide extends StatelessWidget {
               style: TextStyle(fontSize: 24),
             ),
             backgroundColor: Colors.redAccent,
+            actions: [
+              IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  BlocProvider.of<CheckpointManBloc>(context)
+                      .add(CheckpointManDelete(checkpoint));
+                  Navigator.pop(context);
+                },
+              )
+            ],
           ),
           body: checkpoint == null
               ? Container()
@@ -42,11 +64,16 @@ class CheckpointDetailSceneGuide extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(9),
                                 child: Container(
-                                  width: 450,
+                                  child: checkpoint.pointPhotoUrl != null &&
+                                          checkpoint.pointPhotoUrl.isNotEmpty
+                                      ? Image.network(checkpoint.pointPhotoUrl,
+                                          fit: BoxFit.fill)
+                                      : Container(),
                                   decoration: BoxDecoration(
                                       color: Colors.grey,
                                       border: Border.all(color: Colors.black),
                                       borderRadius: BorderRadius.circular(10)),
+                                  width: 450,
                                 ),
                               ),
                             )),
@@ -150,7 +177,8 @@ class CheckpointDetailSceneGuide extends StatelessWidget {
                                   fontSize: 16, color: Colors.redAccent),
                             ),
                             subtitle: Text(
-                              dateFormat.format(checkpoint.pointDatetime),
+                              widget.dateFormat
+                                  .format(checkpoint.pointDatetime),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 22,
