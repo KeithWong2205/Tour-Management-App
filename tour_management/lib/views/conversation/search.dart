@@ -45,16 +45,18 @@ class _SearchState extends State<Search> {
 
   Widget userList() {
     return haveUserSearched
-        ? ListView.builder(
-            shrinkWrap: true,
-            itemCount: searchResultSnapshot.docs.length,
-            itemBuilder: (context, index) {
-              return userTile(
-                searchResultSnapshot.docs[index].data()["name"],
-                searchResultSnapshot.docs[index].data()["email"],
-                searchResultSnapshot.docs[index].data()["id"],
-              );
-            })
+        ? Expanded(
+      child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: searchResultSnapshot.docs.length,
+          itemBuilder: (context, index) {
+            return userTile(
+              searchResultSnapshot.docs[index].data()["name"],
+              searchResultSnapshot.docs[index].data()["email"],
+              searchResultSnapshot.docs[index].data()["id"],
+            );
+          }),
+        )
         : Container();
   }
 
