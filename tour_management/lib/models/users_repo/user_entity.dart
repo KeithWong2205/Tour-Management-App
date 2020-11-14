@@ -9,14 +9,16 @@ class UserEntity extends Equatable {
   final String phone;
   final String groupID;
   final String role;
+  final String photoURL;
+
   const UserEntity(
-      this.id, this.name, this.email, this.phone, this.groupID, this.role);
+      this.id, this.name, this.email, this.phone, this.groupID, this.role, this.photoURL);
   @override
-  List<Object> get props => [id, name, email, phone, groupID, role];
+  List<Object> get props => [id, name, email, phone, groupID, role, photoURL];
 
   @override
   String toString() =>
-      'User entity created $id, $name, $email, $phone, $groupID, $role';
+      'User entity created $id, $name, $email, $phone, $groupID, $role, $photoURL';
 
   //Mapping the entity to Json
   Map<String, dynamic> toJson() {
@@ -26,7 +28,8 @@ class UserEntity extends Equatable {
       'email': email,
       'phone': phone,
       'groupID': groupID,
-      'role': role
+      'role': role,
+      'photoURL' : photoURL,
     };
   }
 
@@ -38,7 +41,9 @@ class UserEntity extends Equatable {
         json['email'] as String,
         json['phone'] as String,
         json['groupID'] as String,
-        json['role'] as String);
+        json['role'] as String,
+        json['photoURL'] as String
+    );
   }
 
   //Get entity from snapshot
@@ -49,7 +54,9 @@ class UserEntity extends Equatable {
         snapshot.data()['email'],
         snapshot.data()['phone'],
         snapshot.data()['groupID'],
-        snapshot.data()['role']);
+        snapshot.data()['role'],
+        snapshot.data()['photoURL']
+    );
   }
 
   //Map user entity to firestore document
@@ -60,7 +67,8 @@ class UserEntity extends Equatable {
       'email': email,
       'phone': phone,
       'groupID': groupID,
-      'role': role
+      'role': role,
+      'photoURL' : photoURL
     };
   }
 }

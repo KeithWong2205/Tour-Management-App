@@ -1,11 +1,20 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
+import 'package:tour_management/helper/FirebaseStorageHelper.dart';
+import 'package:tour_management/models/users_repo/firebase_service.dart';
+import 'package:tour_management/models/users_repo/firestore_service.dart';
+import 'package:tour_management/models/users_repo/user_model.dart';
 import 'package:tour_management/styles/styles.dart';
 import 'package:tour_management/widgets/widgets.dart';
 
 class ProfileEditScene extends StatefulWidget {
-  ProfileEditScene({Key key}) : super(key: key);
+  final UserModel _currentUserInfo;
+  ProfileEditScene({Key key, UserModel userModel})
+      : assert(userModel != null),
+        this._currentUserInfo = userModel,
+        super(key: key);
   @override
   _ProfileEditSceneState createState() => _ProfileEditSceneState();
 }
@@ -14,10 +23,38 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   FocusNode phoneField;
   File _image;
-  // ignore: unused_field
-  String _name;
-  // ignore: unused_field
-  String _phone;
+  TextEditingController _nameController;
+  TextEditingController _phoneController;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget._currentUserInfo.name);
+    _phoneController = TextEditingController(text: widget._currentUserInfo.phone);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  void updateUserInfo() async {
+    if (formKey.currentState.validate()) {
+      String photoURL = "";
+      Map<String, dynamic> userMap = widget._currentUserInfo.toEntity().toDocument();
+      if (_image != null) {
+        photoURL = await FirebaseStorageHelper.uploadImage(file: _image);
+      }
+      userMap['name'] = _nameController.text;
+      userMap['phone'] = _phoneController.text;
+      userMap['photoURL'] = photoURL;
+      await FireStoreService().createUser(UserModel.fromData(userMap));
+      Navigator.pop(context);
+    }
+  }
 
   _imgFromCamera() async {
     // ignore: deprecated_member_use
@@ -121,11 +158,10 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                 TextFormField(
                   decoration: profileNameFieldStyle(),
                   textInputAction: TextInputAction.next,
-                  initialValue: 'Users name query', //Get the user's name
                   validator: (val) {
                     return val.trim().isEmpty ? 'A name is required' : null;
                   },
-                  onSaved: (value) => _name = value,
+                  controller: _nameController,
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(phoneField),
                 ),
@@ -133,13 +169,12 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                 TextFormField(
                   decoration: profilePhoneFieldStyle(),
                   textInputAction: TextInputAction.next,
-                  initialValue: 'Users phone query', //Get the user's phone
                   validator: (val) {
                     return val.trim().isEmpty
                         ? 'A phone number is required'
                         : null;
                   },
-                  onSaved: (value) => _phone = value,
+                  controller: _phoneController,
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(new FocusNode()),
                 ),
@@ -149,7 +184,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => Navigator.pop(context),
+          onPressed: updateUserInfo,
           icon: Icon(Icons.save),
           backgroundColor: Colors.amber,
           foregroundColor: Colors.white,

@@ -13,19 +13,24 @@ class UserModel {
   final String phone;
   final String groupID;
   final String role;
+  final String photoURL;
   UserModel(
       {String id,
       String name = '',
       String email = '',
       String phone = '',
       String groupID = '',
-      String role = ''})
+      String role = '',
+      String photoURL,
+  })
       : this.id = id,
         this.name = name ?? '',
         this.email = email ?? '',
         this.phone = phone ?? '',
         this.groupID = groupID ?? '0',
-        this.role = role ?? 'guide';
+        this.role = role ?? 'guide',
+        this.photoURL = photoURL ?? ''
+  ;
 
   //Passing the parameters
   UserModel copyWith(
@@ -34,14 +39,18 @@ class UserModel {
       String email,
       String phone,
       String groupID,
-      String role}) {
+      String role,
+      String photoURL,
+      }) {
     return UserModel(
         id: id ?? this.id,
         name: name ?? this.name,
         email: email ?? this.email,
         phone: phone ?? this.phone,
         groupID: groupID ?? this.groupID,
-        role: role ?? this.role);
+        role: role ?? this.role,
+        photoURL: photoURL ?? this.photoURL
+    );
   }
 
 //Get hashcode
@@ -68,7 +77,7 @@ class UserModel {
 
   //Convert to entity
   UserEntity toEntity() {
-    return UserEntity(id, name, email, phone, groupID, role);
+    return UserEntity(id, name, email, phone, groupID, role, photoURL);
   }
 
   //Get model from entity
@@ -79,6 +88,7 @@ class UserModel {
         email: entity.email,
         phone: entity.phone,
         groupID: entity.groupID,
+        photoURL: entity.photoURL,
         role: entity.role);
   }
 
@@ -89,7 +99,8 @@ class UserModel {
         email = data['email'],
         phone = data['phone'],
         groupID = data['groupID'],
-        role = data['role'];
+        role = data['role'],
+        photoURL = data['photoURL'];
 
   //Check if is manager
   bool isManager() {
