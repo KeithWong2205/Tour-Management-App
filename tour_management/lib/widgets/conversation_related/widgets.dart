@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
 
-Widget appBarMain(BuildContext context, {String title = ""}) {
+Widget appBarMain(BuildContext context, {String title = "",List<Widget> actions}) {
   return AppBar(
     title: Text(title, style: biggerTextStyle(),),
-    actions: [
-      Padding(
-          padding: EdgeInsets.only(right: 20.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.info_rounded,
-              size: 26.0,
-            ),
-          )
-      )
-    ],
+    actions: actions,
     elevation: 0.0,
     centerTitle: false,
   );
