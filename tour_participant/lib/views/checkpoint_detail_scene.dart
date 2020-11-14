@@ -154,8 +154,10 @@ class CheckpointDetailScene extends StatelessWidget {
                           height: 10,
                         ),
                         RaisedButton(
-                            onPressed: null,
-                            child: Text('Press here to give your feedback'))
+                          onPressed: null,
+                          color: Colors.redAccent,
+                          child: Text('Press here to give your feedback'),
+                        )
                       ],
                     ),
                   )),
