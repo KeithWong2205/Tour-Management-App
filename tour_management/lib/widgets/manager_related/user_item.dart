@@ -14,6 +14,7 @@ class UserItem extends StatelessWidget {
         onTap: onTap,
         leading: CircleAvatar(
           backgroundColor: Colors.grey,
+          backgroundImage: NetworkImage(user.photoURL),
           radius: 50,
         ),
         title: Hero(
