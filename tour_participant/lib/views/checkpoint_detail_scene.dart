@@ -53,15 +53,6 @@ class CheckpointDetailScene extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        RatingBarIndicator(
-                          rating: 4,
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 50,
-                        ),
                         Card(
                           child: ListTile(
                             leading: Icon(
@@ -162,27 +153,9 @@ class CheckpointDetailScene extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.event_note,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Note',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointNote,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        )
+                        RaisedButton(
+                            onPressed: null,
+                            child: Text('Press here to give your feedback'))
                       ],
                     ),
                   )),
