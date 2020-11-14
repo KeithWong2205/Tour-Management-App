@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
-import 'package:tour_management/views/manager/user_detail_scene.dart';
+import 'package:tour_management/views/conversation/user_chat_detail_scene.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
 
 class Chat extends StatefulWidget {
@@ -59,8 +59,7 @@ class _ChatState extends State<Chat> {
         FCMHelper.sendMessage(
             message: message,
             title: _userName ?? "Unknown User",
-            to: '/topics/' + widget.receiverId
-        );
+            to: '/topics/' + widget.receiverId);
       }
       setState(() {
         messageEditingController.text = "";
@@ -70,9 +69,7 @@ class _ChatState extends State<Chat> {
 
   void handleInitChatInfo(User user) {
     _userId = user.uid;
-    AppDataHelper.getUser().then((userData) => {
-      _userName = userData.name
-    });
+    AppDataHelper.getUser().then((userData) => {_userName = userData.name});
   }
 
   void _scrollToEnd() async {
@@ -96,21 +93,22 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context, title: widget.receiverName,
-      actions: [
+      appBar: appBarMain(context, title: widget.receiverName, actions: [
         Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => UserDetailScene(id: widget.receiverId)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            UserChatDetailScene(id: widget.receiverId)));
               },
               child: Icon(
                 Icons.info_rounded,
                 size: 26.0,
               ),
-            )
-        )
+            ))
       ]),
       body: Container(
         child: Column(
@@ -128,30 +126,28 @@ class _ChatState extends State<Chat> {
                   children: [
                     Expanded(
                         child: Container(
-                          height: 48.0,
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(24.0),
-                            border: Border.all(color: Colors.white70, width: 2.0)
-                          ),
-                          child: Center(
-                            child: TextField(
-                              cursorWidth: 2.0,
-                              cursorColor: Colors.black,
-                              controller: messageEditingController,
-                              style: simpleTextStyle(),
-                              decoration: InputDecoration(
-                                  hintText: "Message ...",
-                                  hintStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                  border: InputBorder.none),
-                            ),
-                          )
-                        )
-                    ),
+                            height: 48.0,
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(24.0),
+                                border: Border.all(
+                                    color: Colors.white70, width: 2.0)),
+                            child: Center(
+                              child: TextField(
+                                cursorWidth: 2.0,
+                                cursorColor: Colors.black,
+                                controller: messageEditingController,
+                                style: simpleTextStyle(),
+                                decoration: InputDecoration(
+                                    hintText: "Message ...",
+                                    hintStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                    ),
+                                    border: InputBorder.none),
+                              ),
+                            ))),
                     SizedBox(
                       width: 16,
                     ),
@@ -207,8 +203,9 @@ class MessageTile extends StatelessWidget {
             sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
         padding: EdgeInsets.only(top: 12, bottom: 12, left: 20, right: 20),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(radius)),
-            color: sendByMe ? const Color(0xff007EF4) : const Color(0xff8d8d8d),),
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
+          color: sendByMe ? const Color(0xff007EF4) : const Color(0xff8d8d8d),
+        ),
         child: Text(message,
             textAlign: TextAlign.start,
             style: TextStyle(
