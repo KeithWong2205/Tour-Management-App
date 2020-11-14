@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
+import 'package:tour_management/views/manager/user_detail_scene.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
 
 class Chat extends StatefulWidget {
@@ -95,7 +96,22 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context, title: widget.receiverName),
+      appBar: appBarMain(context, title: widget.receiverName,
+      actions: [
+        Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => UserDetailScene(id: widget.receiverId)));
+              },
+              child: Icon(
+                Icons.info_rounded,
+                size: 26.0,
+              ),
+            )
+        )
+      ]),
       body: Container(
         child: Column(
           children: [

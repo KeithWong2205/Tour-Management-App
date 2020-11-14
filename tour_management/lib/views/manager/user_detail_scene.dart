@@ -38,7 +38,12 @@ class _UserDetailSceneState extends State<UserDetailScene> {
                         children: <Widget>[
                           Container(
                             height: 300,
-                            child: CircleAvatar(
+                            child: (user.photoURL != null && user.photoURL.isNotEmpty)
+                             ? CircleAvatar(
+                              radius: 250,
+                              backgroundImage: NetworkImage(user.photoURL),
+                              backgroundColor: Colors.grey,)
+                             : CircleAvatar(
                               radius: 250,
                               backgroundColor: Colors.grey,
                             ),
