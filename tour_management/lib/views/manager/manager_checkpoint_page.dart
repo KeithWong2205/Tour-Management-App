@@ -7,7 +7,7 @@ class ManagerCheckPointPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.red[50],
       appBar: checkpointAppBar(),
-      drawer: MainDrawer(),
+      drawer: CheckpointDrawer(),
       body: ListCheckPointsManager(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

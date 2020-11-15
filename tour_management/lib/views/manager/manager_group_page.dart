@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tour_management/widgets/manager_related/list_group_manager.dart';
 import 'package:tour_management/widgets/widgets.dart';
 
 class ManagerGroupPage extends StatelessWidget {
@@ -8,7 +7,7 @@ class ManagerGroupPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.green[50],
       appBar: groupAppBar(),
-      drawer: MainDrawer(),
+      drawer: GroupDrawer(),
       body: ListGroupManager(),
     );
   }

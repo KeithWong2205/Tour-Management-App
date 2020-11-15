@@ -6,7 +6,8 @@ class GuideGroupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: groupAppBar(),
-      drawer: MainDrawer(),
+      drawer: GroupDrawer(),
+      body: ListGroupGuide(),
     );
   }
 }

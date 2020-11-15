@@ -29,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber[50],
-      drawer: MainDrawer(),
+      drawer: ProfileDrawer(),
       appBar: AppBar(
         title: Text("Profile Panel", style: TextStyle(fontSize: 24)),
         backgroundColor: Colors.amber,

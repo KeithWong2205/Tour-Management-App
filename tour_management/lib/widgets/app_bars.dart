@@ -46,3 +46,12 @@ AppBar feedbackAppBar() {
       ),
       backgroundColor: Colors.redAccent);
 }
+
+AppBar chatAppBar() {
+  return AppBar(
+      title: Text(
+        'Chat Panel',
+        style: TextStyle(fontSize: 24),
+      ),
+      backgroundColor: Colors.blue);
+}
