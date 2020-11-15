@@ -61,11 +61,11 @@ class _SearchState extends State<Search> {
   }
 
   /// 1.create a chatroom, send user to the chatroom, other userdetails
-  sendMessage(String userId) {
-    AppDataHelper.getUser().then((user) => handleSendMessage(user.id, userId));
+  sendMessage(String userId, String userName) {
+    AppDataHelper.getUser().then((user) => handleSendMessage(user.id, userId, userName));
   }
 
-  void handleSendMessage(String uid1, String uid2) {
+  void handleSendMessage(String uid1, String uid2, String userName) async {
     List<String> users = [uid1, uid2]; // uid2 is receiverId
 
     String chatRoomId = HelperFunctions.createChatRoomId(uid1, uid2);
@@ -75,7 +75,7 @@ class _SearchState extends State<Search> {
       "chatRoomId": chatRoomId,
     };
 
-    firebaseService.addChatRoom(chatRoom, chatRoomId);
+    await firebaseService.addChatRoom(chatRoom, chatRoomId);
 
     Navigator.push(
         context,
@@ -83,6 +83,7 @@ class _SearchState extends State<Search> {
             builder: (context) => Chat(
                   chatRoomId: chatRoomId,
                   receiverId: uid2,
+              receiverName: userName,
                 )));
   }
 
@@ -97,14 +98,14 @@ class _SearchState extends State<Search> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                userName,
+                userName ?? "",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 16
                 ),
               ),
               Text(
-                userEmail,
+                userEmail ?? "",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 16
@@ -115,9 +116,10 @@ class _SearchState extends State<Search> {
           Spacer(),
           GestureDetector(
             onTap: () {
-              sendMessage(userId);
+              sendMessage(userId, userName);
             },
             child: Container(
+              alignment: Alignment.center,
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
                   color: Colors.blue,
@@ -125,6 +127,13 @@ class _SearchState extends State<Search> {
                   color: Colors.white70),
                   borderRadius: BorderRadius.circular(24)
               ),
+              child: Text("Messages",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),),
             ),
           )
         ],

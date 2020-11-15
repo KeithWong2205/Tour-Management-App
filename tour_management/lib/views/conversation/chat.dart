@@ -31,15 +31,15 @@ class _ChatState extends State<Chat> {
         _scrollToEnd();
         return snapshot.hasData
             ? ListView.builder(
-                controller: _scrollController,
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) {
-                  return MessageTile(
-                    message: snapshot.data.documents[index].data()["message"],
-                    sendByMe: _userId ==
-                        snapshot.data.documents[index].data()["sendBy"],
-                  );
-                })
+            controller: _scrollController,
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) {
+              return MessageTile(
+                message: snapshot.data.documents[index].data()["message"],
+                sendByMe: _userId ==
+                    snapshot.data.documents[index].data()["sendBy"],
+              );
+            })
             : Container();
       },
     );
@@ -93,7 +93,7 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context, title: widget.receiverName, actions: [
+      appBar: appBarMain(context, title: widget.receiverName ?? "", actions: [
         Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
@@ -200,13 +200,13 @@ class MessageTile extends StatelessWidget {
       alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin:
-            sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
+        sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
         padding: EdgeInsets.only(top: 12, bottom: 12, left: 20, right: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           color: sendByMe ? const Color(0xff007EF4) : const Color(0xff8d8d8d),
         ),
-        child: Text(message,
+        child: Text(message ?? "",
             textAlign: TextAlign.start,
             style: TextStyle(
                 color: Colors.white,
