@@ -20,7 +20,17 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
           alignment: Alignment.center,
           child: ListView(
             children: [
-              Text('Welcome to the IU Operation App'),
+              SizedBox(height: 20),
+              CircleAvatar(
+                backgroundColor: Colors.grey,
+                radius: 100,
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Welcome to the IU Operation App',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 10),
             ],
           ),
