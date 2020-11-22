@@ -6,12 +6,14 @@ import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/views/conversation/user_chat_detail_scene.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Chat extends StatefulWidget {
   final String chatRoomId;
   final String receiverId;
   final String receiverName;
-  Chat({this.chatRoomId, this.receiverId, this.receiverName});
+  final String receiverPhone;
+  Chat({this.chatRoomId, this.receiverId, this.receiverName, this.receiverPhone});
 
   @override
   _ChatState createState() => _ChatState();
@@ -98,6 +100,18 @@ class _ChatState extends State<Chat> {
             padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
               onTap: () {
+                _launchCaller(this.widget.receiverPhone);
+              },
+              child: Icon(
+                Icons.phone,
+                size: 26.0,
+              ),
+            )
+        ),
+        Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -108,7 +122,8 @@ class _ChatState extends State<Chat> {
                 Icons.info_rounded,
                 size: 26.0,
               ),
-            ))
+            )
+        )
       ]),
       body: Container(
         child: Column(
@@ -182,6 +197,13 @@ class _ChatState extends State<Chat> {
         ),
       ),
     );
+  }
+
+  _launchCaller(String phone) async {
+    var url = "tel:" + phone;
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
   }
 }
 
