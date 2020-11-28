@@ -1,7 +1,5 @@
 library feedback_repo;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export './source/feedback_entity.dart';
+export './source/feedback_model.dart';
+export './source/firebase_feedback_service.dart';
