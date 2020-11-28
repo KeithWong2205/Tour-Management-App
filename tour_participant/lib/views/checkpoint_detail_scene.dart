@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_participant/controllers/chkpoint_manager/chkpoint_man.dart';
 import 'package:tour_participant/localization/keys.dart';
+import 'package:tour_participant/views/feedback_scene.dart';
 
 class CheckpointDetailScene extends StatelessWidget {
   final String id;
@@ -152,10 +153,27 @@ class CheckpointDetailScene extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        RaisedButton(
-                          onPressed: null,
-                          color: Colors.redAccent,
-                          child: Text('Press here to give your feedback'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RaisedButton(
+                                onPressed: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) => FeedBackScene())),
+                                color: Colors.redAccent,
+                                child: Text('Rate checkpoint'),
+                              ),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: RaisedButton(
+                                  onPressed: null,
+                                  color: Colors.redAccent,
+                                  child: Text('View More Info'),
+                                ))
+                          ],
                         )
                       ],
                     ),

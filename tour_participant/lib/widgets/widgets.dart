@@ -12,3 +12,4 @@ export './app_bar.dart';
 export './checkpoint_item.dart';
 export './list_checkpoint.dart';
 export './drawer.dart';
+export './feedback_form.dart';

@@ -15,3 +15,12 @@ AppBar checkpointAppBar() {
       ),
       backgroundColor: Colors.redAccent);
 }
+
+AppBar feedbackAppBar() {
+  return AppBar(
+      title: Text(
+        'Feedback Panel',
+        style: TextStyle(fontSize: 24),
+      ),
+      backgroundColor: Colors.redAccent);
+}
