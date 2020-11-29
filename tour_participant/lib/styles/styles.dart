@@ -69,3 +69,11 @@ InputDecoration groupSelectorFieldStyle() {
       labelText: 'Group Selector',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)));
 }
+
+InputDecoration feedbackFormFieldStyle() {
+  return InputDecoration(
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+      hintText: 'Put your thoughts here',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
+}

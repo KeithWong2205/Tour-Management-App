@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/helper/FirebaseStorageHelper.dart';
-import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/models/users_repo/firestore_service.dart';
 import 'package:tour_management/models/users_repo/user_model.dart';
 import 'package:tour_management/styles/styles.dart';
@@ -26,12 +24,12 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
   TextEditingController _nameController;
   TextEditingController _phoneController;
 
-
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget._currentUserInfo.name);
-    _phoneController = TextEditingController(text: widget._currentUserInfo.phone);
+    _phoneController =
+        TextEditingController(text: widget._currentUserInfo.phone);
   }
 
   @override
@@ -44,7 +42,8 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
   void updateUserInfo() async {
     if (formKey.currentState.validate()) {
       String photoURL = "";
-      Map<String, dynamic> userMap = widget._currentUserInfo.toEntity().toDocument();
+      Map<String, dynamic> userMap =
+          widget._currentUserInfo.toEntity().toDocument();
       if (_image != null) {
         photoURL = await FirebaseStorageHelper.uploadImage(file: _image);
       }
