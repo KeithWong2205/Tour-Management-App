@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:feedback_repo/feedback_repo.dart';
 
 //Class for states of checkpoint operations
 class FeedbackManState extends Equatable {
@@ -16,7 +16,7 @@ class FeedbackManLoading extends FeedbackManState {
 
 //Load Success
 class FeedbackManLoadSuccess extends FeedbackManState {
-  final List<CheckpointModel> checkpoints;
+  final List<FeedbackModel> checkpoints;
   const FeedbackManLoadSuccess([this.checkpoints = const []]);
   @override
   List<Object> get props => [checkpoints];

@@ -12,15 +12,15 @@ class FeedbackManEvent extends Equatable {
 //Event on load success
 class FeedbackManLoaded extends FeedbackManEvent {
   @override
-  String toString() => 'Checkpoints loaded';
+  String toString() => 'Feedback loaded';
 }
 
 //Event on add checkpoint
 class FeedbackManAdded extends FeedbackManEvent {
-  final FeedbackModel checkpoint;
-  const FeedbackManAdded(this.checkpoint);
+  final FeedbackModel feedback;
+  const FeedbackManAdded(this.feedback);
   @override
-  List<Object> get props => [checkpoint];
+  List<Object> get props => [feedback];
 }
 
 //Event on update or edit checkpoint
