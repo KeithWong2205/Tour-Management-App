@@ -161,7 +161,7 @@ class CheckpointDetailScene extends StatelessWidget {
                               child: RaisedButton(
                                 onPressed: () => Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (_) => FeedBackScene())),
+                                        builder: (_) => FeedBackScene(this.id))),
                                 color: Colors.redAccent,
                                 child: Text('Rate checkpoint'),
                               ),

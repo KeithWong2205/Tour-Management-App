@@ -1,4 +1,5 @@
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:feedback_repo/feedback_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:tour_participant/controllers/chkpoint_manager/chkpoint_man.dart'
 import 'package:tour_participant/controllers/chkpoint_list/chkpoint_list.dart';
 import 'package:tour_participant/controllers/controllers.dart';
 import 'package:tour_participant/controllers/authentication/auth.dart';
+import 'package:tour_participant/controllers/feedback_manager/feedback_man.dart';
 import 'package:tour_participant/views/views.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 
@@ -24,6 +26,8 @@ class _AppState extends State<App> {
   final FirebaseService firebaseService = FirebaseService();
   final FirebaseCheckpointService firebaseCheckpointService =
       FirebaseCheckpointService();
+  final FirebaseFeedbackService firebaseFeedbackService =
+  FirebaseFeedbackService();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,11 @@ class _AppState extends State<App> {
           BlocProvider<CheckPointListBloc>(
               create: (context) => CheckPointListBloc(
                   checkpointManBloc:
-                      BlocProvider.of<CheckpointManBloc>(context)))
+                      BlocProvider.of<CheckpointManBloc>(context))),
+          BlocProvider<FeedbackManBloc>(
+              create: (context) => FeedbackManBloc(
+                  firebaseFeedbackService: firebaseFeedbackService)
+                ..add(FeedbackManLoaded())),
         ],
         child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
           '/': (context) {
