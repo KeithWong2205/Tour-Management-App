@@ -1,4 +1,5 @@
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,9 @@ import 'package:tour_participant/controllers/authentication/auth.dart';
 import 'package:tour_participant/views/views.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
   runApp(App());
 }
