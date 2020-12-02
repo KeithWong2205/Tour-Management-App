@@ -81,10 +81,10 @@ class CheckpointEntity extends Equatable {
         snapshot.data()['pointName'],
         snapshot.data()['pointLocal'],
         pointDate,
-        snapshot.data['pointNote'],
-        snapshot.data['pointPhotoUrl'],
-        snapshot.data['totalRating'],
-        snapshot.data['totalRatingStar']);
+        snapshot.data()['pointNote'],
+        snapshot.data()['pointPhotoUrl'],
+        snapshot.data()['totalRating'],
+        snapshot.data()['totalRatingStar']);
   }
 
   //Map checkpoint entity to firestore document
