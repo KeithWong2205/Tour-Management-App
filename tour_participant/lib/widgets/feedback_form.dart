@@ -169,6 +169,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
                                       ratingOverall: _rating
                                   )
                               ));
+                              Navigator.pop(context, _rating);
                             });
                           },
                           child: Text('Submit Form'),
