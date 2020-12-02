@@ -72,16 +72,16 @@ class FeedbackEntity extends Equatable {
 //Map Entity from snapshot
   static FeedbackEntity fromSnapshot(DocumentSnapshot snapshot) {
     return FeedbackEntity(
-        snapshot.data['subscription'],
-        snapshot.documentID,
-        snapshot.data['checkpointID'],
-        snapshot.data['userID'],
-        snapshot.data['userName'],
-        snapshot.data['GuideFeedback'],
-        snapshot.data['TopicFeedback'],
-        snapshot.data['SpeakerFeedback'],
-        snapshot.data['AppFeedback'],
-        snapshot.data['RatingScore']);
+        snapshot.data()['subscription'],
+        snapshot.id,
+        snapshot.data()['checkpointID'],
+        snapshot.data()['userID'],
+        snapshot.data()['userName'],
+        snapshot.data()['GuideFeedback'],
+        snapshot.data()['TopicFeedback'],
+        snapshot.data()['SpeakerFeedback'],
+        snapshot.data()['AppFeedback'],
+        snapshot.data()['RatingScore']);
   }
 
   //Map entity to firestore document
