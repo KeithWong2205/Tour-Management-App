@@ -42,11 +42,16 @@ class CheckpointDetailScene extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(9),
                                 child: Container(
-                                  width: 450,
+                                  child: checkpoint.pointPhotoUrl != null &&
+                                      checkpoint.pointPhotoUrl.isNotEmpty
+                                      ? Image.network(checkpoint.pointPhotoUrl,
+                                      fit: BoxFit.fill)
+                                      : Container(),
                                   decoration: BoxDecoration(
                                       color: Colors.grey,
                                       border: Border.all(color: Colors.black),
                                       borderRadius: BorderRadius.circular(10)),
+                                  width: 450,
                                 ),
                               ),
                             )),
@@ -159,9 +164,18 @@ class CheckpointDetailScene extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: RaisedButton(
-                                onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (_) => FeedBackScene())),
+                                onPressed: () async {
+                                  var totalRatingStar = await Navigator
+                                      .of(context)
+                                      .push(MaterialPageRoute(builder: (_) => FeedBackScene(this.id)));
+                                  if (totalRatingStar >= 0) {
+                                    BlocProvider.of<CheckpointManBloc>(context).add(
+                                        CheckpointManUpdated(checkpoint.copyWith(
+                                            totalRating: checkpoint.totalRating + 1,
+                                            totalRatingStar: checkpoint.totalRatingStar + totalRatingStar
+                                        )));
+                                  }
+                                },
                                 color: Colors.redAccent,
                                 child: Text('Rate checkpoint'),
                               ),
