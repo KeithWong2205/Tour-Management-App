@@ -1,5 +1,4 @@
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:feedback_repo/feedback_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';

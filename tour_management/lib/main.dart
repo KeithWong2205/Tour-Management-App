@@ -1,5 +1,6 @@
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:feedback_repo/feedback_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,8 @@ import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/controllers/chpoint_list/chpoint_list.dart';
 import 'package:tour_management/controllers/controllers.dart';
 import 'package:tour_management/controllers/authentication/auth.dart';
+import 'package:tour_management/controllers/feedback_list/feedback_list.dart';
+import 'package:tour_management/controllers/feedback_manager/feedback_man.dart';
 import 'package:tour_management/controllers/group_list/group_list.dart';
 import 'package:tour_management/controllers/group_manager/group_man_bloc.dart';
 import 'package:tour_management/controllers/group_manager/group_man_event.dart';
@@ -45,6 +48,8 @@ class _AppState extends State<App> {
   final FireStoreService userFireStoreService = FireStoreService();
   final FirebaseCheckpointService firebaseCheckpointService =
       FirebaseCheckpointService();
+  final FirebaseFeedbackService firebaseFeedbackService =
+  FirebaseFeedbackService();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +73,15 @@ class _AppState extends State<App> {
           BlocProvider<GroupListBloc>(
             create: (context) => GroupListBloc(
                 groupManBloc: BlocProvider.of<GroupManBloc>(context)),
-          )
+          ),
+          BlocProvider<FeedbackManBloc>(
+              create: (context) => FeedbackManBloc(
+                  firebaseFeedbackService: firebaseFeedbackService)
+                ..add(FeedbackManLoaded())),
+          BlocProvider<FeedbackListBloc>(
+              create: (context) => FeedbackListBloc(
+                  feedbackManBloc:
+                  BlocProvider.of<FeedbackManBloc>(context))),
         ],
         child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
           '/': (context) {
