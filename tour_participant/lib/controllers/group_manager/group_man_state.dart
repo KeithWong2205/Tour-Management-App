@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tour_management/models/users_repo/users_repo.dart';
+import 'package:tour_participant/models/student_repo/user_model.dart';
 
 //Class for group operation
 class GroupManState extends Equatable {

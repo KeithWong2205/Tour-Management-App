@@ -8,8 +8,8 @@ import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 class FirebaseService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FireStoreService _fireStoreService = FireStoreService();
-  Student _currStudent;
-  Student get currStudent => _currStudent;
+  UserModel _currStudent;
+  UserModel get currStudent => _currStudent;
 
   //Sign-in with email and password
   Future<void> signInWithEmailPassword(String email, String password) async {
@@ -33,7 +33,7 @@ class FirebaseService {
     try {
       var registerResult = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await _fireStoreService.createStudent(Student(
+      await _fireStoreService.createStudent(UserModel(
           id: registerResult.user.uid,
           name: name,
           email: email,
