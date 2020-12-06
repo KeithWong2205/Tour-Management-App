@@ -1,5 +1,6 @@
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 import 'package:feedback_repo/feedback_repo.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +30,7 @@ class _AppState extends State<App> {
   final FirebaseCheckpointService firebaseCheckpointService =
       FirebaseCheckpointService();
   final FirebaseFeedbackService firebaseFeedbackService =
-  FirebaseFeedbackService();
+      FirebaseFeedbackService();
 
   @override
   Widget build(BuildContext context) {

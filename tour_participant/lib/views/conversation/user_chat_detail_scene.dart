@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tour_management/controllers/group_manager/group_man.dart';
+import 'package:tour_participant/controllers/group_manager/group_man.dart';
 
 class UserChatDetailScene extends StatefulWidget {
   final String id;
