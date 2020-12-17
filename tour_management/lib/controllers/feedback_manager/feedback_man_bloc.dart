@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:feedback_repo/feedback_repo.dart';
 import 'package:meta/meta.dart';
-import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 import 'package:tour_management/controllers/feedback_manager/feedback_man.dart';
 import 'package:tour_management/helper/AppDataHelper.dart';
 
@@ -43,8 +42,7 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
         .listen((feedbackList) => add(FeedbackListManUpdate(feedbackList)));
   }
 
-  Stream<FeedbackManState> mapFeedbackManAdded(
-      FeedbackManAdded event) async* {
+  Stream<FeedbackManState> mapFeedbackManAdded(FeedbackManAdded event) async* {
     firebaseFeedbackService.addNewFeedback(event.feedback);
   }
 

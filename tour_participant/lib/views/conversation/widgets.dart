@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tour_participant/models/student_repo/firebase_student_service.dart';
 
-Widget appBarMain(BuildContext context, {String title = "",List<Widget> actions}) {
+Widget appBarMain(BuildContext context,
+    {String title = "", List<Widget> actions}) {
   return AppBar(
-    title: Text(title, style: biggerTextStyle(),),
+    title: Text(
+      title,
+      style: biggerTextStyle(),
+    ),
     actions: actions,
     elevation: 0.0,
     centerTitle: false,
@@ -15,9 +18,9 @@ InputDecoration textFieldInputDecoration(String hintText) {
       hintText: hintText,
       hintStyle: TextStyle(color: Colors.white54),
       focusedBorder:
-      UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
       enabledBorder:
-      UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)));
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)));
 }
 
 TextStyle simpleTextStyle() {
