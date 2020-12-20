@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tour_participant/helper/FirebaseStorageHelper.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 import 'package:tour_participant/widgets/widgets.dart';
-import 'package:tour_participant/views/views.dart';
 import 'package:tour_participant/styles/styles.dart';
 
 class ProfileEditPage extends StatefulWidget {
