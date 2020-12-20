@@ -22,6 +22,7 @@ dependencies:
   flutter_rating_bar: ^3.2.0+1
   grouped_list: ^3.5.0
   shared_preferences: ^0.5.12+2
+  image_picker: ^0.6.7+12
 
   chpnt_repo_manager:
     path: chpnt_repo_manager
