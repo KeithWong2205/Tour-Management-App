@@ -4,7 +4,6 @@ import 'package:tour_participant/controllers/authentication/auth.dart';
 import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 import 'package:tour_participant/views/views.dart';
-import 'package:tour_participant/widgets/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
