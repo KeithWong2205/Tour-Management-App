@@ -8,6 +8,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class FCMHelper {
+
+  static final MANAGER_CHANNEL = "MANAGER_CHANNEL";
   static final FCMHelper _instance = FCMHelper._internal();
 
   FirebaseMessaging _firebaseMessaging;

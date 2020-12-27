@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tour_management/helper/AppDataHelper.dart';
+import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/views/views.dart';
 
@@ -49,7 +50,17 @@ class FireBaseService {
   //Sign-out
   Future<void> signOutUser() async {
     return Future.wait([
-      _firebaseAuth.signOut().then((value) => {AppDataHelper.clearUser()})
+      _firebaseAuth.signOut().then((value) {
+        AppDataHelper.getUser().then((user) {
+          if (user.isManager()) {
+            FCMHelper.unsubscribe(topic: FCMHelper.MANAGER_CHANNEL);
+          } else {
+            FCMHelper.unsubscribe(topic: user.groupID);
+          }
+          FCMHelper.unsubscribe(topic: user.id);
+        });
+        AppDataHelper.clearUser();
+      })
     ]);
   }
 

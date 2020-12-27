@@ -56,9 +56,13 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
   void initState() {
     super.initState();
     FCMHelper.configure(context);
-    AppDataHelper.getUser().then((user) => {
-          FCMHelper.subscribe(topic: user.groupID),
-          FCMHelper.subscribe(topic: user.id),
-        });
+    AppDataHelper.getUser().then((user) {
+      if (user.isManager()) {
+        FCMHelper.subscribe(topic: FCMHelper.MANAGER_CHANNEL);
+      } else {
+        FCMHelper.subscribe(topic: user.groupID);
+      }
+      FCMHelper.subscribe(topic: user.id);
+    });
   }
 }

@@ -77,7 +77,13 @@ class ListCheckPointsGuide extends StatelessWidget {
                                     element.pointName +
                                     "] changed",
                                 title: element.pointGroup,
-                                to: '/topics/' + element.pointGroup)
+                                to: '/topics/' + element.pointGroup),
+                            FCMHelper.sendMessage(
+                                message: "Checkpoint [" +
+                                    element.pointName +
+                                    "] changed",
+                                title: element.pointGroup,
+                                to: '/topics/' + FCMHelper.MANAGER_CHANNEL)
                           }
                       });
                   BlocProvider.of<CheckpointManBloc>(context).add(
