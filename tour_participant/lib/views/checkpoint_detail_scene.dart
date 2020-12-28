@@ -1,19 +1,30 @@
+import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
+import 'package:feedback_repo/feedback_repo.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_participant/controllers/chkpoint_manager/chkpoint_man.dart';
+import 'package:tour_participant/controllers/feedback_manager/feedback_man.dart';
+import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/localization/keys.dart';
+import 'package:tour_participant/models/student_repo/student_repo.dart';
 import 'package:tour_participant/views/feedback_scene.dart';
 
 class CheckpointDetailScene extends StatelessWidget {
+
   final String id;
   final dateFormat = new DateFormat('yyyy-HH-dd HH:mm');
+
+  List<FeedbackModel> feedbackList = null;
+  String userId = "";
+
   CheckpointDetailScene({Key key, @required this.id})
       : super(key: key ?? ArchSampleKeys.checkpointDetailsScene);
 
   @override
   Widget build(BuildContext context) {
+    AppDataHelper.getUser().then((value) => userId = value.id);
     return BlocBuilder<CheckpointManBloc, CheckpointManState>(
       builder: (context, state) {
         final checkpoint = (state as CheckpointManLoadSuccess)
@@ -163,21 +174,9 @@ class CheckpointDetailScene extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: RaisedButton(
-                                onPressed: () async {
-                                  var totalRatingStar = await Navigator
-                                      .of(context)
-                                      .push(MaterialPageRoute(builder: (_) => FeedBackScene(this.id)));
-                                  if (totalRatingStar >= 0) {
-                                    BlocProvider.of<CheckpointManBloc>(context).add(
-                                        CheckpointManUpdated(checkpoint.copyWith(
-                                            totalRating: checkpoint.totalRating + 1,
-                                            totalRatingStar: checkpoint.totalRatingStar + totalRatingStar
-                                        )));
-                                  }
-                                },
-                                color: Colors.redAccent,
-                                child: Text('Rate checkpoint'),
+                              child: buildRateCheckpointButton(
+                                context: context,
+                                model: checkpoint
                               ),
                             ),
                             Padding(
@@ -195,5 +194,48 @@ class CheckpointDetailScene extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget buildRateCheckpointButton({BuildContext context, CheckpointModel model}) {
+    return BlocBuilder<FeedbackManBloc, FeedbackManState>(
+        builder: (context, state) {
+          if (state is FeedbackManLoadSuccess) {
+            if (state.props.isEmpty) {
+              feedbackList = List();
+            } else {
+              feedbackList = state.props;
+            }
+          }
+          if (feedbackList == null) {
+            BlocProvider
+                .of<FeedbackManBloc>(context)
+                .add(FeedbackManLoaded());
+          } else {
+            var disableRateCheckpoint = false;
+            for (var index = 0; index < feedbackList.length; index++) {
+              var feedback = feedbackList[index];
+              if (feedback.userID == userId) {
+                disableRateCheckpoint = true;
+              }
+            }
+            print("buildRateCheckpointButton: " + state.props.length.toString());
+          }
+          return RaisedButton(
+            onPressed: () async {
+              var totalRatingStar = await Navigator
+                  .of(context)
+                  .push(MaterialPageRoute(builder: (_) => FeedBackScene(this.id)));
+              if (totalRatingStar >= 0) {
+                BlocProvider.of<CheckpointManBloc>(context).add(
+                    CheckpointManUpdated(model.copyWith(
+                        totalRating: model.totalRating + 1,
+                        totalRatingStar: model.totalRatingStar + totalRatingStar
+                    )));
+              }
+            },
+            color: Colors.redAccent,
+            child: Text('Rate checkpoint'),
+          );
+        });
   }
 }
