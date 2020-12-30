@@ -11,11 +11,12 @@ import 'package:tour_participant/localization/keys.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 import 'package:tour_participant/views/feedback_scene.dart';
 
+// ignore: must_be_immutable
 class CheckpointDetailScene extends StatelessWidget {
-
   final String id;
   final dateFormat = new DateFormat('yyyy-HH-dd HH:mm');
 
+  // ignore: avoid_init_to_null
   List<FeedbackModel> feedbackList = null;
   String userId = "";
 
@@ -53,9 +54,9 @@ class CheckpointDetailScene extends StatelessWidget {
                                 padding: const EdgeInsets.all(9),
                                 child: Container(
                                   child: checkpoint.pointPhotoUrl != null &&
-                                      checkpoint.pointPhotoUrl.isNotEmpty
+                                          checkpoint.pointPhotoUrl.isNotEmpty
                                       ? Image.network(checkpoint.pointPhotoUrl,
-                                      fit: BoxFit.fill)
+                                          fit: BoxFit.fill)
                                       : Container(),
                                   decoration: BoxDecoration(
                                       color: Colors.grey,
@@ -174,9 +175,7 @@ class CheckpointDetailScene extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: buildRateCheckpointButton(
-                                context: context,
-                                model: checkpoint
-                              ),
+                                  context: context, model: checkpoint),
                             ),
                             Padding(
                                 padding: const EdgeInsets.all(8),
@@ -195,59 +194,60 @@ class CheckpointDetailScene extends StatelessWidget {
     );
   }
 
-  Widget buildRateCheckpointButton({BuildContext context, CheckpointModel model}) {
+  Widget buildRateCheckpointButton(
+      {BuildContext context, CheckpointModel model}) {
     return FutureBuilder<UserModel>(
       future: AppDataHelper.getUser(),
       builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
         switch (snapshot.connectionState) {
-          case ConnectionState.waiting: return Container();
+          case ConnectionState.waiting:
+            return Container();
           default:
             return BlocBuilder<FeedbackManBloc, FeedbackManState>(
                 builder: (context, state) {
-                  var disableRateCheckpoint = false;
-                  if (state is FeedbackManLoadSuccess) {
-                    if (state.props.isEmpty) {
-                      feedbackList = List();
-                    } else {
-                      feedbackList = state.checkpoints;
-                    }
+              var disableRateCheckpoint = false;
+              if (state is FeedbackManLoadSuccess) {
+                if (state.props.isEmpty) {
+                  feedbackList = List();
+                } else {
+                  feedbackList = state.checkpoints;
+                }
+              }
+              if (feedbackList == null) {
+                BlocProvider.of<FeedbackManBloc>(context)
+                    .add(FeedbackManLoaded());
+              } else {
+                for (var index = 0; index < feedbackList.length; index++) {
+                  var feedback = feedbackList[index];
+                  if (feedback.userID == snapshot.data.id) {
+                    disableRateCheckpoint = true;
                   }
-                  if (feedbackList == null) {
-                    BlocProvider
-                        .of<FeedbackManBloc>(context)
-                        .add(FeedbackManLoaded());
-                  } else {
-                    for (var index = 0; index < feedbackList.length; index++) {
-                      var feedback = feedbackList[index];
-                      if (feedback.userID == snapshot.data.id) {
-                        disableRateCheckpoint = true;
-                      }
-                    }
+                }
+              }
+              if (disableRateCheckpoint) {
+                return RaisedButton(
+                  onPressed: null,
+                  color: Colors.redAccent,
+                  child: Text('Rate checkpoint'),
+                );
+              }
+              return RaisedButton(
+                onPressed: () async {
+                  var totalRatingStar = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) => FeedBackScene(this.id)));
+                  if (totalRatingStar >= 0) {
+                    BlocProvider.of<CheckpointManBloc>(context).add(
+                        CheckpointManUpdated(model.copyWith(
+                            totalRating: model.totalRating + 1,
+                            totalRatingStar:
+                                model.totalRatingStar + totalRatingStar)));
                   }
-                  if (disableRateCheckpoint) {
-                    return RaisedButton(
-                      onPressed: null,
-                      color: Colors.redAccent,
-                      child: Text('Rate checkpoint'),
-                    );
-                  }
-                  return RaisedButton(
-                    onPressed: () async {
-                      var totalRatingStar = await Navigator
-                          .of(context)
-                          .push(MaterialPageRoute(builder: (_) => FeedBackScene(this.id)));
-                      if (totalRatingStar >= 0) {
-                        BlocProvider.of<CheckpointManBloc>(context).add(
-                            CheckpointManUpdated(model.copyWith(
-                                totalRating: model.totalRating + 1,
-                                totalRatingStar: model.totalRatingStar + totalRatingStar
-                            )));
-                      }
-                    },
-                    color: Colors.redAccent,
-                    child: Text('Rate checkpoint'),
-                  );
-                });
+                },
+                color: Colors.redAccent,
+                child: Text('Rate checkpoint'),
+              );
+            });
         }
       },
     );

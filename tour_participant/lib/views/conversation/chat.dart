@@ -12,7 +12,11 @@ class Chat extends StatefulWidget {
   final String receiverId;
   final String receiverName;
   final String receiverPhone;
-  Chat({this.chatRoomId, this.receiverId, this.receiverName, this.receiverPhone});
+  Chat(
+      {this.chatRoomId,
+      this.receiverId,
+      this.receiverName,
+      this.receiverPhone});
 
   @override
   _ChatState createState() => _ChatState();
@@ -32,15 +36,15 @@ class _ChatState extends State<Chat> {
         _scrollToEnd();
         return snapshot.hasData
             ? ListView.builder(
-            controller: _scrollController,
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: (context, index) {
-              return MessageTile(
-                message: snapshot.data.documents[index].data()["message"],
-                sendByMe: _userId ==
-                    snapshot.data.documents[index].data()["sendBy"],
-              );
-            })
+                controller: _scrollController,
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  return MessageTile(
+                    message: snapshot.data.documents[index].data()["message"],
+                    sendByMe: _userId ==
+                        snapshot.data.documents[index].data()["sendBy"],
+                  );
+                })
             : Container();
       },
     );
@@ -105,24 +109,7 @@ class _ChatState extends State<Chat> {
                 Icons.phone,
                 size: 26.0,
               ),
-            )
-        ),
-        Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: () {
-                //TODO: display chat detail screen
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => UserChatDetailScene(id: widget.receiverId)));
-              },
-              child: Icon(
-                Icons.info_rounded,
-                size: 26.0,
-              ),
-            )
-        )
+            )),
       ]),
       body: Container(
         child: Column(
@@ -221,7 +208,7 @@ class MessageTile extends StatelessWidget {
       alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin:
-        sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
+            sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
         padding: EdgeInsets.only(top: 12, bottom: 12, left: 20, right: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(radius)),

@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class FCMHelper {
-
+  // ignore: non_constant_identifier_names
   static final MANAGER_CHANNEL = "MANAGER_CHANNEL";
   static final FCMHelper _instance = FCMHelper._internal();
 
@@ -117,7 +117,8 @@ class FCMHelper {
     // Or do other work.
   }
 
-  void handleShowLocalNotification({BuildContext context, String message, String title}) {
+  void handleShowLocalNotification(
+      {BuildContext context, String message, String title}) {
     Fluttertoast.showToast(
         msg: title + ": " + message,
         toastLength: Toast.LENGTH_SHORT,
@@ -125,8 +126,7 @@ class FCMHelper {
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
     // showDialog(
     //     context: context,
     //     builder: (_) => new CupertinoAlertDialog(
