@@ -65,8 +65,8 @@ class MainDrawer extends StatelessWidget {
           style: TextStyle(fontSize: 18, color: Colors.blue),
         ),
         subtitle: Text('Chat with guides & manager'),
-        onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => ChatRoom())));
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ChatRoom())));
   }
 
   Widget profile(BuildContext context) {
@@ -80,6 +80,8 @@ class MainDrawer extends StatelessWidget {
         style: TextStyle(fontSize: 18, color: Colors.amber),
       ),
       subtitle: Text('View your own profile'),
+      onTap: () => Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => ProfilePage())),
     );
   }
 
