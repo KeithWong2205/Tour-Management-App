@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/models/users_repo/users_repo.dart';
 import 'package:tour_management/views/profile_page.dart';
 import 'package:tour_management/views/conversation/chat_room.dart';
@@ -94,15 +92,6 @@ class MainDrawer extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (context) => ProfilePage())),
             ),
           ),
-          SizedBox(height: 200),
-          Card(
-              child: ListTile(
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text("Log out"),
-                  onTap: () {
-                    Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                    BlocProvider.of<AuthBloc>(context).add(LoggedOut());
-                  }))
         ],
       ),
     );
@@ -184,15 +173,6 @@ class CheckpointDrawer extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (context) => ProfilePage())),
             ),
           ),
-          SizedBox(height: 200),
-          Card(
-              child: ListTile(
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text("Log out"),
-                  onTap: () {
-                    Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                    BlocProvider.of<AuthBloc>(context).add(LoggedOut());
-                  }))
         ],
       ),
     );
@@ -274,15 +254,6 @@ class GroupDrawer extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (context) => ProfilePage())),
             ),
           ),
-          SizedBox(height: 200),
-          Card(
-              child: ListTile(
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text("Log out"),
-                  onTap: () {
-                    Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                    BlocProvider.of<AuthBloc>(context).add(LoggedOut());
-                  }))
         ],
       ),
     );
@@ -442,15 +413,6 @@ class ChatDrawer extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (context) => ProfilePage())),
             ),
           ),
-          SizedBox(height: 200),
-          Card(
-              child: ListTile(
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text("Log out"),
-                  onTap: () {
-                    Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                    BlocProvider.of<AuthBloc>(context).add(LoggedOut());
-                  }))
         ],
       ),
     );
