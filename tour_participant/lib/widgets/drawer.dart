@@ -27,7 +27,7 @@ class MainDrawer extends StatelessWidget {
                         image: AssetImage('assets/drawer.png'),
                         fit: BoxFit.fill))),
             Text(
-              'Tour Operator Team',
+              'Tour Participant Team',
               style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,

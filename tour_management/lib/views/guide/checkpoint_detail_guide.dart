@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/localization/keys.dart';
@@ -39,16 +38,6 @@ class _CheckpointDetailSceneGuideState
               style: TextStyle(fontSize: 24),
             ),
             backgroundColor: Colors.redAccent,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  BlocProvider.of<CheckpointManBloc>(context)
-                      .add(CheckpointManDelete(checkpoint));
-                  Navigator.pop(context);
-                },
-              )
-            ],
           ),
           body: checkpoint == null
               ? Container()
@@ -80,14 +69,21 @@ class _CheckpointDetailSceneGuideState
                         SizedBox(
                           height: 10,
                         ),
-                        RatingBarIndicator(
-                          rating: 4,
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 50,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RaisedButton(
+                                onPressed: null,
+                                child: Text("SOS"),
+                              ),
+                            ),
+                            RaisedButton(
+                              onPressed: null,
+                              child: Text("Check-in"),
+                            )
+                          ],
                         ),
                         Card(
                           child: ListTile(
