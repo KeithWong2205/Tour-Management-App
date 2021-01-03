@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
+import 'package:tour_management/helper/AppDataHelper.dart';
+import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/localization/keys.dart';
 
 class CheckpointDetailSceneGuide extends StatefulWidget {
@@ -75,7 +77,20 @@ class _CheckpointDetailSceneGuideState
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: RaisedButton(
-                                onPressed: null,
+                                color: Colors.green,
+                                onPressed: () {
+                                  AppDataHelper.getUser().then((user) {
+                                    if (user.role != 'manager') {
+                                      FCMHelper.sendMessage(
+                                          message: "Checkpoint");
+                                    }
+                                  });
+                                  BlocProvider.of<CheckpointManBloc>(context)
+                                      .add(CheckpointManUpdated(
+                                          checkpoint.copyWith(
+                                              checkin:
+                                                  !checkpoint.pointCheckin)));
+                                },
                                 child: Text("SOS"),
                               ),
                             ),
