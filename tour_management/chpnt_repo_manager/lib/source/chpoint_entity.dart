@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 //Class for checkpoint entity
 class CheckpointEntity extends Equatable {
   final bool pointComplete;
+  final bool pointCheckin;
   final String pointId;
   final String pointName;
   final String pointLocal;
@@ -15,6 +16,7 @@ class CheckpointEntity extends Equatable {
   final double totalRatingStar;
   const CheckpointEntity(
       this.pointComplete,
+      this.pointCheckin,
       this.pointId,
       this.pointGroup,
       this.pointName,
@@ -27,6 +29,7 @@ class CheckpointEntity extends Equatable {
   @override
   List<Object> get props => [
         pointComplete,
+        pointCheckin,
         pointId,
         pointGroup,
         pointName,
@@ -39,12 +42,13 @@ class CheckpointEntity extends Equatable {
       ];
   @override
   String toString() =>
-      'Checkpoint Entity created {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, photoUrl: $pointPhotoUrl, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
+      'Checkpoint Entity created {status: $pointComplete, checkin: $pointCheckin, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, photoUrl: $pointPhotoUrl, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
 
   //Map the entity into Json to send to firestore
   Map<String, Object> toJson() {
     return {
       'pointComplete': pointComplete,
+      'pointCheckin': pointCheckin,
       'pointId': pointId,
       'pointGroup': pointGroup,
       'pointName': pointName,
@@ -60,6 +64,7 @@ class CheckpointEntity extends Equatable {
   static CheckpointEntity fromJson(Map<String, Object> json) {
     return CheckpointEntity(
         json['pointComplete'] as bool,
+        json['pointCheckin'] as bool,
         json['pointId'] as String,
         json['pointGroup'] as String,
         json['pointName'] as String,
@@ -76,6 +81,7 @@ class CheckpointEntity extends Equatable {
     DateTime pointDate = snapshot.data()['pointDatetime'].toDate();
     return CheckpointEntity(
         snapshot.data()['pointComplete'],
+        snapshot.data()['pointCheckin'],
         snapshot.id,
         snapshot.data()['pointGroup'],
         snapshot.data()['pointName'],
@@ -91,6 +97,7 @@ class CheckpointEntity extends Equatable {
   Map<String, Object> toDocument() {
     return {
       'pointComplete': pointComplete,
+      'pointCheckin': pointCheckin,
       'pointGroup': pointGroup,
       'pointName': pointName,
       'pointLocal': pointLocal,

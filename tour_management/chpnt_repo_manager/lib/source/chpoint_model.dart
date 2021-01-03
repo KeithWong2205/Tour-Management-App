@@ -7,6 +7,7 @@ enum VisibilityFilter { all, active, completed }
 @immutable
 class CheckpointModel {
   final bool pointComplete;
+  final bool pointCheckin;
   final String pointId;
   final String pointGroup;
   final String pointName;
@@ -18,6 +19,7 @@ class CheckpointModel {
   final double totalRatingStar;
   CheckpointModel(this.pointName,
       {this.pointComplete = false,
+      this.pointCheckin = false,
       String pointId,
       String pointGroup = '0',
       String pointLocal = '',
@@ -38,6 +40,7 @@ class CheckpointModel {
   //Passing the parameters
   CheckpointModel copyWith(
       {bool complete,
+      bool checkin,
       String id,
       String name,
       String group,
@@ -49,6 +52,7 @@ class CheckpointModel {
       double totalRatingStar}) {
     return CheckpointModel(name ?? this.pointName,
         pointComplete: complete ?? this.pointComplete,
+        pointCheckin: checkin ?? this.pointCheckin,
         pointId: id ?? this.pointId,
         pointGroup: group ?? this.pointGroup,
         pointLocal: location ?? this.pointLocal,
@@ -63,6 +67,7 @@ class CheckpointModel {
   @override
   int get hashCode =>
       pointComplete.hashCode ^
+      pointCheckin.hashCode ^
       pointId.hashCode ^
       pointGroup.hashCode ^
       pointName.hashCode ^
@@ -79,6 +84,7 @@ class CheckpointModel {
       other is CheckpointModel &&
           runtimeType == other.runtimeType &&
           pointComplete == other.pointComplete &&
+          pointCheckin == other.pointCheckin &&
           pointId == other.pointId &&
           pointGroup == other.pointGroup &&
           pointName == other.pointName &&
@@ -91,18 +97,29 @@ class CheckpointModel {
 
   @override
   String toString() =>
-      'Checkpoint Model {status: $pointComplete, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, photoUrl: $pointPhotoUrl, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
+      'Checkpoint Model {status: $pointComplete, checkin: $pointCheckin, id: $pointId, group: $pointGroup, name: $pointName, location: $pointLocal, datetime: $pointDatetime, note: $pointNote, photoUrl: $pointPhotoUrl, totalRating: $totalRating, totalRatingStar: $totalRatingStar}';
 
   //Make model into checkpoint entity to send to firestore
   CheckpointEntity toEntity() {
-    return CheckpointEntity(pointComplete, pointId, pointGroup, pointName,
-        pointLocal, pointDatetime, pointNote, pointPhotoUrl, totalRating, totalRatingStar);
+    return CheckpointEntity(
+        pointComplete,
+        pointCheckin,
+        pointId,
+        pointGroup,
+        pointName,
+        pointLocal,
+        pointDatetime,
+        pointNote,
+        pointPhotoUrl,
+        totalRating,
+        totalRatingStar);
   }
 
   //Get the checkpoint model from the entity acquire from firestore
   static CheckpointModel fromEntity(CheckpointEntity entity) {
     return CheckpointModel(entity.pointName,
         pointComplete: entity.pointComplete ?? false,
+        pointCheckin: entity.pointCheckin ?? false,
         pointId: entity.pointId,
         pointGroup: entity.pointGroup,
         pointLocal: entity.pointLocal,
