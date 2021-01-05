@@ -69,21 +69,20 @@ class ListCheckPointsGuide extends StatelessWidget {
                   }
                 },
                 onCheckboxChanged: (_) {
-                  AppDataHelper.getUser().then((user) => {
+                  AppDataHelper.getUser().then((user) {
                         if (user.role != 'manager')
                           {
+                            String _message = "Checkpoint [" +
+                                element.pointName +
+                                "] changed";
                             FCMHelper.sendMessage(
-                                message: "Checkpoint [" +
-                                    element.pointName +
-                                    "] changed",
+                                message: _message,
                                 title: element.pointGroup,
-                                to: '/topics/' + element.pointGroup),
+                                to: '/topics/' + element.pointGroup);
                             FCMHelper.sendMessage(
-                                message: "Checkpoint [" +
-                                    element.pointName +
-                                    "] changed",
+                                message: _message,
                                 title: element.pointGroup,
-                                to: '/topics/' + FCMHelper.MANAGER_CHANNEL)
+                                to: '/topics/' + FCMHelper.MANAGER_CHANNEL);
                           }
                       });
                   BlocProvider.of<CheckpointManBloc>(context).add(

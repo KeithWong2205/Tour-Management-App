@@ -80,22 +80,47 @@ class _CheckpointDetailSceneGuideState
                                 color: Colors.green,
                                 onPressed: () {
                                   AppDataHelper.getUser().then((user) {
-                                    if (user.role != 'manager') {
+                                    if (user.role != 'manager')
+                                    {
+                                      String _message = "S.O.S Checkpoint [" +
+                                          checkpoint.pointName +
+                                          "] need help";
                                       FCMHelper.sendMessage(
-                                          message: "Checkpoint");
+                                          message: _message,
+                                          title: checkpoint.pointGroup,
+                                          to: '/topics/' + checkpoint.pointGroup);
+                                      FCMHelper.sendMessage(
+                                          message: _message,
+                                          title: checkpoint.pointGroup,
+                                          to: '/topics/' + FCMHelper.MANAGER_CHANNEL);
                                     }
                                   });
-                                  BlocProvider.of<CheckpointManBloc>(context)
-                                      .add(CheckpointManUpdated(
-                                          checkpoint.copyWith(
-                                              checkin:
-                                                  !checkpoint.pointCheckin)));
                                 },
                                 child: Text("SOS"),
                               ),
                             ),
                             RaisedButton(
-                              onPressed: null,
+                              onPressed: checkpoint.pointCheckin ? null : () {
+                                AppDataHelper.getUser().then((user) {
+                                  if (user.role != 'manager')
+                                    {
+                                      String _message = "Checkpoint [" +
+                                        checkpoint.pointName +
+                                        "] changed";
+                                      FCMHelper.sendMessage(
+                                          message: _message,
+                                          title: checkpoint.pointGroup,
+                                          to: '/topics/' + checkpoint.pointGroup);
+                                      FCMHelper.sendMessage(
+                                          message: _message,
+                                          title: checkpoint.pointGroup,
+                                          to: '/topics/' + FCMHelper.MANAGER_CHANNEL);
+                                    }
+                                });
+                                BlocProvider.of<CheckpointManBloc>(context)
+                                    .add(CheckpointManUpdated(checkpoint.copyWith(checkin: true))
+                                );
+                              },
                               child: Text("Check-in"),
                             )
                           ],
