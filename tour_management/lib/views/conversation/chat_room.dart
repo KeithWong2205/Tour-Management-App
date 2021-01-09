@@ -5,7 +5,6 @@ import 'package:tour_management/models/users_repo/firebase_service.dart';
 import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/views/conversation/search.dart';
 import 'package:tour_management/widgets/widgets.dart';
-
 import 'chat.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -35,7 +34,8 @@ class _ChatRoomState extends State<ChatRoom> {
                     isCurrentUser:
                         snapshot.data.documents[index].data()['id'] == _userId,
                     receiverId: snapshot.data.documents[index].data()['id'],
-                    receiverPhone: snapshot.data.documents[index].data()['phone'],
+                    receiverPhone:
+                        snapshot.data.documents[index].data()['phone'],
                   );
                 })
             : Container();

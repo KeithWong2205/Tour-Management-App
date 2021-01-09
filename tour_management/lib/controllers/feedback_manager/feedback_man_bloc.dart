@@ -24,15 +24,6 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
     if (event is FeedbackManAdded) {
       yield* mapFeedbackManAdded(event);
     }
-    if (event is FeedbackManUpdated) {
-      yield* mapFeedbackManUpdated(event);
-    }
-    if (event is FeedbackManDelete) {
-      yield* mapFeedbackManDelete(event);
-    }
-    if (event is FeedbackListManUpdate) {
-      yield* mapFeedbackListManUpdate(event);
-    }
   }
 
   Stream<FeedbackManState> mapFeedbackManLoaded({String groupId}) async* {
@@ -46,25 +37,10 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
     firebaseFeedbackService.addNewFeedback(event.feedback);
   }
 
-  Stream<FeedbackManState> mapFeedbackManUpdated(
-      FeedbackManUpdated event) async* {
-    firebaseFeedbackService.updateCheckpoint(event.updated);
-  }
-
-  Stream<FeedbackManState> mapFeedbackManDelete(
-      FeedbackManDelete event) async* {
-    firebaseFeedbackService.deleteCheckpoint(event.deleted);
-  }
-
-  Stream<FeedbackManState> mapFeedbackListManUpdate(
-      FeedbackListManUpdate event) async* {
-    yield FeedbackManLoadSuccess(event.updatedList);
-
-    @override
-    // ignore: unused_element
-    Future<void> close() {
-      _checkpointSubscription?.cancel();
-      return super.close();
-    }
+  @override
+  // ignore: unused_element
+  Future<void> close() {
+    _checkpointSubscription?.cancel();
+    return super.close();
   }
 }
