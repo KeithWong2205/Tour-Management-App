@@ -6,13 +6,13 @@ import 'package:intl/intl.dart';
 import 'package:tour_management/localization/localization.dart';
 
 //Widget for the checkpoint to be displayed
-class CheckpointofManager extends StatelessWidget {
+class CheckpointOfManager extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
   final ValueChanged<bool> onCheckboxChanged;
   final CheckpointModel chkpoint;
   final dateFormat = new DateFormat('yyyy-MM-dd HH:mm');
-  CheckpointofManager(
+  CheckpointOfManager(
       {Key key,
       @required this.onDismissed,
       @required this.onTap,

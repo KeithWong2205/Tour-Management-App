@@ -49,7 +49,7 @@ class ListCheckPointsManager extends StatelessWidget {
                           )),
                     ))),
             itemBuilder: (context, element) {
-              return CheckpointofManager(
+              return CheckpointOfManager(
                 chkpoint: element,
                 onDismissed: (direction) {
                   BlocProvider.of<CheckpointManBloc>(context)
@@ -75,11 +75,7 @@ class ListCheckPointsManager extends StatelessWidget {
                                 .add(CheckpointManDelete(element))));
                   }
                 },
-                onCheckboxChanged: (_) {
-                  BlocProvider.of<CheckpointManBloc>(context).add(
-                      CheckpointManUpdated(
-                          element.copyWith(complete: !element.pointComplete)));
-                },
+                onCheckboxChanged: null,
               );
             },
           );

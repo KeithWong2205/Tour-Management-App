@@ -50,7 +50,7 @@ class ListCheckPointsGuide extends StatelessWidget {
                           )),
                     ))),
             itemBuilder: (context, element) {
-              return CheckpointofGuide(
+              return CheckpointOfGuide(
                 chkpoint: element,
                 onTap: () async {
                   final removedTodo = await Navigator.of(context)
@@ -70,21 +70,19 @@ class ListCheckPointsGuide extends StatelessWidget {
                 },
                 onCheckboxChanged: (_) {
                   AppDataHelper.getUser().then((user) {
-                        if (user.role != 'manager')
-                          {
-                            String _message = "Checkpoint [" +
-                                element.pointName +
-                                "] changed";
-                            FCMHelper.sendMessage(
-                                message: _message,
-                                title: element.pointGroup,
-                                to: '/topics/' + element.pointGroup);
-                            FCMHelper.sendMessage(
-                                message: _message,
-                                title: element.pointGroup,
-                                to: '/topics/' + FCMHelper.MANAGER_CHANNEL);
-                          }
-                      });
+                    if (user.role != 'manager') {
+                      String _message =
+                          "Checkpoint [" + element.pointName + "] changed";
+                      FCMHelper.sendMessage(
+                          message: _message,
+                          title: element.pointGroup,
+                          to: '/topics/' + element.pointGroup);
+                      FCMHelper.sendMessage(
+                          message: _message,
+                          title: element.pointGroup,
+                          to: '/topics/' + FCMHelper.MANAGER_CHANNEL);
+                    }
+                  });
                   BlocProvider.of<CheckpointManBloc>(context).add(
                       CheckpointManUpdated(
                           element.copyWith(complete: !element.pointComplete)));
