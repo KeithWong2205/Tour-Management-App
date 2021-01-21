@@ -54,10 +54,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapLoginWithEmailPassword(
       {String email, String password}) async* {
     yield LoginState.loading();
-    try {
-      await firebaseService.signInWithEmailPassword(email, password);
+    bool isSuccess =
+        await firebaseService.signInWithEmailPassword(email, password);
+    if (isSuccess) {
       yield LoginState.success();
-    } catch (_) {
+    } else {
       yield LoginState.failure();
     }
   }

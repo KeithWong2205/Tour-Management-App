@@ -15,14 +15,14 @@ class FireBaseService {
   UserModel get currUser => _currUser;
 
   //Sign-in using email and password
-  Future<void> signInWithEmailPassword(String email, String password) async {
+  Future<bool> signInWithEmailPassword(String email, String password) async {
     try {
       var loginResult = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       await _fetchCurrentUser(loginResult.user);
       return loginResult.user != null;
     } catch (e) {
-      return e.message;
+      return false;
     }
   }
 
