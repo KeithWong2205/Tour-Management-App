@@ -107,7 +107,7 @@ class CheckpointDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Colors.blue,
+            color: Colors.redAccent,
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -188,7 +188,7 @@ class GroupDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Colors.blue,
+            color: Colors.green,
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -269,7 +269,7 @@ class ProfileDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Colors.blue,
+            color: Colors.amber,
             child: Center(
               child: Column(
                 children: <Widget>[
