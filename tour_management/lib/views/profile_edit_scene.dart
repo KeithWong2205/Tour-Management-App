@@ -149,10 +149,11 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                                                     BorderRadius.circular(100)),
                                             width: 200,
                                             height: 200,
-                                            child: Icon(
-                                              Icons.camera_alt,
-                                              color: Colors.grey[800],
-                                            ))))))),
+                                            child:CircleAvatar(
+                                              backgroundImage: NetworkImage(widget._currentUserInfo.photoURL),
+                                              radius: 200,
+                                            )
+                                    )))))),
                 SizedBox(height: 10),
                 TextFormField(
                   decoration: profileNameFieldStyle(),

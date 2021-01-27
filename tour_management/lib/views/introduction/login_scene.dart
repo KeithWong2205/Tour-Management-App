@@ -33,7 +33,9 @@ class _LoginSceneState extends State<LoginScene> {
 
   @override
   void dispose() {
-    _loginBloc.close();
+    if(_loginBloc != null) {
+      _loginBloc.close();
+    }
     super.dispose();
   }
 }

@@ -144,15 +144,15 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _onEmailChanged() {
-    _loginBloc.add(EmailChanged(email: _emailField.text));
+    _loginBloc.add(EmailChanged(email: _emailField.text.trim()));
   }
 
   void _onPasswordChanged() {
-    _loginBloc.add(PasswordChanged(password: _passwordField.text));
+    _loginBloc.add(PasswordChanged(password: _passwordField.text.trim()));
   }
 
   void _onFormSubmitted() {
     _loginBloc.add(LoginWithEmailPassword(
-        email: _emailField.text, password: _passwordField.text));
+        email: _emailField.text.trim(), password: _passwordField.text.trim()));
   }
 }
