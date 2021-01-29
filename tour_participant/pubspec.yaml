@@ -23,6 +23,8 @@ dependencies:
   grouped_list: ^3.5.0
   shared_preferences: ^0.5.12+2
   image_picker: ^0.6.7+12
+  barcode_scan: ^0.0.4
+  qr_flutter: ^1.1.5
 
   chpnt_repo_manager:
     path: chpnt_repo_manager

@@ -3,6 +3,7 @@ import 'package:feedback_repo/feedback_repo.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_participant/controllers/chkpoint_manager/chkpoint_man.dart';
 import 'package:tour_participant/controllers/feedback_manager/feedback_man.dart';
@@ -10,18 +11,84 @@ import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/localization/keys.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 import 'package:tour_participant/views/feedback_scene.dart';
+import 'package:flutter/services.dart';
+import 'package:barcode_scan/barcode_scan.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
-class CheckpointDetailScene extends StatelessWidget {
+class CheckpointDetailScene extends StatefulWidget {
   final String id;
-  final dateFormat = new DateFormat('yyyy-HH-dd HH:mm');
-
-  // ignore: avoid_init_to_null
-  List<FeedbackModel> feedbackList = null;
-  String userId = "";
-
   CheckpointDetailScene({Key key, @required this.id})
       : super(key: key ?? ArchSampleKeys.checkpointDetailsScene);
+
+  @override
+  _CheckpointDetailSceneState createState() => _CheckpointDetailSceneState();
+}
+
+class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
+  String result = "Please scan the QR code or Barcode";
+  // ignore: avoid_init_to_null
+  List<FeedbackModel> feedbackList = null;
+  final dateFormat = new DateFormat('yyyy-HH-dd HH:mm');
+  String userId = "";
+  String _result;
+
+  checkingValue() {
+    if (_result != null || _result != "") {
+      if (_result.contains("https") || _result.contains("http")) {
+        return _launchURL(_result);
+      } else {
+        Fluttertoast.showToast(
+            msg: "Invalide URL",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    } else {
+      return null;
+    }
+  }
+
+  _launchURL(String urlQRCode) async {
+    String url = urlQRCode;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future _scanQR() async {
+    try {
+      String qrResult = await BarcodeScanner.scan();
+      setState(() {
+        result = qrResult;
+        _result = qrResult;
+      });
+      checkingValue();
+    } on PlatformException catch (ex) {
+      if (ex.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          result = "Camera permission was denied";
+        });
+      } else {
+        setState(() {
+          result = "Unknown Error $ex";
+        });
+      }
+    } on FormatException {
+      setState(() {
+        result = "You pressed the back button before scanning anything";
+      });
+    } catch (ex) {
+      setState(() {
+        result = "Unknown Error $ex";
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +96,7 @@ class CheckpointDetailScene extends StatelessWidget {
       builder: (context, state) {
         final checkpoint = (state as CheckpointManLoadSuccess)
             .checkpoints
-            .firstWhere((checkpoint) => checkpoint.pointId == id,
+            .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
           appBar: AppBar(
@@ -180,9 +247,9 @@ class CheckpointDetailScene extends StatelessWidget {
                             Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: RaisedButton(
-                                  onPressed: null,
+                                  onPressed: _scanQR,
                                   color: Colors.redAccent,
-                                  child: Text('View More Info'),
+                                  child: Text('Scan QR'),
                                 ))
                           ],
                         )
@@ -235,7 +302,7 @@ class CheckpointDetailScene extends StatelessWidget {
                 onPressed: () async {
                   var totalRatingStar = await Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (_) => FeedBackScene(this.id)));
+                          builder: (_) => FeedBackScene(widget.id)));
                   if (totalRatingStar >= 0) {
                     BlocProvider.of<CheckpointManBloc>(context).add(
                         CheckpointManUpdated(model.copyWith(
