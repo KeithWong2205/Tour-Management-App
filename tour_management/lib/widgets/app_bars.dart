@@ -38,6 +38,13 @@ AppBar profileEditAppBar() {
   );
 }
 
+AppBar feedbackDetailsAppBar() {
+  return AppBar(
+    title: Text("Feedback Details", style: TextStyle(fontSize: 24)),
+    backgroundColor: Colors.redAccent,
+  );
+}
+
 AppBar feedbackAppBar() {
   return AppBar(
       title: Text(

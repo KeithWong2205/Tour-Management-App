@@ -11,7 +11,6 @@ import 'package:feedback_repo/feedback_repo.dart';
 import '../helper/SharedPreferencesHelper.dart';
 
 class FeedBackForm extends StatefulWidget {
-
   final String checkpointId;
 
   FeedBackForm(this.checkpointId);
@@ -23,10 +22,6 @@ class FeedBackForm extends StatefulWidget {
 class _FeedBackFormState extends State<FeedBackForm> {
   IconData _selectedIcon;
   double _rating;
-  String _guideCom;
-  String _topicCom;
-  String _speakerCom;
-  String _appCom;
   TextEditingController _guideCommentController = TextEditingController();
   TextEditingController _topicCommentController = TextEditingController();
   TextEditingController _speakerCommentController = TextEditingController();
@@ -38,148 +33,140 @@ class _FeedBackFormState extends State<FeedBackForm> {
   Widget build(BuildContext context) {
     return BlocBuilder<FeedbackManBloc, FeedbackManState>(
         builder: (context, state) {
-          return GestureDetector(
-            onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
-            child: Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Form(
-                  child: Center(
-                    child: ListView(
-                      children: [
-                        SizedBox(height: 10),
-                        Text(
-                          'Checkpoint Evaluation Form',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          color: Colors.red,
-                          height: 5,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          'Overall rating for the checkpoint',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Center(child: _ratingBar()),
-                        SizedBox(height: 15),
-                        Text(
-                          'Do you have any comments on the guides',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          decoration: feedbackFormFieldStyle(),
-                          controller: _guideCommentController,
-                          textInputAction: TextInputAction.next,
-                          maxLines: 5,
-                          validator: (val) {
-                            return val.trim().isEmpty
-                                ? 'Please give your thoughts'
-                                : null;
-                          },
-                          onSaved: (value) => _guideCom = value,
-                          onFieldSubmitted: (val) =>
-                              FocusScope.of(context).requestFocus(topicFocus),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          'Do you have any comments on the topic of this checkpoint?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          decoration: feedbackFormFieldStyle(),
-                          controller: _topicCommentController,
-                          textInputAction: TextInputAction.next,
-                          maxLines: 5,
-                          validator: (val) {
-                            return val.trim().isEmpty
-                                ? 'Please give your thoughts'
-                                : null;
-                          },
-                          onSaved: (value) => _topicCom = value,
-                          onFieldSubmitted: (val) =>
-                              FocusScope.of(context).requestFocus(speaker),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          'Do you have any comments on the speaker of this checkpoint',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          decoration: feedbackFormFieldStyle(),
-                          controller: _speakerCommentController,
-                          textInputAction: TextInputAction.next,
-                          maxLines: 5,
-                          validator: (val) {
-                            return val.trim().isEmpty
-                                ? 'Please give your thoughts'
-                                : null;
-                          },
-                          onSaved: (value) => _speakerCom = value,
-                          onFieldSubmitted: (val) =>
-                              FocusScope.of(context).requestFocus(app),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          'Do you have any comments for the app to improve',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          decoration: feedbackFormFieldStyle(),
-                          controller: _appCommentController,
-                          textInputAction: TextInputAction.next,
-                          maxLines: 5,
-                          validator: (val) {
-                            return val.trim().isEmpty
-                                ? 'Please give your thoughts'
-                                : null;
-                          },
-                          onSaved: (value) => _appCom = value,
-                          onFieldSubmitted: (val) =>
-                              FocusScope.of(context).requestFocus(new FocusNode()),
-                        ),
-                        RaisedButton(
-                          onPressed: () {
-                            AppDataHelper.getUser().then((user) {
-                              BlocProvider
-                                  .of<FeedbackManBloc>(context)
-                                  .add(FeedbackManAdded(
-                                  FeedbackModel(
-                                      checkpointID: widget.checkpointId,
-                                      userID: user.id,
-                                      userName: user.name,
-                                      commentOnGuide: _guideCommentController.text,
-                                      commentOnTopic: _topicCommentController.text,
-                                      commentOnSpeaker: _speakerCommentController.text,
-                                      commentOnTourApp: _appCommentController.text,
-                                      ratingOverall: _rating
-                                  )
-                              ));
-                              Navigator.pop(context, _rating);
-                            });
-                          },
-                          child: Text('Submit Form'),
-                        )
-                      ],
-                    ),
-                  )),
+      return GestureDetector(
+        onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
+        child: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Form(
+              child: Center(
+            child: ListView(
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  'Checkpoint Evaluation Form',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  color: Colors.red,
+                  height: 5,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Overall rating for the checkpoint',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(child: _ratingBar()),
+                SizedBox(height: 15),
+                Text(
+                  'Do you have any comments on the guides',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  decoration: feedbackFormFieldStyle(),
+                  controller: _guideCommentController,
+                  textInputAction: TextInputAction.next,
+                  maxLines: 5,
+                  validator: (val) {
+                    return val.trim().isEmpty
+                        ? 'Please give your thoughts'
+                        : null;
+                  },
+                  onFieldSubmitted: (val) =>
+                      FocusScope.of(context).requestFocus(topicFocus),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Do you have any comments on the topic of this checkpoint?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  decoration: feedbackFormFieldStyle(),
+                  controller: _topicCommentController,
+                  textInputAction: TextInputAction.next,
+                  maxLines: 5,
+                  validator: (val) {
+                    return val.trim().isEmpty
+                        ? 'Please give your thoughts'
+                        : null;
+                  },
+                  onFieldSubmitted: (val) =>
+                      FocusScope.of(context).requestFocus(speaker),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Do you have any comments on the speaker of this checkpoint',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  decoration: feedbackFormFieldStyle(),
+                  controller: _speakerCommentController,
+                  textInputAction: TextInputAction.next,
+                  maxLines: 5,
+                  validator: (val) {
+                    return val.trim().isEmpty
+                        ? 'Please give your thoughts'
+                        : null;
+                  },
+                  onFieldSubmitted: (val) =>
+                      FocusScope.of(context).requestFocus(app),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Do you have any comments for the app to improve',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  decoration: feedbackFormFieldStyle(),
+                  controller: _appCommentController,
+                  textInputAction: TextInputAction.next,
+                  maxLines: 5,
+                  validator: (val) {
+                    return val.trim().isEmpty
+                        ? 'Please give your thoughts'
+                        : null;
+                  },
+                  onFieldSubmitted: (val) =>
+                      FocusScope.of(context).requestFocus(new FocusNode()),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    AppDataHelper.getUser().then((user) {
+                      BlocProvider.of<FeedbackManBloc>(context).add(
+                          FeedbackManAdded(FeedbackModel(
+                              checkpointID: widget.checkpointId,
+                              userID: user.id,
+                              userName: user.name,
+                              commentOnGuide: _guideCommentController.text,
+                              commentOnTopic: _topicCommentController.text,
+                              commentOnSpeaker: _speakerCommentController.text,
+                              commentOnTourApp: _appCommentController.text,
+                              ratingOverall: _rating)));
+                      Navigator.pop(context, _rating);
+                    });
+                  },
+                  child: Text('Submit Form'),
+                )
+              ],
             ),
-          );
-        });
+          )),
+        ),
+      );
+    });
   }
 
   Widget _ratingBar() {

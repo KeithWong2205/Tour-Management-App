@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:grouped_list/grouped_list.dart';
 import 'package:tour_management/controllers/feedback_list/feedback_list.dart';
+import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/app_bars.dart';
+import 'package:tour_management/widgets/widgets.dart';
 
 class FeedBackCollectionScene extends StatelessWidget {
   @override
@@ -17,15 +21,59 @@ class ListFeedbacksManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FeedbackListBloc, FeedbackListState>(
+        // ignore: missing_return
         builder: (context, state) {
       if (state is FeedbackListLoaded) {
         final feedbackList = state.feedbackList;
-        return ListView.builder(
-          itemCount: feedbackList.length,
-          itemBuilder: (context, index) => Text(feedbackList[index].userName),
+        return GroupedListView(
+          elements: feedbackList,
+          groupBy: (element) => element.ratingOverall,
+          groupComparator: (value1, value2) => value1.compareTo(value2),
+          itemComparator: (element1, element2) =>
+              element1.userName.compareTo(element2.userName),
+          order: GroupedListOrder.ASC,
+          useStickyGroupSeparators: true,
+          groupSeparatorBuilder: (value) => Container(
+            color: Colors.grey,
+            height: 80,
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: RatingBarIndicator(
+                    rating: value,
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 10,
+                    direction: Axis.horizontal,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          itemBuilder: (context, element) {
+            return FeedbackItem(
+                onTap: () =>
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                      return FeedbackDetailScene(
+                        id: element.feedbackID,
+                      );
+                    })),
+                feedbackModel: element);
+          },
         );
       } else {
-        return Container();
+        return Center(child: CircularProgressIndicator());
       }
     });
   }

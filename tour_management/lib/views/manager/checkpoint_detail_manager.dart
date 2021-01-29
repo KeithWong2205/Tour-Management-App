@@ -87,7 +87,12 @@ class _CheckpointDetailSceneManagerState
                             Padding(
                                 padding: EdgeInsets.all(5),
                                 child: RatingBarIndicator(
-                                  rating: 4,
+                                  rating: (checkpoint.totalRatingStar /
+                                              checkpoint.totalRating) ==
+                                          null
+                                      ? 0
+                                      : checkpoint.totalRatingStar /
+                                          checkpoint.totalRating,
                                   itemBuilder: (context, index) => Icon(
                                     Icons.star,
                                     color: Colors.amber,
