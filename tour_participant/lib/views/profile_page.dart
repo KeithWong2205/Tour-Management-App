@@ -4,6 +4,7 @@ import 'package:tour_participant/controllers/authentication/auth.dart';
 import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 import 'package:tour_participant/views/views.dart';
+import 'package:tour_participant/widgets/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -27,6 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber[50],
+      drawer: MainDrawer(currentIndex: 2),
       appBar: AppBar(
         title: Text("Profile Panel", style: TextStyle(fontSize: 24)),
         backgroundColor: Colors.amber,

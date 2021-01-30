@@ -212,9 +212,6 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - barcode_scan (0.0.1):
-    - Flutter
-    - MTBBarcodeScanner
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -356,12 +353,13 @@ PODS:
   - image_picker (0.0.1):
     - Flutter
   - leveldb-library (1.22)
-  - MTBBarcodeScanner (5.0.11)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - "permission_handler (5.0.1+1)":
+    - Flutter
   - PromisesObjC (1.2.10)
   - Protobuf (3.13.0)
   - shared_preferences (0.0.1):
@@ -371,7 +369,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -380,6 +377,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
@@ -402,15 +400,12 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - leveldb-library
-    - MTBBarcodeScanner
     - nanopb
     - PromisesObjC
     - Protobuf
     - Toast
 
 EXTERNAL SOURCES:
-  barcode_scan:
-    :path: ".symlinks/plugins/barcode_scan/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   firebase_auth:
@@ -427,6 +422,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   url_launcher:
@@ -434,7 +431,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
-  barcode_scan: 33f586d02270046fc6559135038b34b5754eaa4f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   cloud_firestore: b8c0e15fa49dfff87c2817d288b577e5dca2df13
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
@@ -459,8 +455,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
-  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d

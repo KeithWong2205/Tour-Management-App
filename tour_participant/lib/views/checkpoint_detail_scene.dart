@@ -11,8 +11,8 @@ import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/localization/keys.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
 import 'package:tour_participant/views/feedback_scene.dart';
-import 'package:flutter/services.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
@@ -61,32 +61,16 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
     }
   }
 
-  Future _scanQR() async {
-    try {
-      String qrResult = await BarcodeScanner.scan();
+  Future _scan() async {
+    await Permission.camera.request();
+    String barcode = await scanner.scan();
+    if (barcode == null) {
+      print('nothing return.');
+    } else {
       setState(() {
-        result = qrResult;
-        _result = qrResult;
+        _result = barcode;
       });
       checkingValue();
-    } on PlatformException catch (ex) {
-      if (ex.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          result = "Camera permission was denied";
-        });
-      } else {
-        setState(() {
-          result = "Unknown Error $ex";
-        });
-      }
-    } on FormatException {
-      setState(() {
-        result = "You pressed the back button before scanning anything";
-      });
-    } catch (ex) {
-      setState(() {
-        result = "Unknown Error $ex";
-      });
     }
   }
 
@@ -247,7 +231,7 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                             Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: RaisedButton(
-                                  onPressed: _scanQR,
+                                  onPressed: () => _scan(),
                                   color: Colors.redAccent,
                                   child: Text('Scan QR'),
                                 ))

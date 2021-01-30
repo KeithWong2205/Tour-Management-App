@@ -6,6 +6,7 @@ class CheckpointPageStudent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: checkpointAppBar(),
+      drawer: MainDrawer(currentIndex: 0),
       body: ListCheckpointsStudent(),
     );
   }
