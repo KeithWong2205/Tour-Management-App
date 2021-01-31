@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/localization/keys.dart';
+import 'package:tour_management/styles/animation.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/widgets.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -28,6 +29,7 @@ class ListCheckPointsGuide extends StatelessWidget {
             order: GroupedListOrder.ASC,
             useStickyGroupSeparators: true,
             groupSeparatorBuilder: (value) => Container(
+                color: Colors.red[50],
                 height: 80,
                 child: Align(
                     alignment: Alignment.center,
@@ -53,12 +55,12 @@ class ListCheckPointsGuide extends StatelessWidget {
               return CheckpointOfGuide(
                 chkpoint: element,
                 onTap: () async {
-                  final removedTodo = await Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) {
-                    return CheckpointDetailSceneGuide(
-                      id: element.pointId,
-                    );
-                  }));
+                  final removedTodo = await Navigator.push(
+                      context,
+                      SlideLeftRoute(
+                          page: CheckpointDetailSceneGuide(
+                        id: element.pointId,
+                      )));
                   if (removedTodo != null) {
                     Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
                         key: ArchSampleKeys.snackbar,
@@ -86,6 +88,8 @@ class ListCheckPointsGuide extends StatelessWidget {
                   BlocProvider.of<CheckpointManBloc>(context).add(
                       CheckpointManUpdated(
                           element.copyWith(complete: !element.pointComplete)));
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Completion notification sent...')));
                 },
               );
             },

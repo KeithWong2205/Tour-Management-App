@@ -35,6 +35,7 @@ class _CheckpointDetailSceneGuideState
                 orElse: () => null);
         return Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             title: Text(
               'Checkpoint Details',
               style: TextStyle(fontSize: 24),
@@ -44,212 +45,228 @@ class _CheckpointDetailSceneGuideState
           body: checkpoint == null
               ? Container()
               : Container(
-                  alignment: Alignment.center,
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                            height: 250,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.all(9),
-                                child: Container(
-                                  child: checkpoint.pointPhotoUrl != null &&
-                                          checkpoint.pointPhotoUrl.isNotEmpty
-                                      ? Image.network(checkpoint.pointPhotoUrl,
-                                          fit: BoxFit.fill)
-                                      : Container(),
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      border: Border.all(color: Colors.black),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  width: 450,
-                                ),
-                              ),
-                            )),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: RaisedButton(
-                                color: Colors.green,
-                                onPressed: () {
-                                  AppDataHelper.getUser().then((user) {
-                                    if (user.role != 'manager')
-                                    {
-                                      String _message = "S.O.S Checkpoint [" +
-                                          checkpoint.pointName +
-                                          "] need help";
-                                      FCMHelper.sendMessage(
-                                          message: _message,
-                                          title: checkpoint.pointGroup,
-                                          to: '/topics/' + checkpoint.pointGroup);
-                                      FCMHelper.sendMessage(
-                                          message: _message,
-                                          title: checkpoint.pointGroup,
-                                          to: '/topics/' + FCMHelper.MANAGER_CHANNEL);
-                                    }
-                                  });
-                                },
-                                child: Text("SOS"),
-                              ),
+                  child: Column(
+                    children: <Widget>[
+                      Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Image(
+                            image: AssetImage('assets/chekgrad.jpg'),
+                            height: MediaQuery.of(context).size.height / 3,
+                            fit: BoxFit.fill,
+                          ),
+                          Positioned(
+                            child: Container(
+                              height: 300,
+                              child: checkpoint.pointPhotoUrl != null &&
+                                      checkpoint.pointPhotoUrl.isNotEmpty
+                                  ? Image.network(checkpoint.pointPhotoUrl,
+                                      fit: BoxFit.fill)
+                                  : Container(),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(10)),
+                              width: 450,
                             ),
-                            RaisedButton(
-                              onPressed: checkpoint.pointCheckin ? null : () {
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: RaisedButton(
+                              color: Colors.grey[200],
+                              onPressed: () {
                                 AppDataHelper.getUser().then((user) {
-                                  if (user.role != 'manager')
-                                    {
-                                      String _message = "Checkpoint [" +
+                                  if (user.role != 'manager') {
+                                    String _message = "S.O.S reported at: [" +
                                         checkpoint.pointName +
-                                        "] changed";
-                                      FCMHelper.sendMessage(
-                                          message: _message,
-                                          title: checkpoint.pointGroup,
-                                          to: '/topics/' + checkpoint.pointGroup);
-                                      FCMHelper.sendMessage(
-                                          message: _message,
-                                          title: checkpoint.pointGroup,
-                                          to: '/topics/' + FCMHelper.MANAGER_CHANNEL);
-                                    }
+                                        "] ";
+                                    FCMHelper.sendMessage(
+                                        message: _message,
+                                        title: checkpoint.pointGroup,
+                                        to: '/topics/' + checkpoint.pointGroup);
+                                    FCMHelper.sendMessage(
+                                        message: _message,
+                                        title: checkpoint.pointGroup,
+                                        to: '/topics/' +
+                                            FCMHelper.MANAGER_CHANNEL);
+                                  }
                                 });
-                                BlocProvider.of<CheckpointManBloc>(context)
-                                    .add(CheckpointManUpdated(checkpoint.copyWith(checkin: true))
-                                );
                               },
-                              child: Text("Check-in"),
-                            )
-                          ],
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.announcement,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Checkpoint Name',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointName,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                              child: Text(
+                                "SOS",
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 20),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.group,
-                              color: Colors.redAccent,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: RaisedButton(
+                              color: Colors.blue,
+                              onPressed: checkpoint.pointCheckin
+                                  ? null
+                                  : () {
+                                      AppDataHelper.getUser().then((user) {
+                                        if (user.role != 'manager') {
+                                          String _message = "Checked-in at: [" +
+                                              checkpoint.pointName +
+                                              "] ";
+                                          FCMHelper.sendMessage(
+                                              message: _message,
+                                              title: checkpoint.pointGroup,
+                                              to: '/topics/' +
+                                                  checkpoint.pointGroup);
+                                          FCMHelper.sendMessage(
+                                              message: _message,
+                                              title: checkpoint.pointGroup,
+                                              to: '/topics/' +
+                                                  FCMHelper.MANAGER_CHANNEL);
+                                        }
+                                      });
+                                      BlocProvider.of<CheckpointManBloc>(
+                                              context)
+                                          .add(CheckpointManUpdated(checkpoint
+                                              .copyWith(checkin: true)));
+                                    },
+                              child: Text("Check-in",
+                                  style: TextStyle(fontSize: 20)),
                             ),
-                            title: Text(
-                              'Attendee Group',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointGroup,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          )
+                        ],
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.announcement,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Checkpoint Name',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            checkpoint.pointName,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.add_location,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Location',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointLocal,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.group,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Attendee Group',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            checkpoint.pointGroup,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.calendar_today,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Date & Time',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              widget.dateFormat
-                                  .format(checkpoint.pointDatetime),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.add_location,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Location',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            checkpoint.pointLocal,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.event_note,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Note',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointNote,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.calendar_today,
+                            color: Colors.redAccent,
                           ),
-                        )
-                      ],
-                    ),
-                  )),
+                          title: Text(
+                            'Date & Time',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            widget.dateFormat.format(checkpoint.pointDatetime),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.event_note,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Note',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            checkpoint.pointNote,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )),
         );
       },
     );

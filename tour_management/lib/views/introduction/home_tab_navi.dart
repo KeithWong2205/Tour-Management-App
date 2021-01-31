@@ -39,10 +39,28 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
               SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'This app was designed and implemented with the purpose of enhancing the tour leading experience and assessment for both the guide and the manager staffs',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                child: Column(
+                  children: [
+                    Text(
+                      'This app was designed and implemented with the purpose of enhancing the tour leading experience and assessment for both the guide and the manager staffs',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Text(
+                      'You can manage your checkpoints, your groups. Chat with others and you also have a dedicated profile of your own.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      '<<-- Get started by tapping on the drawer on the left',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    )
+                  ],
                 ),
               ),
             ],

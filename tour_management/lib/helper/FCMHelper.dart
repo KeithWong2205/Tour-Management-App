@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class FCMHelper {
@@ -118,28 +117,25 @@ class FCMHelper {
 
   void handleShowLocalNotification(
       {BuildContext context, String message, String title}) {
-    Fluttertoast.showToast(
+/*     Fluttertoast.showToast(
         msg: title + ": " + message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0);
-    // showDialog(
-    //     context: context,
-    //     builder: (_) => new CupertinoAlertDialog(
-    //       actions: [
-    //         FlatButton(
-    //           child: Text("OK"),
-    //           onPressed: () => {
-    //             Navigator.of(context).pop()
-    //           },
-    //         ),
-    //       ],
-    //       content: new Text(message),
-    //       title: new Text(title),
-    //     )
-    // );
+        fontSize: 16.0); */
+    showDialog(
+        context: context,
+        builder: (_) => new CupertinoAlertDialog(
+              actions: [
+                FlatButton(
+                  child: Text("OK"),
+                  onPressed: () => {Navigator.of(context).pop()},
+                ),
+              ],
+              content: new Text(message),
+              title: new Text(title),
+            ));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tour_management/styles/animation.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/widgets.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -24,6 +25,7 @@ class ListGroupGuide extends StatelessWidget {
             order: GroupedListOrder.ASC,
             useStickyGroupSeparators: true,
             groupSeparatorBuilder: (value) => Container(
+                color: Colors.green[50],
                 height: 80,
                 child: Align(
                     alignment: Alignment.center,
@@ -48,10 +50,8 @@ class ListGroupGuide extends StatelessWidget {
             itemBuilder: (context, element) {
               return UserItem(
                   user: element,
-                  onTap: () => Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (_) {
-                        return UserDetailScene(id: element.id);
-                      })));
+                  onTap: () => Navigator.push(context,
+                      SlideLeftRoute(page: UserDetailScene(id: element.id))));
             },
           );
         } else if (state is GroupListLoadin) {
