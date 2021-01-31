@@ -27,7 +27,6 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
           body: feedback == null
               ? Container()
               : Container(
-                  alignment: Alignment.center,
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[

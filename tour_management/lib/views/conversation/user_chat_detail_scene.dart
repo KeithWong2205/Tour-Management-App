@@ -41,25 +41,30 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
             body: user == null
                 ? Container()
                 : Container(
-                    alignment: Alignment.center,
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Container(
-                            height: 300,
-                            child: (user.photoURL != null &&
-                                    user.photoURL.isNotEmpty)
-                                ? CircleAvatar(
-                                    radius: 250,
-                                    backgroundImage:
-                                        NetworkImage(user.photoURL),
-                                    backgroundColor: Colors.grey,
-                                  )
-                                : CircleAvatar(
-                                    radius: 250,
-                                    backgroundColor: Colors.grey,
-                                  ),
-                          ),
+                          Stack(alignment: Alignment.center, children: <Widget>[
+                            Image(
+                              image: AssetImage('assets/chatgrad.jpg'),
+                              height: MediaQuery.of(context).size.height / 3,
+                              fit: BoxFit.fill,
+                            ),
+                            Positioned(
+                              child: (user.photoURL != null &&
+                                      user.photoURL.isNotEmpty)
+                                  ? CircleAvatar(
+                                      radius: 150,
+                                      backgroundImage:
+                                          NetworkImage(user.photoURL),
+                                      backgroundColor: Colors.grey,
+                                    )
+                                  : CircleAvatar(
+                                      radius: 150,
+                                      backgroundColor: Colors.grey,
+                                    ),
+                            )
+                          ]),
                           SizedBox(height: 40),
                           Card(
                             child: ListTile(

@@ -125,7 +125,7 @@ class _AddEditSceneState extends State<AddEditScene> {
                     key: _formKey,
                     child: ListView(children: [
                       Container(
-                        height: 250,
+                        height: 300,
                         child: Align(
                           alignment: Alignment.center,
                           child: Padding(
@@ -148,11 +148,11 @@ class _AddEditSceneState extends State<AddEditScene> {
                                                 width: MediaQuery.of(context)
                                                     .size
                                                     .width,
-                                                height: 200,
+                                                height: 300,
                                                 fit: BoxFit.fill))
                                         : Container(
                                             width: 100,
-                                            height: 200,
+                                            height: 300,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey[200],
                                                 borderRadius:

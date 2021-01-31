@@ -5,7 +5,6 @@ import 'package:tour_management/helper/FirebaseStorageHelper.dart';
 import 'package:tour_management/models/users_repo/firestore_service.dart';
 import 'package:tour_management/models/users_repo/user_model.dart';
 import 'package:tour_management/styles/styles.dart';
-import 'package:tour_management/widgets/widgets.dart';
 
 class ProfileEditScene extends StatefulWidget {
   final UserModel _currentUserInfo;
@@ -109,7 +108,18 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber[50],
-      appBar: profileEditAppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text("Edit Profile", style: TextStyle(fontSize: 24)),
+        backgroundColor: Colors.amber,
+        actions: [
+          FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: Icon(Icons.cancel, size: 24, color: Colors.white),
+          )
+        ],
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
         child: Padding(
@@ -119,7 +129,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
             child: ListView(
               children: [
                 Container(
-                    height: 250,
+                    height: 320,
                     child: Align(
                         alignment: Alignment.center,
                         child: Padding(
@@ -129,16 +139,15 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                                   _showPicker(context);
                                 },
                                 child: CircleAvatar(
-                                    radius: 200,
-                                    backgroundColor: Color(0xffFDCF09),
+                                    radius: 300,
                                     child: _image != null
                                         ? ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(100),
                                             child: Image.file(
                                               _image,
-                                              width: 200,
-                                              height: 200,
+                                              width: 300,
+                                              height: 300,
                                               fit: BoxFit.fill,
                                             ),
                                           )
@@ -147,14 +156,19 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                                                 color: Colors.grey[200],
                                                 borderRadius:
                                                     BorderRadius.circular(100)),
-                                            width: 200,
-                                            height: 200,
-                                            child:CircleAvatar(
-                                              backgroundImage: NetworkImage(widget._currentUserInfo.photoURL),
-                                              radius: 200,
-                                            )
-                                    )))))),
-                SizedBox(height: 10),
+                                            width: 300,
+                                            height: 300,
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  widget._currentUserInfo
+                                                      .photoURL),
+                                              radius: 300,
+                                            ))))))),
+                Text('Tap on image to change',
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
+                SizedBox(height: 50),
                 TextFormField(
                   decoration: profileNameFieldStyle(),
                   textInputAction: TextInputAction.next,
@@ -165,7 +179,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(phoneField),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 50),
                 TextFormField(
                   decoration: profilePhoneFieldStyle(),
                   textInputAction: TextInputAction.next,

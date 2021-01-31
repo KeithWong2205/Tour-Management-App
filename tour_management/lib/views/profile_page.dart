@@ -4,6 +4,7 @@ import 'package:tour_management/controllers/authentication/auth.dart';
 import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/models/users_repo/firestore_service.dart';
 import 'package:tour_management/models/users_repo/user_model.dart';
+import 'package:tour_management/styles/animation.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/widgets.dart';
 
@@ -51,45 +52,71 @@ class _ProfilePageState extends State<ProfilePage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50),
-              Container(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
+              Stack(alignment: Alignment.center, children: <Widget>[
+                Image(
+                  height: MediaQuery.of(context).size.height / 3,
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/profgrad.jpg'),
+                ),
+                Positioned(
                   child: (_currentUser?.photoURL != null &&
                           _currentUser.photoURL.isNotEmpty)
                       ? CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          backgroundImage: NetworkImage(_currentUser.photoURL),
                           radius: 150,
+                          backgroundImage: NetworkImage(_currentUser.photoURL),
+                          backgroundColor: Colors.grey,
                         )
                       : CircleAvatar(
-                          backgroundColor: Colors.grey,
                           radius: 150,
+                          backgroundColor: Colors.grey,
                         ),
-                ),
-              ),
+                )
+              ]),
               SizedBox(
                 height: 20,
               ),
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text(_currentUser?.name ?? ""),
+                  leading: Icon(Icons.person, color: Colors.amber),
+                  title: Text("Name",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: Colors.amber)),
+                  subtitle: Text(_currentUser?.name ?? "",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
                 ),
               ),
               SizedBox(height: 10),
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.phone),
-                  title: Text(_currentUser?.phone ?? ""),
+                  leading: Icon(Icons.phone, color: Colors.amber),
+                  title: Text("Phone",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: Colors.amber)),
+                  subtitle: Text(_currentUser?.phone ?? "",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
                 ),
               ),
               SizedBox(height: 10),
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.mail),
-                  title: Text(_currentUser?.email ?? ""),
+                  leading: Icon(Icons.mail, color: Colors.amber),
+                  title: Text("Email",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: Colors.amber)),
+                  subtitle: Text(_currentUser?.email ?? "",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
                 ),
               )
             ],
@@ -98,12 +125,12 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(
-                  builder: (_) => ProfileEditScene(
-                        userModel: _currentUser,
-                      )))
-              .then((value) {
+          Navigator.push(
+              context,
+              SlideTopRoute(
+                  page: ProfileEditScene(
+                userModel: _currentUser,
+              ))).then((value) {
             FireStoreService().getUser(_currentUser.id).then((value) {
               AppDataHelper.setUser(value);
               setState(() {
