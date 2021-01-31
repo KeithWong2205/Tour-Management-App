@@ -31,6 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Colors.amber[50],
       drawer: ProfileDrawer(),
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Profile Panel", style: TextStyle(fontSize: 24)),
         backgroundColor: Colors.amber,
         actions: [

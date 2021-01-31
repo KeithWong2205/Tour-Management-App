@@ -106,6 +106,7 @@ class _AddEditSceneState extends State<AddEditScene> {
     return Scaffold(
         backgroundColor: Colors.red[50],
         appBar: AppBar(
+            centerTitle: true,
             automaticallyImplyLeading: false,
             actions: [
               FlatButton(

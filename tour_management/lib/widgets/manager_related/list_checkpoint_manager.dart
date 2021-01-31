@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tour_management/localization/keys.dart';
+import 'package:tour_management/styles/animation.dart';
 import 'package:tour_management/views/views.dart';
 import 'package:tour_management/widgets/widgets.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -60,12 +61,12 @@ class ListCheckPointsManager extends StatelessWidget {
                           .add(CheckpointManAdded(element))));
                 },
                 onTap: () async {
-                  final removedTodo = await Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) {
-                    return CheckpointDetailSceneManager(
-                      id: element.pointId,
-                    );
-                  }));
+                  final removedTodo = await Navigator.push(
+                      context,
+                      SlideLeftRoute(
+                          page: CheckpointDetailSceneManager(
+                        id: element.pointId,
+                      )));
                   if (removedTodo != null) {
                     Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
                         key: ArchSampleKeys.snackbar,

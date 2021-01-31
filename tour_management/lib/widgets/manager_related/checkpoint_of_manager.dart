@@ -52,7 +52,9 @@ class CheckpointOfManager extends StatelessWidget {
                   color: Colors.blueAccent),
             ),
             trailing: RatingBarIndicator(
-              rating: chkpoint.totalRatingStar / chkpoint.totalRating,
+              rating: (chkpoint.totalRatingStar / chkpoint.totalRating) == null
+                  ? 0
+                  : (chkpoint.totalRatingStar / chkpoint.totalRating),
               itemBuilder: (context, index) => Icon(
                 Icons.star,
                 color: Colors.amber,

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
+import 'package:tour_management/styles/animation.dart';
 import 'package:tour_management/views/conversation/helperfunctions.dart';
 import 'package:tour_management/views/conversation/search.dart';
 import 'package:tour_management/widgets/widgets.dart';
@@ -57,18 +58,18 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: chatAppBar(),
       drawer: ChatDrawer(),
       body: Container(
         child: chatRoomsList(),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.search),
+        label: Text("Search"),
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Search(currentUid: _userId)));
+              context, SlideTopRoute(page: Search(currentUid: _userId)));
         },
       ),
     );
@@ -109,13 +110,13 @@ class ChatRoomsTile extends StatelessWidget {
     }
     Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => Chat(
-                  chatRoomId: chatRoomId,
-                  receiverId: receiverId,
-                  receiverName: userName,
-                  receiverPhone: receiverPhone,
-                )));
+        SlideLeftRoute(
+            page: Chat(
+          chatRoomId: chatRoomId,
+          receiverId: receiverId,
+          receiverName: userName,
+          receiverPhone: receiverPhone,
+        )));
   }
 
   @override
@@ -132,10 +133,10 @@ class ChatRoomsTile extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: 30,
-                  width: 30,
+                  height: 50,
+                  width: 50,
                   decoration: BoxDecoration(
-                      color: Color(0xff007EF4),
+                      color: Colors.grey,
                       borderRadius: BorderRadius.circular(30)),
                   child: Center(
                     child: Text(userName.substring(0, 1),
@@ -148,15 +149,14 @@ class ChatRoomsTile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 12,
+                  width: 30,
                 ),
                 Text(userName,
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
-                        fontFamily: 'OverpassRegular',
-                        fontWeight: FontWeight.w300))
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold))
               ],
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tour_management/helper/AppDataHelper.dart';
 import 'package:tour_management/helper/FCMHelper.dart';
 import 'package:tour_management/models/users_repo/firebase_service.dart';
+import 'package:tour_management/styles/animation.dart';
 import 'package:tour_management/views/conversation/user_chat_detail_scene.dart';
 import 'package:tour_management/widgets/conversation_related/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -117,9 +118,8 @@ class _ChatState extends State<Chat> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            UserChatDetailScene(id: widget.receiverId)));
+                    SlideTopRoute(
+                        page: UserChatDetailScene(id: widget.receiverId)));
               },
               child: Icon(
                 Icons.info_rounded,
@@ -137,8 +137,8 @@ class _ChatState extends State<Chat> {
               alignment: Alignment.bottomCenter,
               width: MediaQuery.of(context).size.width,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                color: Color(0xff007EF4),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                color: Colors.blue[100],
                 child: Row(
                   children: [
                     Expanded(
@@ -149,7 +149,7 @@ class _ChatState extends State<Chat> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(24.0),
                                 border: Border.all(
-                                    color: Colors.white70, width: 2.0)),
+                                    color: Colors.black, width: 2.0)),
                             child: Center(
                               child: TextField(
                                 cursorWidth: 2.0,
@@ -173,16 +173,10 @@ class _ChatState extends State<Chat> {
                         addMessage();
                       },
                       child: Container(
-                          height: 42,
-                          width: 42,
+                          height: 50,
+                          width: 50,
                           decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0x36FFFFFF),
-                                    const Color(0x0FFFFFFF)
-                                  ],
-                                  begin: FractionalOffset.topLeft,
-                                  end: FractionalOffset.bottomRight),
+                              color: Colors.blue,
                               borderRadius: BorderRadius.circular(40)),
                           padding: EdgeInsets.all(12),
                           child: Image.asset(

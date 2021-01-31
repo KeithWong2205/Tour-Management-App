@@ -22,7 +22,9 @@ class _UserDetailSceneState extends State<UserDetailScene> {
             .users
             .firstWhere((user) => user.id == widget.id, orElse: null);
         return Scaffold(
+            backgroundColor: Colors.green[50],
             appBar: AppBar(
+              centerTitle: true,
               title: Text(
                 'User Detail',
                 style: TextStyle(fontSize: 24),
@@ -36,17 +38,25 @@ class _UserDetailSceneState extends State<UserDetailScene> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
+                          Stack(alignment: Alignment.center, children: <Widget>[
+                            Image(
+                              image: AssetImage('assets/groupgrad.jpg'),
+                            )
+                          ]),
                           Container(
                             height: 300,
-                            child: (user.photoURL != null && user.photoURL.isNotEmpty)
-                             ? CircleAvatar(
-                              radius: 250,
-                              backgroundImage: NetworkImage(user.photoURL),
-                              backgroundColor: Colors.grey,)
-                             : CircleAvatar(
-                              radius: 250,
-                              backgroundColor: Colors.grey,
-                            ),
+                            child: (user.photoURL != null &&
+                                    user.photoURL.isNotEmpty)
+                                ? CircleAvatar(
+                                    radius: 250,
+                                    backgroundImage:
+                                        NetworkImage(user.photoURL),
+                                    backgroundColor: Colors.grey,
+                                  )
+                                : CircleAvatar(
+                                    radius: 250,
+                                    backgroundColor: Colors.grey,
+                                  ),
                           ),
                           SizedBox(height: 40),
                           Card(

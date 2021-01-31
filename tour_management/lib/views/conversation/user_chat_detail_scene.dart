@@ -22,7 +22,16 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
             .users
             .firstWhere((user) => user.id == widget.id, orElse: null);
         return Scaffold(
+            backgroundColor: Colors.blue[50],
             appBar: AppBar(
+              automaticallyImplyLeading: false,
+              actions: [
+                FlatButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Icon(Icons.cancel, size: 24, color: Colors.white),
+                )
+              ],
+              centerTitle: true,
               title: Text(
                 'User Detail',
                 style: TextStyle(fontSize: 24),
