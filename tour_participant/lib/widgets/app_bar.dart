@@ -25,10 +25,3 @@ AppBar feedbackAppBar() {
       ),
       backgroundColor: Colors.redAccent);
 }
-
-AppBar profileEditAppBar() {
-  return AppBar(
-    title: Text("Edit Profile", style: TextStyle(fontSize: 24)),
-    backgroundColor: Colors.amber,
-  );
-}

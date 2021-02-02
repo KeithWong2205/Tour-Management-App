@@ -109,7 +109,18 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber[50],
-      appBar: profileEditAppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text("Edit Profile", style: TextStyle(fontSize: 24)),
+        backgroundColor: Colors.amber,
+        actions: [
+          FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: Icon(Icons.cancel, size: 24, color: Colors.white),
+          )
+        ],
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
         child: Padding(
