@@ -267,7 +267,7 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                 if (state.props.isEmpty) {
                   feedbackList = List();
                 } else {
-                  feedbackList = state.checkpoints;
+                  feedbackList = state.fbackLists;
                 }
               }
               if (feedbackList == null) {

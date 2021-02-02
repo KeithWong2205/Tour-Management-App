@@ -8,7 +8,7 @@ import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 //Checkpoint business bloc
 class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
   final FirebaseFeedbackService firebaseFeedbackService;
-  StreamSubscription _checkpointSubscription;
+  StreamSubscription _feedbackSubscription;
   FeedbackManBloc({@required this.firebaseFeedbackService})
       : assert(firebaseFeedbackService != null),
         super(FeedbackManLoading());
@@ -36,8 +36,8 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
   }
 
   Stream<FeedbackManState> mapFeedbackManLoaded({String groupId}) async* {
-    _checkpointSubscription?.cancel();
-    _checkpointSubscription = firebaseFeedbackService
+    _feedbackSubscription?.cancel();
+    _feedbackSubscription = firebaseFeedbackService
         .feedbackList()
         .listen((feedbackList) => add(FeedbackListManUpdate(feedbackList)));
   }
@@ -63,7 +63,7 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
     @override
     // ignore: unused_element
     Future<void> close() {
-      _checkpointSubscription?.cancel();
+      _feedbackSubscription?.cancel();
       return super.close();
     }
   }

@@ -11,21 +11,21 @@ class FeedbackManState extends Equatable {
 //Loading state
 class FeedbackManLoading extends FeedbackManState {
   @override
-  String toString() => 'Checkpoints are loading';
+  String toString() => 'Feedbacks are loading';
 }
 
 //Load Success
 class FeedbackManLoadSuccess extends FeedbackManState {
-  final List<FeedbackModel> checkpoints;
-  const FeedbackManLoadSuccess([this.checkpoints = const []]);
+  final List<FeedbackModel> fbackLists;
+  const FeedbackManLoadSuccess([this.fbackLists = const []]);
   @override
-  List<Object> get props => [checkpoints];
+  List<Object> get props => [fbackLists];
   @override
-  String toString() => 'Checkpoints loaded {checkpoints: $checkpoints}';
+  String toString() => 'Feedbacks loaded {feedbacks: $fbackLists}';
 }
 
 //Load Failed
 class FeedbackManLoadFail extends FeedbackManState {
   @override
-  String toString() => 'Checkpoints failed to load';
+  String toString() => 'Feedbacks failed to load';
 }
