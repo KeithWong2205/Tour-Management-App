@@ -112,7 +112,7 @@ class _CheckpointDetailSceneGuideState
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: RaisedButton(
                               color: Colors.blue,
-                              onPressed: checkpoint.pointCheckin
+                              onPressed: checkpoint.pointCheckin == true
                                   ? null
                                   : () {
                                       AppDataHelper.getUser().then((user) {

@@ -276,7 +276,8 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
               } else {
                 for (var index = 0; index < feedbackList.length; index++) {
                   var feedback = feedbackList[index];
-                  if (feedback.userID == snapshot.data.id) {
+                  if (feedback.userID == snapshot.data.id &&
+                      feedback.checkpointID == widget.id) {
                     disableRateCheckpoint = true;
                   }
                 }
