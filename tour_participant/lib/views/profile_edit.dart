@@ -119,7 +119,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             child: ListView(
               children: [
                 Container(
-                    height: 250,
+                    height: 320,
                     child: Align(
                         alignment: Alignment.center,
                         child: Padding(
@@ -129,7 +129,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                   _showPicker(context);
                                 },
                                 child: CircleAvatar(
-                                    radius: 200,
+                                    radius: 300,
                                     backgroundColor: Color(0xffFDCF09),
                                     child: _image != null
                                         ? ClipRRect(
@@ -137,23 +137,33 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                                 BorderRadius.circular(100),
                                             child: Image.file(
                                               _image,
-                                              width: 200,
-                                              height: 200,
+                                              width: 300,
+                                              height: 300,
                                               fit: BoxFit.fill,
                                             ),
                                           )
                                         : Container(
                                             decoration: BoxDecoration(
-                                                color: Colors.grey[200],
+                                                color: Colors.blueGrey[50],
                                                 borderRadius:
                                                     BorderRadius.circular(100)),
-                                            width: 200,
-                                            height: 200,
-                                            child: Icon(
-                                              Icons.camera_alt,
-                                              color: Colors.grey[800],
+                                            width: 300,
+                                            height: 300,
+                                            child: CircleAvatar(
+                                              child: widget._currUserInfo
+                                                          .photoURL !=
+                                                      null
+                                                  ? NetworkImage(widget
+                                                      ._currUserInfo.photoURL)
+                                                  : Icon(
+                                                      Icons.camera,
+                                                      color: Colors.black,
+                                                      size: 26,
+                                                    ),
+                                              radius: 300,
+                                              backgroundColor: Colors.grey,
                                             ))))))),
-                SizedBox(height: 10),
+                SizedBox(height: 50),
                 TextFormField(
                   decoration: profileNameFieldStyle(),
                   textInputAction: TextInputAction.next,
@@ -164,7 +174,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(phoneField),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 50),
                 TextFormField(
                   decoration: profilePhoneFieldStyle(),
                   textInputAction: TextInputAction.next,

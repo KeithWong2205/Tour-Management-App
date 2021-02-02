@@ -10,6 +10,7 @@ import 'package:tour_participant/controllers/feedback_manager/feedback_man.dart'
 import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/localization/keys.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
+import 'package:tour_participant/styles/animation.dart';
 import 'package:tour_participant/views/feedback_scene.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
@@ -83,6 +84,7 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
             .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
+          backgroundColor: Colors.red[50],
           appBar: AppBar(
             title: Text(
               'Checkpoint Details',
@@ -93,153 +95,157 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
           body: checkpoint == null
               ? Container()
               : Container(
-                  alignment: Alignment.center,
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                            height: 250,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.all(9),
-                                child: Container(
-                                  child: checkpoint.pointPhotoUrl != null &&
-                                          checkpoint.pointPhotoUrl.isNotEmpty
-                                      ? Image.network(checkpoint.pointPhotoUrl,
-                                          fit: BoxFit.fill)
-                                      : Container(),
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      border: Border.all(color: Colors.black),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  width: 450,
-                                ),
-                              ),
-                            )),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.announcement,
-                              color: Colors.redAccent,
+                  child: Column(
+                    children: <Widget>[
+                      Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Image(
+                            image: AssetImage('assets/chekgrad.jpg'),
+                            height: MediaQuery.of(context).size.height / 3,
+                            fit: BoxFit.fill,
+                          ),
+                          Positioned(
+                            child: Container(
+                              height: 300,
+                              child: checkpoint.pointPhotoUrl != null &&
+                                      checkpoint.pointPhotoUrl.isNotEmpty
+                                  ? Image.network(checkpoint.pointPhotoUrl,
+                                      fit: BoxFit.fill)
+                                  : Container(),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(10)),
+                              width: 450,
                             ),
-                            title: Text(
-                              'Checkpoint Name',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointName,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.announcement,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Checkpoint Name',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            checkpoint.pointName,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.group,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Attendee Group',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointGroup,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.group,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Attendee Group',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            checkpoint.pointGroup,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.add_location,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Location',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              checkpoint.pointLocal,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.add_location,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Location',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            checkpoint.pointLocal,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.calendar_today,
-                              color: Colors.redAccent,
-                            ),
-                            title: Text(
-                              'Date & Time',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.redAccent),
-                            ),
-                            subtitle: Text(
-                              dateFormat.format(checkpoint.pointDatetime),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.calendar_today,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Date & Time',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
+                          ),
+                          subtitle: Text(
+                            dateFormat.format(checkpoint.pointDatetime),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: buildRateCheckpointButton(
-                                  context: context, model: checkpoint),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: RaisedButton(
-                                  onPressed: () => _scan(),
-                                  color: Colors.redAccent,
-                                  child: Text('Scan QR'),
-                                ))
-                          ],
-                        )
-                      ],
-                    ),
-                  )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: buildRateCheckpointButton(
+                                context: context, model: checkpoint),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: RaisedButton(
+                                onPressed: () => _scan(),
+                                color: Colors.blue,
+                                child: Text('QR Scanner'),
+                              ))
+                        ],
+                      )
+                    ],
+                  ),
+                )),
         );
       },
     );
@@ -278,15 +284,14 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
               if (disableRateCheckpoint) {
                 return RaisedButton(
                   onPressed: null,
-                  color: Colors.redAccent,
+                  color: Colors.amber,
                   child: Text('Rate checkpoint'),
                 );
               }
               return RaisedButton(
                 onPressed: () async {
-                  var totalRatingStar = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (_) => FeedBackScene(widget.id)));
+                  var totalRatingStar = await Navigator.push(
+                      context, SlideTopRoute(page: FeedBackScene(widget.id)));
                   if (totalRatingStar >= 0) {
                     BlocProvider.of<CheckpointManBloc>(context).add(
                         CheckpointManUpdated(model.copyWith(
@@ -295,7 +300,7 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                                 model.totalRatingStar + totalRatingStar)));
                   }
                 },
-                color: Colors.redAccent,
+                color: Colors.amber,
                 child: Text('Rate checkpoint'),
               );
             });

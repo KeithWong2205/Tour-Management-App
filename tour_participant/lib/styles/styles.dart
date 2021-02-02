@@ -84,7 +84,7 @@ InputDecoration profileNameFieldStyle() {
       fillColor: Colors.white.withOpacity(0.3),
       icon: Icon(
         Icons.person,
-        color: Colors.black,
+        color: Colors.amber,
       ),
       hintText: 'Please give a brief name',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
@@ -96,7 +96,7 @@ InputDecoration profilePhoneFieldStyle() {
       fillColor: Colors.white.withOpacity(0.3),
       icon: Icon(
         Icons.phone,
-        color: Colors.black,
+        color: Colors.amber,
       ),
       hintText: 'Please give a phone number',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));

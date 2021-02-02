@@ -153,16 +153,23 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                                           )
                                         : Container(
                                             decoration: BoxDecoration(
-                                                color: Colors.grey[200],
+                                                color: Colors.blueGrey[50],
                                                 borderRadius:
                                                     BorderRadius.circular(100)),
                                             width: 300,
                                             height: 300,
                                             child: CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  widget._currentUserInfo
-                                                      .photoURL),
+                                              child: widget._currentUserInfo
+                                                          .photoURL !=
+                                                      null
+                                                  ? NetworkImage(widget
+                                                      ._currentUserInfo
+                                                      .photoURL)
+                                                  : Icon(Icons.camera,
+                                                      color: Colors.black,
+                                                      size: 26),
                                               radius: 300,
+                                              backgroundColor: Colors.grey,
                                             ))))))),
                 Text('Tap on image to change',
                     textAlign: TextAlign.center,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tour_participant/localization/keys.dart';
+import 'package:tour_participant/styles/animation.dart';
 import 'package:tour_participant/views/views.dart';
 import 'package:tour_participant/widgets/widgets.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -26,6 +27,7 @@ class ListCheckpointsStudent extends StatelessWidget {
             order: GroupedListOrder.ASC,
             useStickyGroupSeparators: true,
             groupSeparatorBuilder: (value) => Container(
+                color: Colors.red[50],
                 height: 80,
                 child: Align(
                     alignment: Alignment.center,
@@ -51,12 +53,12 @@ class ListCheckpointsStudent extends StatelessWidget {
               return CheckpointofStudent(
                 chkpoint: element,
                 onTap: () async {
-                  final removedTodo = await Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) {
-                    return CheckpointDetailScene(
-                      id: element.pointId,
-                    );
-                  }));
+                  final removedTodo = await Navigator.push(
+                      context,
+                      SlideLeftRoute(
+                          page: CheckpointDetailScene(
+                        id: element.pointId,
+                      )));
                   if (removedTodo != null) {
                     Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
                         key: ArchSampleKeys.snackbar,

@@ -122,7 +122,7 @@ class _ChatState extends State<Chat> {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                color: Color(0xff007EF4),
+                color: Colors.blue[100],
                 child: Row(
                   children: [
                     Expanded(
@@ -157,16 +157,10 @@ class _ChatState extends State<Chat> {
                         addMessage();
                       },
                       child: Container(
-                          height: 42,
-                          width: 42,
+                          height: 50,
+                          width: 50,
                           decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0x36FFFFFF),
-                                    const Color(0x0FFFFFFF)
-                                  ],
-                                  begin: FractionalOffset.topLeft,
-                                  end: FractionalOffset.bottomRight),
+                              color: Colors.blue,
                               borderRadius: BorderRadius.circular(40)),
                           padding: EdgeInsets.all(12),
                           child: Image.asset(

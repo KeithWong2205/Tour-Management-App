@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tour_participant/controllers/authentication/auth.dart';
 import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/models/student_repo/student_repo.dart';
+import 'package:tour_participant/styles/animation.dart';
 import 'package:tour_participant/views/views.dart';
 import 'package:tour_participant/widgets/widgets.dart';
 
@@ -49,42 +50,69 @@ class _ProfilePageState extends State<ProfilePage> {
         child: SingleChildScrollView(
             child: Column(
           children: <Widget>[
-            SizedBox(height: 50),
-            Container(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: (_currUser?.photoURL != null &&
-                          _currUser.photoURL.isNotEmpty)
-                      ? CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          backgroundImage: NetworkImage(_currUser.photoURL),
-                          radius: 150,
-                        )
-                      : CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 150,
-                        ),
-                )),
+            Stack(alignment: Alignment.center, children: <Widget>[
+              Image(
+                height: MediaQuery.of(context).size.height / 3,
+                fit: BoxFit.fill,
+                image: AssetImage('assets/profgrad.jpg'),
+              ),
+              Positioned(
+                child: (_currUser?.photoURL != null &&
+                        _currUser.photoURL.isNotEmpty)
+                    ? CircleAvatar(
+                        radius: 150,
+                        backgroundImage: NetworkImage(_currUser.photoURL),
+                        backgroundColor: Colors.grey,
+                      )
+                    : CircleAvatar(
+                        radius: 150,
+                        backgroundColor: Colors.grey,
+                      ),
+              )
+            ]),
             SizedBox(height: 20),
             Card(
               child: ListTile(
-                leading: Icon(Icons.person),
-                title: Text(_currUser?.name ?? ""),
+                leading: Icon(Icons.person, color: Colors.amber),
+                title: Text("Name",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: Colors.amber)),
+                subtitle: Text(_currUser?.name ?? "",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
             SizedBox(height: 10),
             Card(
               child: ListTile(
-                leading: Icon(Icons.phone),
-                title: Text(_currUser?.phone ?? ""),
+                leading: Icon(Icons.phone, color: Colors.amber),
+                title: Text("Phone",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: Colors.amber)),
+                subtitle: Text(_currUser?.phone ?? "",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
             SizedBox(height: 10),
             Card(
               child: ListTile(
-                leading: Icon(Icons.mail),
-                title: Text(_currUser?.email ?? ""),
+                leading: Icon(Icons.mail, color: Colors.amber),
+                title: Text("Email",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: Colors.amber)),
+                subtitle: Text(_currUser?.email ?? "",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold)),
               ),
             )
           ],
@@ -92,12 +120,12 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(
-                  builder: (_) => ProfileEditPage(
-                        userModel: _currUser,
-                      )))
-              .then((value) {
+          Navigator.push(
+              context,
+              SlideTopRoute(
+                  page: ProfileEditPage(
+                userModel: _currUser,
+              ))).then((value) {
             FireStoreService().getStudent(_currUser.id).then((value) {
               AppDataHelper.setUser(value);
               setState(() {

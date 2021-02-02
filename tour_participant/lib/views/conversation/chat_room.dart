@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tour_participant/models/student_repo/firebase_student_service.dart';
+import 'package:tour_participant/styles/animation.dart';
 import 'package:tour_participant/views/conversation/chat.dart';
 import 'package:tour_participant/views/conversation/helperfunctions.dart';
 import 'package:tour_participant/views/conversation/search.dart';
@@ -35,7 +36,8 @@ class _ChatRoomState extends State<ChatRoom> {
                     isCurrentUser:
                         snapshot.data.documents[index].data()['id'] == _userId,
                     receiverId: snapshot.data.documents[index].data()['id'],
-                    receiverPhone: snapshot.data.documents[index].data()['phone'],
+                    receiverPhone:
+                        snapshot.data.documents[index].data()['phone'],
                   );
                 })
             : Container();
@@ -57,8 +59,11 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: chatAppBar(),
-      drawer: MainDrawer(currentIndex: 1,),
+      drawer: MainDrawer(
+        currentIndex: 1,
+      ),
       body: Container(
         child: chatRoomsList(),
       ),
@@ -66,9 +71,7 @@ class _ChatRoomState extends State<ChatRoom> {
         child: Icon(Icons.search),
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Search(currentUid: _userId)));
+              context, SlideTopRoute(page: Search(currentUid: _userId)));
         },
       ),
     );
@@ -132,10 +135,10 @@ class ChatRoomsTile extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: 30,
-                  width: 30,
+                  height: 50,
+                  width: 50,
                   decoration: BoxDecoration(
-                      color: Color(0xff007EF4),
+                      color: Colors.grey,
                       borderRadius: BorderRadius.circular(30)),
                   child: Center(
                     child: Text(userName.substring(0, 1),
@@ -148,15 +151,14 @@ class ChatRoomsTile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 12,
+                  width: 30,
                 ),
                 Text(userName,
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
-                        fontFamily: 'OverpassRegular',
-                        fontWeight: FontWeight.w300))
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold))
               ],
             ),
           ),

@@ -18,6 +18,7 @@ AppBar checkpointAppBar() {
 
 AppBar feedbackAppBar() {
   return AppBar(
+      automaticallyImplyLeading: false,
       title: Text(
         'Feedback Panel',
         style: TextStyle(fontSize: 24),

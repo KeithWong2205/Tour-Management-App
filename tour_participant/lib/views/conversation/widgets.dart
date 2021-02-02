@@ -9,7 +9,7 @@ Widget appBarMain(BuildContext context,
     ),
     actions: actions,
     elevation: 0.0,
-    centerTitle: false,
+    centerTitle: true,
   );
 }
 
@@ -28,11 +28,12 @@ TextStyle simpleTextStyle() {
 }
 
 TextStyle biggerTextStyle() {
-  return TextStyle(color: Colors.white, fontSize: 17);
+  return TextStyle(color: Colors.white, fontSize: 24);
 }
 
 AppBar chatAppBar() {
   return AppBar(
+      centerTitle: true,
       title: Text(
         'Chat Panel',
         style: TextStyle(fontSize: 24),
