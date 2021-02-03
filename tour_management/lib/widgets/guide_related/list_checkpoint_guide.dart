@@ -25,7 +25,7 @@ class ListCheckPointsGuide extends StatelessWidget {
             groupBy: (element) => element.pointGroup,
             groupComparator: (value1, value2) => value1.compareTo(value2),
             itemComparator: (element1, element2) =>
-                element1.pointName.compareTo(element2.pointName),
+                element1.pointDatetime.compareTo(element2.pointDatetime),
             order: GroupedListOrder.ASC,
             useStickyGroupSeparators: true,
             groupSeparatorBuilder: (value) => Container(
