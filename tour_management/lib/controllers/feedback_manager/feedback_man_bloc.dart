@@ -24,6 +24,9 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
     if (event is FeedbackManAdded) {
       yield* mapFeedbackManAdded(event);
     }
+    if (event is FeedbackListManUpdate) {
+      yield* mapGroupManListUpdated(event);
+    }
   }
 
   Stream<FeedbackManState> mapFeedbackManLoaded({String groupId}) async* {
@@ -35,6 +38,10 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
 
   Stream<FeedbackManState> mapFeedbackManAdded(FeedbackManAdded event) async* {
     firebaseFeedbackService.addNewFeedback(event.feedback);
+  }
+
+  Stream<FeedbackManState> mapGroupManListUpdated(FeedbackListManUpdate event) async* {
+    yield FeedbackManLoadSuccess(event.updatedList);
   }
 
   @override

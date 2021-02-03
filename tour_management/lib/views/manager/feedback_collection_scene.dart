@@ -21,7 +21,6 @@ class ListFeedbacksManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FeedbackListBloc, FeedbackListState>(
-        // ignore: missing_return
         builder: (context, state) {
       if (state is FeedbackListLoaded) {
         final feedbackList = state.feedbackList;
