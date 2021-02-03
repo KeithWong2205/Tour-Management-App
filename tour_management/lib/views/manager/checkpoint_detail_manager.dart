@@ -93,7 +93,7 @@ class _CheckpointDetailSceneManagerState
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                padding: EdgeInsets.symmetric(horizontal: 5),
                                 child: RatingBarIndicator(
                                   rating: (checkpoint.totalRatingStar /
                                               checkpoint.totalRating) ==
@@ -109,7 +109,7 @@ class _CheckpointDetailSceneManagerState
                                   itemSize: 50,
                                 )),
                             Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                padding: EdgeInsets.symmetric(horizontal: 5),
                                 child: RaisedButton(
                                   color: Colors.red,
                                   textColor: Colors.white,
