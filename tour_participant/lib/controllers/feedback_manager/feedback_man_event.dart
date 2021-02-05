@@ -31,14 +31,6 @@ class FeedbackManUpdated extends FeedbackManEvent {
   List<Object> get props => [updated];
 }
 
-//Event on delete checkpoint
-class FeedbackManDelete extends FeedbackManEvent {
-  final FeedbackModel deleted;
-  const FeedbackManDelete(this.deleted);
-  @override
-  List<Object> get props => [deleted];
-}
-
 //Event on update list of checkpoints
 class FeedbackListManUpdate extends FeedbackManEvent {
   final List<FeedbackModel> updatedList;

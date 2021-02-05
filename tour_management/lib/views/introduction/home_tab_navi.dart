@@ -27,6 +27,7 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
                     height: MediaQuery.of(context).size.height / 3,
                     fit: BoxFit.fill,
                     image: AssetImage('assets/cover.jpg'),
+                    width: MediaQuery.of(context).size.width,
                   )
                 ],
               ),

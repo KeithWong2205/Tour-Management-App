@@ -22,10 +22,10 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Image(
-                    height: MediaQuery.of(context).size.height / 3,
-                    fit: BoxFit.fill,
-                    image: AssetImage('assets/welcome.png'),
-                  )
+                      height: MediaQuery.of(context).size.height / 3,
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/welcome.png'),
+                      width: MediaQuery.of(context).size.width)
                 ],
               ),
               SizedBox(height: 20),

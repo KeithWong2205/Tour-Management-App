@@ -27,9 +27,6 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
     if (event is FeedbackManUpdated) {
       yield* mapFeedbackManUpdated(event);
     }
-    if (event is FeedbackManDelete) {
-      yield* mapFeedbackManDelete(event);
-    }
     if (event is FeedbackListManUpdate) {
       yield* mapFeedbackListManUpdate(event);
     }
@@ -48,12 +45,7 @@ class FeedbackManBloc extends Bloc<FeedbackManEvent, FeedbackManState> {
 
   Stream<FeedbackManState> mapFeedbackManUpdated(
       FeedbackManUpdated event) async* {
-    firebaseFeedbackService.updateCheckpoint(event.updated);
-  }
-
-  Stream<FeedbackManState> mapFeedbackManDelete(
-      FeedbackManDelete event) async* {
-    firebaseFeedbackService.deleteCheckpoint(event.deleted);
+    firebaseFeedbackService.updateFeedback(event.updated);
   }
 
   Stream<FeedbackManState> mapFeedbackListManUpdate(

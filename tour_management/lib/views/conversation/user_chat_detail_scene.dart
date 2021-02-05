@@ -49,18 +49,23 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
                               image: AssetImage('assets/chatgrad.jpg'),
                               height: MediaQuery.of(context).size.height / 3,
                               fit: BoxFit.fill,
+                              width: MediaQuery.of(context).size.width,
                             ),
                             Positioned(
                               child: (user.photoURL != null &&
                                       user.photoURL.isNotEmpty)
                                   ? CircleAvatar(
-                                      radius: 150,
+                                      radius:
+                                          MediaQuery.of(context).size.height /
+                                              7,
                                       backgroundImage:
                                           NetworkImage(user.photoURL),
                                       backgroundColor: Colors.grey,
                                     )
                                   : CircleAvatar(
-                                      radius: 150,
+                                      radius:
+                                          MediaQuery.of(context).size.height /
+                                              7,
                                       backgroundColor: Colors.grey,
                                     ),
                             )

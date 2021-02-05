@@ -70,7 +70,8 @@ class _CheckpointDetailSceneManagerState
                             ),
                             Positioned(
                               child: Container(
-                                height: 300,
+                                height:
+                                    MediaQuery.of(context).size.height / 3.5,
                                 child: checkpoint.pointPhotoUrl != null &&
                                         checkpoint.pointPhotoUrl.isNotEmpty
                                     ? Image.network(checkpoint.pointPhotoUrl,
@@ -80,7 +81,8 @@ class _CheckpointDetailSceneManagerState
                                     color: Colors.grey,
                                     border: Border.all(color: Colors.black),
                                     borderRadius: BorderRadius.circular(10)),
-                                width: 450,
+                                width:
+                                    MediaQuery.of(context).size.width * (5 / 6),
                               ),
                             )
                           ],

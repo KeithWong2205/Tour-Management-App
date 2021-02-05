@@ -55,17 +55,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: MediaQuery.of(context).size.height / 3,
                 fit: BoxFit.fill,
                 image: AssetImage('assets/profgrad.jpg'),
+                width: MediaQuery.of(context).size.width,
               ),
               Positioned(
                 child: (_currUser?.photoURL != null &&
                         _currUser.photoURL.isNotEmpty)
                     ? CircleAvatar(
-                        radius: 150,
+                        radius: MediaQuery.of(context).size.height / 7,
                         backgroundImage: NetworkImage(_currUser.photoURL),
                         backgroundColor: Colors.grey,
                       )
                     : CircleAvatar(
-                        radius: 150,
+                        radius: MediaQuery.of(context).size.height / 7,
                         backgroundColor: Colors.grey,
                       ),
               )

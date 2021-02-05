@@ -62,12 +62,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: (_currentUser?.photoURL != null &&
                           _currentUser.photoURL.isNotEmpty)
                       ? CircleAvatar(
-                          radius: 150,
+                          radius: MediaQuery.of(context).size.height / 7,
                           backgroundImage: NetworkImage(_currentUser.photoURL),
                           backgroundColor: Colors.grey,
                         )
                       : CircleAvatar(
-                          radius: 150,
+                          radius: MediaQuery.of(context).size.height / 7,
                           backgroundColor: Colors.grey,
                         ),
                 )
