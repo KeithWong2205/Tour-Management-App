@@ -27,21 +27,23 @@ class ListFeedbacksManager extends StatelessWidget {
         return GroupedListView(
           elements: feedbackList,
           groupBy: (element) => element.ratingOverall,
-          groupComparator: (value1, value2) => value1.compareTo(value2),
+          groupComparator: (value1, value2) => value2.compareTo(value1),
           itemComparator: (element1, element2) =>
               element1.userName.compareTo(element2.userName),
           order: GroupedListOrder.ASC,
           useStickyGroupSeparators: true,
           groupSeparatorBuilder: (value) => Container(
-            color: Colors.grey,
+            color: Colors.red[50],
             height: 80,
             child: Align(
               alignment: Alignment.center,
               child: Container(
-                width: 200,
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width / 2,
+                height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
-                  border: Border.all(color: Colors.grey),
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey[100]),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: Padding(
@@ -53,7 +55,7 @@ class ListFeedbacksManager extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     itemCount: 5,
-                    itemSize: 10,
+                    itemSize: 30,
                     direction: Axis.horizontal,
                   ),
                 ),
