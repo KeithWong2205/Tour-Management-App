@@ -5,14 +5,14 @@ class SplashScene extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Welcome...",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              "Hello there...",
+              style: TextStyle(fontSize: 24, color: Colors.black),
             )
           ],
         ),

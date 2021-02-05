@@ -87,9 +87,8 @@ class _CheckpointDetailSceneGuideState
                               onPressed: () {
                                 AppDataHelper.getUser().then((user) {
                                   if (user.role != 'manager') {
-                                    String _message = "S.O.S reported at: [" +
-                                        checkpoint.pointName +
-                                        "] ";
+                                    String _message = "S.O.S reported at:" +
+                                        checkpoint.pointName;
                                     FCMHelper.sendMessage(
                                         message: _message,
                                         title: checkpoint.pointGroup,
@@ -118,9 +117,8 @@ class _CheckpointDetailSceneGuideState
                                   : () {
                                       AppDataHelper.getUser().then((user) {
                                         if (user.role != 'manager') {
-                                          String _message = "Checked-in at: [" +
-                                              checkpoint.pointName +
-                                              "] ";
+                                          String _message = "Checked-in at:" +
+                                              checkpoint.pointName;
                                           FCMHelper.sendMessage(
                                               message: _message,
                                               title: checkpoint.pointGroup,

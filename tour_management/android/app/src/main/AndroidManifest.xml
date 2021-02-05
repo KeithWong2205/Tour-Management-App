@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name=".Application"
-        android:label="tour_management"
+        android:label="Ambassador"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
