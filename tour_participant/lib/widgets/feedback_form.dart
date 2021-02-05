@@ -22,6 +22,7 @@ class FeedBackForm extends StatefulWidget {
 class _FeedBackFormState extends State<FeedBackForm> {
   IconData _selectedIcon;
   double _rating;
+  bool tapped = false;
   TextEditingController _guideCommentController = TextEditingController();
   TextEditingController _topicCommentController = TextEditingController();
   TextEditingController _speakerCommentController = TextEditingController();
@@ -62,7 +63,12 @@ class _FeedBackFormState extends State<FeedBackForm> {
                 SizedBox(
                   height: 10,
                 ),
-                Center(child: _ratingBar()),
+                Container(
+                    alignment: Alignment.center,
+                    height: 100,
+                    color: Colors.white,
+                    child: _ratingBar(),
+                    width: MediaQuery.of(context).size.width),
                 SizedBox(height: 15),
                 Text(
                   'Do you have any comments on the guides',
@@ -143,6 +149,26 @@ class _FeedBackFormState extends State<FeedBackForm> {
                   onFieldSubmitted: (val) =>
                       FocusScope.of(context).requestFocus(new FocusNode()),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  title: Text(
+                    "Would you like to share your information with us? ",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  subtitle: Text("Please check if you would.",
+                      textAlign: TextAlign.center),
+                  trailing: Checkbox(
+                    value: tapped,
+                    onChanged: (value) {
+                      setState(() {
+                        tapped = value;
+                      });
+                    },
+                  ),
+                ),
                 RaisedButton(
                   color: Colors.amber,
                   onPressed: () {
@@ -152,6 +178,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
                               checkpointID: widget.checkpointId,
                               userID: user.id,
                               userName: user.name,
+                              subscription: tapped,
                               commentOnGuide: _guideCommentController.text,
                               commentOnTopic: _topicCommentController.text,
                               commentOnSpeaker: _speakerCommentController.text,

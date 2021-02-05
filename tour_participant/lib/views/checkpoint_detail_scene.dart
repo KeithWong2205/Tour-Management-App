@@ -86,6 +86,7 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
         return Scaffold(
           backgroundColor: Colors.red[50],
           appBar: AppBar(
+            centerTitle: true,
             title: Text(
               'Checkpoint Details',
               style: TextStyle(fontSize: 24),
