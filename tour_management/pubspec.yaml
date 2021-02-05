@@ -31,6 +31,7 @@ dependencies:
   shared_preferences: ^0.5.12+2
   http: ^0.12.1
   url_launcher: ^5.7.10
+  flutter_launcher_icons: ^0.8.1
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -38,7 +39,6 @@ dependencies:
   cupertino_icons: ^0.1.3
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.8.1
   flutter_native_splash: ^0.2.9
   flutter_test:
     sdk: flutter
@@ -47,10 +47,15 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+flutter_launcher_icons:
+  path: ../
 flutter_icons:
-  android: "launcher_icon"
+  image_path_android: "assets/icon/icon.png"
+  image_path_ios: "assets/icon/icon.png"
+  android: true
   ios: true
-  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "assets/icon/icon.png"
+  adaptive_icon_foreground: "assets/icon/icon.png"
 
 flutter_native_splash:
   # color is the only required parameter.  It sets the background color of your splash screen.
@@ -59,7 +64,7 @@ flutter_native_splash:
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing 
   # the leading # character.
 
-  # The image parameter allows you to specifiy an image used in the splash screen.  It must be a 
+  # The image parameter allows you to specify an image used in the splash screen.  It must be a 
   # png file.  
   image: assets/icon/icon.png
 
