@@ -129,7 +129,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             child: ListView(
               children: [
                 Container(
-                    height: 320,
+                    height: MediaQuery.of(context).size.height / 3,
                     child: Align(
                         alignment: Alignment.center,
                         child: Padding(
@@ -139,7 +139,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                   _showPicker(context);
                                 },
                                 child: CircleAvatar(
-                                    radius: 300,
+                                    radius:
+                                        MediaQuery.of(context).size.height / 7,
                                     backgroundColor: Color(0xffFDCF09),
                                     child: _image != null
                                         ? ClipRRect(
@@ -163,7 +164,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                               child: widget._currUserInfo
                                                           .photoURL !=
                                                       null
-                                                  ? NetworkImage(widget
+                                                  ? Image.network(widget
                                                       ._currUserInfo.photoURL)
                                                   : Icon(
                                                       Icons.camera,
