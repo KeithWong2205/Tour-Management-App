@@ -73,8 +73,9 @@ class ListCheckPointsGuide extends StatelessWidget {
                 onCheckboxChanged: (_) {
                   AppDataHelper.getUser().then((user) {
                     if (user.role != 'manager') {
-                      String _message =
-                          element.pointName + "completion status change";
+                      String _message = "Checkpoint name: " +
+                          element.pointName +
+                          " completion status change !";
                       FCMHelper.sendMessage(
                           message: _message,
                           title: element.pointGroup,
