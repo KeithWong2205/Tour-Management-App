@@ -20,7 +20,7 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
       builder: (context, state) {
         final user = (state as GroupManLoadSuccess)
             .users
-            .firstWhere((user) => user.id == widget.id, orElse: null);
+            .firstWhere((user) => user.id == widget.id, orElse: () => null);
         return Scaffold(
             backgroundColor: Colors.blue[50],
             appBar: AppBar(
