@@ -76,7 +76,9 @@ class _ChatState extends State<Chat> {
 
   void handleInitChatInfo(User user) {
     _userId = user.uid;
-    AppDataHelper.getUser().then((userData) => {_userName = userData.name});
+    AppDataHelper.getUser().then((userData) => {
+      _userName = userData.name
+    });
   }
 
   void _scrollToEnd() async {
@@ -84,6 +86,12 @@ class _ChatState extends State<Chat> {
       _scrollController.animateTo(_scrollController.position.maxScrollExtent,
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     });
+  }
+
+  @override
+  void dispose() {
+    FCMHelper.clearIgnoreTitle();
+    super.dispose();
   }
 
   @override
@@ -99,6 +107,7 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
+    FCMHelper.updateIgnoreTitle(title: widget.receiverName);
     return Scaffold(
       appBar: appBarMain(context, title: widget.receiverName ?? "", actions: [
         Padding(
