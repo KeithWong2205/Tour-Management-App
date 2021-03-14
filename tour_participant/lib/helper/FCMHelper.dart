@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,6 +11,7 @@ class FCMHelper {
   static final FCMHelper _instance = FCMHelper._internal();
 
   FirebaseMessaging _firebaseMessaging;
+  String _ignoreTitle = "";
 
   final String serverToken =
       'AAAAalMccjc:APA91bEbJGk5CE8Cfs6Kiotzdggld2b4kBohXdE1L2H-24kS2XQTfsZF8zef08UaTvH4jJx-qROwJmE1Uu8JWarIw3UAKjgGha4iA8FpJpQQOa9yfHzafqEvlyFwzFvx6aKqRQUxijqx';
@@ -45,6 +46,10 @@ class FCMHelper {
         print("onResume: $message");
       },
     );
+  }
+
+  static clearIgnoreTitle() {
+    updateIgnoreTitle(title: "");
   }
 
   static void sendMessage({String message, String title, String to}) async {
@@ -92,6 +97,10 @@ class FCMHelper {
     _instance.getFirebaseMessaging().unsubscribeFromTopic(_topic);
   }
 
+  static updateIgnoreTitle({String title}) {
+    _instance._ignoreTitle = title;
+  }
+
   /// MARK: Getter functions
   FirebaseMessaging getFirebaseMessaging() {
     if (_firebaseMessaging == null) {
@@ -115,30 +124,29 @@ class FCMHelper {
     // Or do other work.
   }
 
-  void handleShowLocalNotification({BuildContext context, String message, String title}) {
-    Fluttertoast.showToast(
+  void handleShowLocalNotification(
+      {BuildContext context, String message, String title}) {
+    if (title != _instance._ignoreTitle) {
+      /*     Fluttertoast.showToast(
         msg: title + ": " + message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
-    // showDialog(
-    //     context: context,
-    //     builder: (_) => new CupertinoAlertDialog(
-    //       actions: [
-    //         FlatButton(
-    //           child: Text("OK"),
-    //           onPressed: () => {
-    //             Navigator.of(context).pop()
-    //           },
-    //         ),
-    //       ],
-    //       content: new Text(message),
-    //       title: new Text(title),
-    //     )
-    // );
+        fontSize: 16.0); */
+      showDialog(
+          context: context,
+          builder: (_) => new CupertinoAlertDialog(
+                actions: [
+                  FlatButton(
+                    child: Text("OK"),
+                    onPressed: () => {Navigator.of(context).pop()},
+                  ),
+                ],
+                content: new Text(message),
+                title: new Text(title),
+              ));
+    }
   }
 }

@@ -85,6 +85,12 @@ class _ChatState extends State<Chat> {
   }
 
   @override
+  void dispose() {
+    FCMHelper.clearIgnoreTitle();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     handleInitChatInfo(FirebaseAuth.instance.currentUser);
@@ -97,6 +103,7 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
+    FCMHelper.updateIgnoreTitle(title: widget.receiverName);
     return Scaffold(
       appBar: appBarMain(context, title: widget.receiverName ?? "", actions: [
         Padding(
