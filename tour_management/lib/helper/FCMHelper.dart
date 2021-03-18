@@ -124,7 +124,8 @@ class FCMHelper {
     // Or do other work.
   }
 
-  void handleShowLocalNotification({BuildContext context, String message, String title}) {
+  void handleShowLocalNotification(
+      {BuildContext context, String message, String title}) {
     if (title != _instance._ignoreTitle) {
       /*     Fluttertoast.showToast(
         msg: title + ": " + message,
@@ -137,15 +138,15 @@ class FCMHelper {
       showDialog(
           context: context,
           builder: (_) => new CupertinoAlertDialog(
-            actions: [
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () => {Navigator.of(context).pop()},
-              ),
-            ],
-            content: new Text(message),
-            title: new Text(title),
-          ));
+                actions: [
+                  FlatButton(
+                    child: Text("OK"),
+                    onPressed: () => {Navigator.of(context).pop()},
+                  ),
+                ],
+                content: new Text(message),
+                title: new Text(title),
+              ));
     }
   }
 }
