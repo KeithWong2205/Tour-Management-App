@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:overlay_support/overlay_support.dart';
 
 class FCMHelper {
   // ignore: non_constant_identifier_names
@@ -135,18 +136,40 @@ class FCMHelper {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0); */
-      showDialog(
-          context: context,
-          builder: (_) => new CupertinoAlertDialog(
-                actions: [
-                  FlatButton(
-                    child: Text("OK"),
-                    onPressed: () => {Navigator.of(context).pop()},
-                  ),
-                ],
-                content: new Text(message),
-                title: new Text(title),
-              ));
+      // showDialog(
+      //     context: context,
+      //     builder: (_) => new CupertinoAlertDialog(
+      //           actions: [
+      //             FlatButton(
+      //               child: Text("OK"),
+      //               onPressed: () => {Navigator.of(context).pop()},
+      //             ),
+      //           ],
+      //           content: new Text(message),
+      //           title: new Text(title),
+      //         ));
+      showOverlayNotification((context) {
+        return Card(
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          child: SafeArea(
+            child: ListTile(
+              leading: SizedBox.fromSize(
+                  size: const Size(40, 40),
+                  child: ClipOval(
+                      child: Container(
+                    color: Colors.black,
+                  ))),
+              title: new Text(title),
+              subtitle: new Text(message),
+              trailing: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    OverlaySupportEntry.of(context).dismiss();
+                  }),
+            ),
+          ),
+        );
+      }, duration: Duration(milliseconds: 4000));
     }
   }
 }

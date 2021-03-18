@@ -49,7 +49,7 @@ class _AppState extends State<App> {
   final FirebaseCheckpointService firebaseCheckpointService =
       FirebaseCheckpointService();
   final FirebaseFeedbackService firebaseFeedbackService =
-  FirebaseFeedbackService();
+      FirebaseFeedbackService();
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +80,7 @@ class _AppState extends State<App> {
                 ..add(FeedbackManLoaded())),
           BlocProvider<FeedbackListBloc>(
               create: (context) => FeedbackListBloc(
-                  feedbackManBloc:
-                  BlocProvider.of<FeedbackManBloc>(context))),
+                  feedbackManBloc: BlocProvider.of<FeedbackManBloc>(context))),
         ],
         child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
           '/': (context) {

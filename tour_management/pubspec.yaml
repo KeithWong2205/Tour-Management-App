@@ -32,6 +32,7 @@ dependencies:
   http: ^0.12.1
   url_launcher: ^5.7.10
   flutter_launcher_icons: ^0.8.1
+  overlay_support: ^1.0.0
   
 
   # The following adds the Cupertino Icons font to your application.
