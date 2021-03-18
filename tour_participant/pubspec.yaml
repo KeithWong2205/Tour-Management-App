@@ -27,6 +27,7 @@ dependencies:
   permission_handler: ^5.0.1+1
   qr_flutter: ^1.1.5
   flutter_launcher_icons: ^0.8.1
+  overlay_support: ^1.0.0
 
   chpnt_repo_manager:
     path: chpnt_repo_manager

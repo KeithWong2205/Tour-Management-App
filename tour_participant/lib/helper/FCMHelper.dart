@@ -6,6 +6,21 @@ import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:overlay_support/overlay_support.dart';
+
+Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
+  if (message.containsKey('data')) {
+    // Handle data message
+    // final dynamic data = message['data'];
+  }
+
+  if (message.containsKey('notification')) {
+    // Handle notification message
+    // final dynamic notification = message['notification'];
+  }
+
+  // Or do other work.
+}
 
 class FCMHelper {
   static final FCMHelper _instance = FCMHelper._internal();
@@ -35,10 +50,7 @@ class FCMHelper {
           title: _notification['title'] ?? '',
         );
       },
-      onBackgroundMessage: (Map<String, dynamic> message) {
-        print("onBackgroundMessage: $message");
-        return _instance.handleBackgroundMessage(message);
-      },
+      onBackgroundMessage: myBackgroundMessageHandler,
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
       },
@@ -135,18 +147,41 @@ class FCMHelper {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0); */
-      showDialog(
-          context: context,
-          builder: (_) => new CupertinoAlertDialog(
-                actions: [
-                  FlatButton(
-                    child: Text("OK"),
-                    onPressed: () => {Navigator.of(context).pop()},
-                  ),
-                ],
-                content: new Text(message),
-                title: new Text(title),
-              ));
+      // showDialog(
+      //     context: context,
+      //     builder: (_) => new CupertinoAlertDialog(
+      //           actions: [
+      //             FlatButton(
+      //               child: Text("OK"),
+      //               onPressed: () => {Navigator.of(context).pop()},
+      //             ),
+      //           ],
+      //           content: new Text(message),
+      //           title: new Text(title),
+      //         ));
+      showOverlayNotification((context) {
+        return Card(
+          color: Colors.blue,
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          child: SafeArea(
+            child: ListTile(
+              leading: SizedBox.fromSize(
+                  size: const Size(40, 40),
+                  child: ClipOval(
+                      child: Container(
+                    color: Colors.black,
+                  ))),
+              title: new Text(title),
+              subtitle: new Text(message),
+              trailing: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    OverlaySupportEntry.of(context).dismiss();
+                  }),
+            ),
+          ),
+        );
+      }, duration: Duration(milliseconds: 4000));
     }
   }
 }

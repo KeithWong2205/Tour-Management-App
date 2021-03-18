@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:tour_participant/controllers/chkpoint_manager/chkpoint_man.dart';
 import 'package:tour_participant/controllers/chkpoint_list/chkpoint_list.dart';
 import 'package:tour_participant/controllers/controllers.dart';
@@ -52,7 +53,8 @@ class _AppState extends State<App> {
                   firebaseFeedbackService: firebaseFeedbackService)
                 ..add(FeedbackManLoaded())),
         ],
-        child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
+        child: OverlaySupport(
+            child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
           '/': (context) {
             return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
               if (state is Uninitialized) {
@@ -64,6 +66,6 @@ class _AppState extends State<App> {
               return LoginScene(firebaseService: firebaseService);
             });
           },
-        }));
+        })));
   }
 }

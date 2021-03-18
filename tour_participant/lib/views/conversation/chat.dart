@@ -33,7 +33,7 @@ class _ChatState extends State<Chat> {
     return StreamBuilder(
       stream: chats,
       builder: (context, snapshot) {
-        _scrollToEnd();
+        // _scrollToEnd();
         return snapshot.hasData
             ? ListView.builder(
                 controller: _scrollController,
@@ -77,12 +77,12 @@ class _ChatState extends State<Chat> {
     AppDataHelper.getUser().then((userData) => {_userName = userData.name});
   }
 
-  void _scrollToEnd() async {
-    Future.delayed(Duration(milliseconds: 200), () {
-      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
-    });
-  }
+  // void _scrollToEnd() async {
+  //   Future.delayed(Duration(milliseconds: 200), () {
+  //     _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+  //         duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+  //   });
+  // }
 
   @override
   void dispose() {

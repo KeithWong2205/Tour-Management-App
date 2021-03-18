@@ -4,6 +4,7 @@ import 'package:feedback_repo/feedback_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:tour_management/controllers/chpnt_manager/chpnt_man.dart';
 import 'package:tour_management/controllers/chpoint_list/chpoint_list.dart';
 import 'package:tour_management/controllers/controllers.dart';
@@ -82,7 +83,8 @@ class _AppState extends State<App> {
               create: (context) => FeedbackListBloc(
                   feedbackManBloc: BlocProvider.of<FeedbackManBloc>(context))),
         ],
-        child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
+        child: OverlaySupport(
+            child: MaterialApp(debugShowCheckedModeBanner: false, routes: {
           '/': (context) {
             return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
               if (state is Uninitialized) {
@@ -108,6 +110,6 @@ class _AppState extends State<App> {
               },
             );
           }
-        }));
+        })));
   }
 }

@@ -6,6 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:overlay_support/overlay_support.dart';
 
+Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
+  if (message.containsKey('data')) {
+    // Handle data message
+    // final dynamic data = message['data'];
+  }
+
+  if (message.containsKey('notification')) {
+    // Handle notification message
+    // final dynamic notification = message['notification'];
+  }
+
+  // Or do other work.
+}
+
 class FCMHelper {
   // ignore: non_constant_identifier_names
   static final MANAGER_CHANNEL = "MANAGER_CHANNEL";
@@ -36,10 +50,7 @@ class FCMHelper {
           title: _notification['title'] ?? '',
         );
       },
-      onBackgroundMessage: (Map<String, dynamic> message) {
-        print("onBackgroundMessage: $message");
-        return _instance.handleBackgroundMessage(message);
-      },
+      onBackgroundMessage: myBackgroundMessageHandler,
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
       },
@@ -150,6 +161,7 @@ class FCMHelper {
       //         ));
       showOverlayNotification((context) {
         return Card(
+          color: Colors.blue,
           margin: const EdgeInsets.symmetric(horizontal: 4),
           child: SafeArea(
             child: ListTile(
