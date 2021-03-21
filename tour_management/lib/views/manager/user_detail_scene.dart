@@ -22,7 +22,7 @@ class _UserDetailSceneState extends State<UserDetailScene> {
             .users
             .firstWhere((user) => user.id == widget.id, orElse: null);
         return Scaffold(
-            backgroundColor: Colors.green[50],
+            backgroundColor: Colors.grey[350],
             appBar: AppBar(
               centerTitle: true,
               title: Text(
@@ -63,7 +63,7 @@ class _UserDetailSceneState extends State<UserDetailScene> {
                                     ),
                             )
                           ]),
-                          SizedBox(height: 40),
+                          SizedBox(height: 20),
                           Card(
                             child: ListTile(
                                 leading: Icon(
@@ -84,9 +84,6 @@ class _UserDetailSceneState extends State<UserDetailScene> {
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 )),
-                          ),
-                          SizedBox(
-                            height: 10,
                           ),
                           Card(
                             child: ListTile(
@@ -110,9 +107,6 @@ class _UserDetailSceneState extends State<UserDetailScene> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
                           Card(
                             child: ListTile(
                               leading: Icon(
@@ -135,9 +129,6 @@ class _UserDetailSceneState extends State<UserDetailScene> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
                           Card(
                             child: ListTile(
                               leading: Icon(
@@ -159,9 +150,6 @@ class _UserDetailSceneState extends State<UserDetailScene> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
                           ),
                         ],
                       ),

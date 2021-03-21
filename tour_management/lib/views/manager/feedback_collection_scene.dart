@@ -11,6 +11,7 @@ class FeedBackCollectionScene extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[350],
       appBar: feedbackAppBar(),
       body: ListFeedbacksManager(),
     );
@@ -33,7 +34,7 @@ class ListFeedbacksManager extends StatelessWidget {
           order: GroupedListOrder.ASC,
           useStickyGroupSeparators: true,
           groupSeparatorBuilder: (value) => Container(
-            color: Colors.red[50],
+            color: Colors.grey[350],
             height: 80,
             child: Align(
               alignment: Alignment.center,

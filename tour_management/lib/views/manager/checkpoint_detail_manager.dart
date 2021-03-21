@@ -35,7 +35,7 @@ class _CheckpointDetailSceneManagerState
             .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
-            backgroundColor: Colors.red[50],
+            backgroundColor: Colors.grey[350],
             appBar: AppBar(
               centerTitle: true,
               title: Text(
@@ -88,14 +88,14 @@ class _CheckpointDetailSceneManagerState
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                padding: EdgeInsets.symmetric(horizontal: 0),
                                 child: RatingBarIndicator(
                                   rating: (checkpoint.totalRatingStar /
                                               checkpoint.totalRating) ==
@@ -112,18 +112,27 @@ class _CheckpointDetailSceneManagerState
                                 )),
                             Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 5),
-                                child: RaisedButton(
-                                  color: Colors.red,
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 10,
+                                  highlightElevation: 4,
+                                  height: 45,
+                                  minWidth:
+                                      MediaQuery.of(context).size.width / 3,
+                                  color: Colors.amber,
                                   textColor: Colors.white,
                                   onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute(
                                           builder: (_) =>
                                               FeedBackCollectionScene())),
                                   child: Text('View feedback',
-                                      style: TextStyle(fontSize: 14)),
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.black)),
                                 )),
                           ],
                         ),
+                        SizedBox(height: 20),
                         Card(
                           child: ListTile(
                             leading: Icon(
@@ -145,9 +154,6 @@ class _CheckpointDetailSceneManagerState
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
                         ),
                         Card(
                           child: ListTile(
@@ -171,9 +177,6 @@ class _CheckpointDetailSceneManagerState
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Card(
                           child: ListTile(
                             leading: Icon(
@@ -195,9 +198,6 @@ class _CheckpointDetailSceneManagerState
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
                         ),
                         Card(
                           child: ListTile(
@@ -221,9 +221,6 @@ class _CheckpointDetailSceneManagerState
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
                         ),
                         Card(
                           child: ListTile(

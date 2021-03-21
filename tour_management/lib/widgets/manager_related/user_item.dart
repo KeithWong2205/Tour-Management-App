@@ -12,11 +12,13 @@ class UserItem extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: onTap,
-        leading: CircleAvatar(
-          backgroundColor: Colors.grey,
-          backgroundImage: NetworkImage(user.photoURL),
-          radius: 50,
-        ),
+        leading: (user.photoURL != null
+            ? CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: NetworkImage(user.photoURL),
+                radius: 50,
+              )
+            : CircleAvatar(backgroundColor: Colors.grey, radius: 50)),
         title: Hero(
           tag: '${user.name}__heroTag',
           child: Container(
@@ -31,6 +33,11 @@ class UserItem extends StatelessWidget {
               fontSize: 14,
               fontStyle: FontStyle.italic,
               color: Colors.blueAccent),
+        ),
+        trailing: Icon(
+          Icons.info,
+          size: 25,
+          color: Colors.blue,
         ),
       ),
     );

@@ -107,7 +107,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[50],
+      backgroundColor: Colors.grey[350],
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -116,7 +116,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
         actions: [
           FlatButton(
             onPressed: () => Navigator.pop(context),
-            child: Icon(Icons.cancel, size: 24, color: Colors.white),
+            child: Icon(Icons.cancel_presentation, size: 30, color: Colors.red),
           )
         ],
       ),
@@ -163,9 +163,14 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                                               child: widget._currentUserInfo
                                                           .photoURL !=
                                                       null
-                                                  ? Image.network(widget
-                                                      ._currentUserInfo
-                                                      .photoURL)
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      child: Image.network(
+                                                          widget
+                                                              ._currentUserInfo
+                                                              .photoURL))
                                                   : Icon(Icons.camera,
                                                       color: Colors.black,
                                                       size: 26),
@@ -187,7 +192,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(phoneField),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 30),
                 TextFormField(
                   decoration: profilePhoneFieldStyle(),
                   textInputAction: TextInputAction.next,

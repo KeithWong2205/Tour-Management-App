@@ -22,13 +22,14 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
             .users
             .firstWhere((user) => user.id == widget.id, orElse: () => null);
         return Scaffold(
-            backgroundColor: Colors.blue[50],
+            backgroundColor: Colors.grey[350],
             appBar: AppBar(
               automaticallyImplyLeading: false,
               actions: [
                 FlatButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Icon(Icons.cancel, size: 24, color: Colors.white),
+                  child: Icon(Icons.cancel_presentation,
+                      size: 30, color: Colors.red),
                 )
               ],
               centerTitle: true,
@@ -70,7 +71,7 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
                                     ),
                             )
                           ]),
-                          SizedBox(height: 40),
+                          SizedBox(height: 20),
                           Card(
                             child: ListTile(
                                 leading: Icon(
@@ -91,9 +92,6 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 )),
-                          ),
-                          SizedBox(
-                            height: 10,
                           ),
                           Card(
                             child: ListTile(
@@ -117,9 +115,6 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
                           Card(
                             child: ListTile(
                               leading: Icon(
@@ -142,9 +137,6 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
                           Card(
                             child: ListTile(
                               leading: Icon(
@@ -166,9 +158,6 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
                           ),
                         ],
                       ),

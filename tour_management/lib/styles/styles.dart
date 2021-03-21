@@ -55,7 +55,7 @@ InputDecoration passswordFieldStyle() {
 InputDecoration checkpointNameFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.red[100].withOpacity(0.3),
       icon: Icon(Icons.card_membership, color: Colors.redAccent),
       hintText: 'Please give a brief name',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
@@ -64,7 +64,7 @@ InputDecoration checkpointNameFieldStyle() {
 InputDecoration checkpointLocationFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.red[100].withOpacity(0.3),
       icon: Icon(Icons.add_location, color: Colors.redAccent),
       hintText: 'Where is this place?',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
@@ -73,7 +73,7 @@ InputDecoration checkpointLocationFieldStyle() {
 InputDecoration checkpointDateTimeFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.red[100].withOpacity(0.3),
       icon: Icon(Icons.calendar_today, color: Colors.redAccent),
       hintText: 'Tap to select a date & time',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
@@ -82,7 +82,7 @@ InputDecoration checkpointDateTimeFieldStyle() {
 InputDecoration checkpointGroupFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.red[100].withOpacity(0.3),
       icon: Icon(Icons.people, color: Colors.redAccent),
       hintText: 'Tap to select group',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
@@ -91,7 +91,7 @@ InputDecoration checkpointGroupFieldStyle() {
 InputDecoration checkpointNoteFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.red[100].withOpacity(0.3),
       icon: Icon(Icons.note, color: Colors.redAccent),
       hintText: 'Do we have any notes?',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
@@ -100,7 +100,7 @@ InputDecoration checkpointNoteFieldStyle() {
 InputDecoration profileNameFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.amber[200].withOpacity(0.3),
       icon: Icon(
         Icons.person,
         color: Colors.amber,
@@ -112,7 +112,7 @@ InputDecoration profileNameFieldStyle() {
 InputDecoration profilePhoneFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.amber[200].withOpacity(0.3),
       icon: Icon(Icons.phone, color: Colors.amber),
       hintText: 'Please give a phone number',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));

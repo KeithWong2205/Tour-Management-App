@@ -17,6 +17,7 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
       drawer: MainDrawer(),
       body: Center(
         child: Container(
+          color: Colors.grey[350],
           alignment: Alignment.center,
           child: ListView(
             children: [
@@ -33,8 +34,11 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
               ),
               SizedBox(height: 20),
               Text(
-                'Welcome to the IU Operation App',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                'Welcome to the IU Operator App',
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red[500]),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10),
@@ -43,20 +47,20 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
                 child: Column(
                   children: [
                     Text(
-                      'This app was designed and implemented with the purpose of enhancing the tour leading experience and assessment for both the guide and the manager staffs',
+                      '_This app was designed and implemented with the purpose of enhancing the tour leading experience and assessment for both the guide and the manager staffs',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),
                     Text(
-                      'You can manage your checkpoints, your groups. Chat with others and you also have a dedicated profile of your own.',
+                      '_You can manage your checkpoints, your groups. Chat with others and you also have a dedicated profile of your own.',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Text(
-                      '<<-- Get started by tapping on the drawer on the left',
+                      'Get started by tapping on the icon on the top left corner',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,

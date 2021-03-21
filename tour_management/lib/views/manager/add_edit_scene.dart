@@ -104,7 +104,7 @@ class _AddEditSceneState extends State<AddEditScene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.red[50],
+        backgroundColor: Colors.grey[350],
         appBar: AppBar(
             centerTitle: true,
             automaticallyImplyLeading: false,
@@ -154,7 +154,7 @@ class _AddEditSceneState extends State<AddEditScene> {
                                             width: 100,
                                             height: 300,
                                             decoration: BoxDecoration(
-                                                color: Colors.grey[200],
+                                                color: Colors.red[100],
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         10.0)),

@@ -116,7 +116,8 @@ class _ChatState extends State<Chat> {
               },
               child: Icon(
                 Icons.phone,
-                size: 26.0,
+                size: 30,
+                color: Colors.amber,
               ),
             )),
         Padding(
@@ -130,7 +131,8 @@ class _ChatState extends State<Chat> {
               },
               child: Icon(
                 Icons.info_rounded,
-                size: 26.0,
+                size: 30,
+                color: Colors.amber,
               ),
             ))
       ]),
@@ -229,7 +231,7 @@ class MessageTile extends StatelessWidget {
         padding: EdgeInsets.only(top: 12, bottom: 12, left: 20, right: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          color: sendByMe ? const Color(0xff007EF4) : const Color(0xff8d8d8d),
+          color: sendByMe ? Colors.blue : Colors.green,
         ),
         child: Text(message ?? "",
             textAlign: TextAlign.start,

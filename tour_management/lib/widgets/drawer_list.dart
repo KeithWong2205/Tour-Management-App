@@ -38,54 +38,58 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           Card(
+              color: Colors.red[200],
               child: ListTile(
                   leading: Icon(
                     Icons.done_all,
-                    color: Colors.red,
+                    color: Colors.black,
                   ),
                   title: Text(
                     'Checkpoints',
-                    style: TextStyle(fontSize: 18, color: Colors.red),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   subtitle: Text('View your planned itinerary'),
                   onTap: () =>
                       FireBaseService().checkRoleCheckpointUser(context))),
           Card(
+              color: Colors.green[200],
               child: ListTile(
-            leading: Icon(
-              Icons.people,
-              color: Colors.green,
-            ),
-            title: Text(
-              'Attendee Group',
-              style: TextStyle(fontSize: 18, color: Colors.green),
-            ),
-            subtitle: Text('View information of your group'),
-            onTap: () => FireBaseService().checkRoleGroupUser(context),
-          )),
+                leading: Icon(
+                  Icons.people,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Attendee Group',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('View information of your group'),
+                onTap: () => FireBaseService().checkRoleGroupUser(context),
+              )),
           Card(
+              color: Colors.blue[200],
               child: ListTile(
-            leading: Icon(
-              Icons.chat_bubble,
-              color: Colors.blue,
-            ),
-            title: Text(
-              'Conversation',
-              style: TextStyle(fontSize: 18, color: Colors.blue),
-            ),
-            subtitle: Text('Chat with guides & manager'),
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => ChatRoom())),
-          )),
+                leading: Icon(
+                  Icons.chat_bubble,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Conversation',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('Chat with guides & manager'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => ChatRoom())),
+              )),
           Card(
+            color: Colors.amber[200],
             child: ListTile(
               leading: Icon(
                 Icons.person,
-                color: Colors.amber,
+                color: Colors.black,
               ),
               title: Text(
                 'Profile',
-                style: TextStyle(fontSize: 18, color: Colors.amber),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               subtitle: Text('View your own profile'),
               onTap: () => Navigator.of(context)
@@ -132,41 +136,41 @@ class CheckpointDrawer extends StatelessWidget {
             ),
           ),
           Card(
+              color: Colors.green[200],
               child: ListTile(
-            leading: Icon(
-              Icons.people,
-              color: Colors.green,
-            ),
-            title: Text(
-              'Attendee Group',
-              style: TextStyle(fontSize: 18, color: Colors.green),
-            ),
-            subtitle: Text('View information of your group'),
-            onTap: () => FireBaseService().checkRoleGroupUser(context),
-          )),
+                leading: Icon(Icons.people, color: Colors.black),
+                title: Text(
+                  'Attendee Group',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('View information of your group'),
+                onTap: () => FireBaseService().checkRoleGroupUser(context),
+              )),
           Card(
+              color: Colors.blue[200],
               child: ListTile(
-            leading: Icon(
-              Icons.chat_bubble,
-              color: Colors.blue,
-            ),
-            title: Text(
-              'Conversation',
-              style: TextStyle(fontSize: 18, color: Colors.blue),
-            ),
-            subtitle: Text('Chat with guides & manager'),
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => ChatRoom())),
-          )),
+                leading: Icon(
+                  Icons.chat_bubble,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Conversation',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('Chat with guides & manager'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => ChatRoom())),
+              )),
           Card(
+            color: Colors.amber[200],
             child: ListTile(
               leading: Icon(
                 Icons.person,
-                color: Colors.amber,
+                color: Colors.black,
               ),
               title: Text(
                 'Profile',
-                style: TextStyle(fontSize: 18, color: Colors.amber),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               subtitle: Text('View your own profile'),
               onTap: () => Navigator.of(context)
@@ -213,41 +217,44 @@ class GroupDrawer extends StatelessWidget {
             ),
           ),
           Card(
+              color: Colors.red[200],
               child: ListTile(
                   leading: Icon(
                     Icons.done_all,
-                    color: Colors.red,
+                    color: Colors.black,
                   ),
                   title: Text(
                     'Checkpoints',
-                    style: TextStyle(fontSize: 18, color: Colors.red),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   subtitle: Text('View your planned itinerary'),
                   onTap: () =>
                       FireBaseService().checkRoleCheckpointUser(context))),
           Card(
+              color: Colors.blue[200],
               child: ListTile(
-            leading: Icon(
-              Icons.chat_bubble,
-              color: Colors.blue,
-            ),
-            title: Text(
-              'Conversation',
-              style: TextStyle(fontSize: 18, color: Colors.blue),
-            ),
-            subtitle: Text('Chat with guides & manager'),
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => ChatRoom())),
-          )),
+                leading: Icon(
+                  Icons.chat_bubble,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Conversation',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('Chat with guides & manager'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => ChatRoom())),
+              )),
           Card(
+            color: Colors.amber[200],
             child: ListTile(
               leading: Icon(
                 Icons.person,
-                color: Colors.amber,
+                color: Colors.black,
               ),
               title: Text(
                 'Profile',
-                style: TextStyle(fontSize: 18, color: Colors.amber),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               subtitle: Text('View your own profile'),
               onTap: () => Navigator.of(context)
@@ -294,45 +301,48 @@ class ProfileDrawer extends StatelessWidget {
             ),
           ),
           Card(
+              color: Colors.red[200],
               child: ListTile(
                   leading: Icon(
                     Icons.done_all,
-                    color: Colors.red,
+                    color: Colors.black,
                   ),
                   title: Text(
                     'Checkpoints',
-                    style: TextStyle(fontSize: 18, color: Colors.red),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   subtitle: Text('View your planned itinerary'),
                   onTap: () =>
                       FireBaseService().checkRoleCheckpointUser(context))),
           Card(
+              color: Colors.green[200],
               child: ListTile(
-            leading: Icon(
-              Icons.people,
-              color: Colors.green,
-            ),
-            title: Text(
-              'Attendee Group',
-              style: TextStyle(fontSize: 18, color: Colors.green),
-            ),
-            subtitle: Text('View information of your group'),
-            onTap: () => FireBaseService().checkRoleGroupUser(context),
-          )),
+                leading: Icon(
+                  Icons.people,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Attendee Group',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('View information of your group'),
+                onTap: () => FireBaseService().checkRoleGroupUser(context),
+              )),
           Card(
+              color: Colors.blue[200],
               child: ListTile(
-            leading: Icon(
-              Icons.chat_bubble,
-              color: Colors.blue,
-            ),
-            title: Text(
-              'Conversation',
-              style: TextStyle(fontSize: 18, color: Colors.blue),
-            ),
-            subtitle: Text('Chat with guides & manager'),
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => ChatRoom())),
-          )),
+                leading: Icon(
+                  Icons.chat_bubble,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Conversation',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('Chat with guides & manager'),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => ChatRoom())),
+              )),
         ],
       ),
     );
@@ -373,40 +383,43 @@ class ChatDrawer extends StatelessWidget {
             ),
           ),
           Card(
+              color: Colors.red[200],
               child: ListTile(
                   leading: Icon(
                     Icons.done_all,
-                    color: Colors.red,
+                    color: Colors.black,
                   ),
                   title: Text(
                     'Checkpoints',
-                    style: TextStyle(fontSize: 18, color: Colors.red),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   subtitle: Text('View your planned itinerary'),
                   onTap: () =>
                       FireBaseService().checkRoleCheckpointUser(context))),
           Card(
+              color: Colors.green[200],
               child: ListTile(
-            leading: Icon(
-              Icons.people,
-              color: Colors.green,
-            ),
-            title: Text(
-              'Attendee Group',
-              style: TextStyle(fontSize: 18, color: Colors.green),
-            ),
-            subtitle: Text('View information of your group'),
-            onTap: () => FireBaseService().checkRoleGroupUser(context),
-          )),
+                leading: Icon(
+                  Icons.people,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Attendee Group',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                subtitle: Text('View information of your group'),
+                onTap: () => FireBaseService().checkRoleGroupUser(context),
+              )),
           Card(
+            color: Colors.amber[200],
             child: ListTile(
               leading: Icon(
                 Icons.person,
-                color: Colors.amber,
+                color: Colors.black,
               ),
               title: Text(
                 'Profile',
-                style: TextStyle(fontSize: 18, color: Colors.amber),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               subtitle: Text('View your own profile'),
               onTap: () => Navigator.of(context)

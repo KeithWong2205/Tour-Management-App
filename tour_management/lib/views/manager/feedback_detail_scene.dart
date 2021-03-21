@@ -23,6 +23,7 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
             .firstWhere((feedback) => feedback.feedbackID == widget.id,
                 orElse: null);
         return Scaffold(
+          backgroundColor: Colors.grey[350],
           appBar: feedbackDetailsAppBar(),
           body: feedback == null
               ? Container()
@@ -52,9 +53,6 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Card(
                           child: ListTile(
                             leading: Icon(
@@ -77,9 +75,6 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Text("Overall Rating",
                             style: TextStyle(
                                 fontSize: 16, color: Colors.redAccent),
@@ -92,9 +87,6 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
                           ),
                           itemCount: 5,
                           itemSize: 50,
-                        ),
-                        SizedBox(
-                          height: 10,
                         ),
                         Card(
                           child: ListTile(
@@ -118,9 +110,6 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Card(
                           child: ListTile(
                             leading: Icon(
@@ -143,9 +132,6 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Card(
                           child: ListTile(
                             leading: Icon(
@@ -167,9 +153,6 @@ class _FeedbackDetailSceneState extends State<FeedbackDetailScene> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
                         ),
                         Card(
                           child: ListTile(

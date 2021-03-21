@@ -5,7 +5,7 @@ class ManagerCheckPointPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[50],
+      backgroundColor: Colors.grey[350],
       appBar: checkpointAppBar(),
       drawer: CheckpointDrawer(),
       body: ListCheckPointsManager(),

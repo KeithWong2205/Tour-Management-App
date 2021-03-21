@@ -34,6 +34,7 @@ class _CheckpointDetailSceneGuideState
             .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
+          backgroundColor: Colors.grey[350],
           appBar: AppBar(
             centerTitle: true,
             title: Text(
@@ -82,8 +83,14 @@ class _CheckpointDetailSceneGuideState
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: RaisedButton(
-                              color: Colors.grey[200],
+                            child: MaterialButton(
+                              elevation: 10,
+                              highlightElevation: 4,
+                              color: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              minWidth: MediaQuery.of(context).size.width / 3,
+                              height: 50,
                               onPressed: () {
                                 AppDataHelper.getUser().then((user) {
                                   if (user.role != 'manager') {
@@ -104,15 +111,24 @@ class _CheckpointDetailSceneGuideState
                               },
                               child: Text(
                                 "SOS",
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 20),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
                               ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: RaisedButton(
-                              color: Colors.blue,
+                            child: MaterialButton(
+                              elevation: 10,
+                              highlightElevation: 4,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              minWidth: MediaQuery.of(context).size.width / 3,
+                              height: 50,
+                              disabledColor: Colors.black,
+                              disabledTextColor: Colors.grey,
+                              disabledElevation: 0,
+                              color: Colors.green,
                               onPressed: checkpoint.pointCheckin == true
                                   ? null
                                   : () {
@@ -139,10 +155,14 @@ class _CheckpointDetailSceneGuideState
                                               .copyWith(checkin: true)));
                                     },
                               child: Text("Check-in",
-                                  style: TextStyle(fontSize: 20)),
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)),
                             ),
                           )
                         ],
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Card(
                         child: ListTile(
@@ -166,9 +186,6 @@ class _CheckpointDetailSceneGuideState
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       Card(
                         child: ListTile(
                           leading: Icon(
@@ -190,9 +207,6 @@ class _CheckpointDetailSceneGuideState
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                       Card(
                         child: ListTile(
@@ -216,9 +230,6 @@ class _CheckpointDetailSceneGuideState
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       Card(
                         child: ListTile(
                           leading: Icon(
@@ -240,9 +251,6 @@ class _CheckpointDetailSceneGuideState
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                       Card(
                         child: ListTile(

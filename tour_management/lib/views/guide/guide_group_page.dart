@@ -5,7 +5,7 @@ class GuideGroupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[50],
+      backgroundColor: Colors.grey[350],
       appBar: groupAppBar(),
       drawer: GroupDrawer(),
       body: ListGroupGuide(),
