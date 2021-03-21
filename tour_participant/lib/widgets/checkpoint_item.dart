@@ -1,7 +1,6 @@
 import 'package:chpnt_repo_manager/chpnt_repo_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:tour_participant/localization/localization.dart';
 
@@ -41,16 +40,7 @@ class CheckpointofStudent extends StatelessWidget {
               fontStyle: FontStyle.italic,
               color: Colors.blueAccent),
         ),
-        trailing: RatingBarIndicator(
-          rating: chkpoint.totalRatingStar / chkpoint.totalRating,
-          itemBuilder: (context, index) => Icon(
-            Icons.star,
-            color: Colors.amber,
-          ),
-          itemCount: 5,
-          itemSize: 25,
-          direction: Axis.horizontal,
-        ),
+        trailing: Icon(Icons.info, color: Colors.blue, size: 25),
       ),
     );
   }

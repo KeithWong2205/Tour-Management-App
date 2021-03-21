@@ -84,7 +84,7 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
             .firstWhere((checkpoint) => checkpoint.pointId == widget.id,
                 orElse: () => null);
         return Scaffold(
-          backgroundColor: Colors.red[50],
+          backgroundColor: Colors.grey[350],
           appBar: AppBar(
             centerTitle: true,
             title: Text(
@@ -128,6 +128,35 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                       SizedBox(
                         height: 10,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: buildRateCheckpointButton(
+                                context: context, model: checkpoint),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: MaterialButton(
+                                elevation: 10,
+                                highlightElevation: 4,
+                                height: 45,
+                                minWidth: MediaQuery.of(context).size.width / 3,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                onPressed: () => _scan(),
+                                color: Colors.green,
+                                child: Text(
+                                  'QR Scanner',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Card(
                         child: ListTile(
                           leading: Icon(
@@ -149,9 +178,6 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                       Card(
                         child: ListTile(
@@ -175,9 +201,6 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       Card(
                         child: ListTile(
                           leading: Icon(
@@ -199,9 +222,6 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                       Card(
                         child: ListTile(
@@ -225,26 +245,6 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: buildRateCheckpointButton(
-                                context: context, model: checkpoint),
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: RaisedButton(
-                                onPressed: () => _scan(),
-                                color: Colors.blue,
-                                child: Text('QR Scanner'),
-                              ))
-                        ],
-                      )
                     ],
                   ),
                 )),
@@ -285,13 +285,19 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                 }
               }
               if (disableRateCheckpoint) {
-                return RaisedButton(
+                return MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  disabledElevation: 0,
+                  disabledColor: Colors.black,
+                  disabledTextColor: Colors.grey,
+                  height: 45,
+                  minWidth: MediaQuery.of(context).size.width / 3,
                   onPressed: null,
-                  color: Colors.amber,
                   child: Text('Rate checkpoint'),
                 );
               }
-              return RaisedButton(
+              return MaterialButton(
                 onPressed: () async {
                   var totalRatingStar = await Navigator.push(
                       context, SlideTopRoute(page: FeedBackScene(widget.id)));
@@ -303,8 +309,17 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
                                 model.totalRatingStar + totalRatingStar)));
                   }
                 },
-                color: Colors.amber,
-                child: Text('Rate checkpoint'),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                elevation: 10,
+                highlightElevation: 4,
+                height: 45,
+                minWidth: MediaQuery.of(context).size.width / 3,
+                color: Colors.blue,
+                child: Text(
+                  'Rate checkpoint',
+                  style: TextStyle(fontSize: 18, color: Colors.amber),
+                ),
               );
             });
         }

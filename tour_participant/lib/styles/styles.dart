@@ -73,7 +73,7 @@ InputDecoration groupSelectorFieldStyle() {
 InputDecoration feedbackFormFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.red[200].withOpacity(0.3),
       hintText: 'Put your thoughts here',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)));
 }
@@ -81,7 +81,7 @@ InputDecoration feedbackFormFieldStyle() {
 InputDecoration profileNameFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.amber[200].withOpacity(0.3),
       icon: Icon(
         Icons.person,
         color: Colors.amber,
@@ -93,7 +93,7 @@ InputDecoration profileNameFieldStyle() {
 InputDecoration profilePhoneFieldStyle() {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.amber[200].withOpacity(0.3),
       icon: Icon(
         Icons.phone,
         color: Colors.amber,

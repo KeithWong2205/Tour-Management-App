@@ -40,48 +40,57 @@ class MainDrawer extends StatelessWidget {
   }
 
   Widget checkpoint(BuildContext context) {
-    return ListTile(
-        leading: Icon(
-          Icons.done_all,
-          color: Colors.red,
-        ),
-        title: Text(
-          'Checkpoints',
-          style: TextStyle(fontSize: 18, color: Colors.red),
-        ),
-        subtitle: Text('View your planned itinerary'),
-        onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => CheckpointPageStudent())));
+    return Card(
+      color: Colors.red[200],
+      child: ListTile(
+          leading: Icon(
+            Icons.done_all,
+            color: Colors.black,
+          ),
+          title: Text(
+            'Checkpoints',
+            style: TextStyle(fontSize: 18, color: Colors.black),
+          ),
+          subtitle: Text('View your planned itinerary'),
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CheckpointPageStudent()))),
+    );
   }
 
   Widget conversation(BuildContext context) {
-    return ListTile(
-        leading: Icon(
-          Icons.chat_bubble,
-          color: Colors.blue,
-        ),
-        title: Text(
-          'Conversation',
-          style: TextStyle(fontSize: 18, color: Colors.blue),
-        ),
-        subtitle: Text('Chat with guides & manager'),
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ChatRoom())));
+    return Card(
+      color: Colors.blue[200],
+      child: ListTile(
+          leading: Icon(
+            Icons.chat_bubble,
+            color: Colors.black,
+          ),
+          title: Text(
+            'Conversation',
+            style: TextStyle(fontSize: 18, color: Colors.black),
+          ),
+          subtitle: Text('Chat with guides & manager'),
+          onTap: () => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => ChatRoom()))),
+    );
   }
 
   Widget profile(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        Icons.person,
-        color: Colors.amber,
+    return Card(
+      color: Colors.amber[200],
+      child: ListTile(
+        leading: Icon(
+          Icons.person,
+          color: Colors.black,
+        ),
+        title: Text(
+          'Profile',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
+        subtitle: Text('View your own profile'),
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ProfilePage())),
       ),
-      title: Text(
-        'Profile',
-        style: TextStyle(fontSize: 18, color: Colors.amber),
-      ),
-      subtitle: Text('View your own profile'),
-      onTap: () => Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ProfilePage())),
     );
   }
 

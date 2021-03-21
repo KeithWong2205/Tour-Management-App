@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[50],
+      backgroundColor: Colors.grey[350],
       drawer: MainDrawer(currentIndex: 2),
       appBar: AppBar(
         centerTitle: true,
@@ -87,7 +87,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontWeight: FontWeight.bold)),
               ),
             ),
-            SizedBox(height: 10),
             Card(
               child: ListTile(
                 leading: Icon(Icons.phone, color: Colors.amber),
@@ -102,7 +101,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontWeight: FontWeight.bold)),
               ),
             ),
-            SizedBox(height: 10),
             Card(
               child: ListTile(
                 leading: Icon(Icons.mail, color: Colors.amber),

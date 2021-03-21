@@ -6,6 +6,5 @@ export './splash.dart';
 export './checkpoint_detail_scene.dart';
 export './checkpoint_page_student.dart';
 export './feedback_scene.dart';
-export './qr_scanner.dart';
 export './profile_edit.dart';
 export './profile_page.dart';

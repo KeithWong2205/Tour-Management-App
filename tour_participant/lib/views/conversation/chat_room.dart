@@ -59,7 +59,7 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[50],
+      backgroundColor: Colors.grey[350],
       appBar: chatAppBar(),
       drawer: MainDrawer(
         currentIndex: 1,
@@ -138,16 +138,16 @@ class ChatRoomsTile extends StatelessWidget {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Colors.green[200],
                       borderRadius: BorderRadius.circular(30)),
                   child: Center(
-                    child: Text(userName.substring(0, 1),
+                    child: Text(userName.substring(0, 1).toUpperCase(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: 18,
                             fontFamily: 'OverpassRegular',
-                            fontWeight: FontWeight.w300)),
+                            fontWeight: FontWeight.bold)),
                   ),
                 ),
                 SizedBox(

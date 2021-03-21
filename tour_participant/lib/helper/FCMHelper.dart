@@ -168,13 +168,17 @@ class FCMHelper {
               leading: SizedBox.fromSize(
                   size: const Size(40, 40),
                   child: ClipOval(
-                      child: Container(
-                    color: Colors.black,
+                      child: Icon(
+                    Icons.warning,
+                    color: Colors.amber,
                   ))),
               title: new Text(title),
               subtitle: new Text(message),
               trailing: IconButton(
-                  icon: Icon(Icons.close),
+                  icon: Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  ),
                   onPressed: () {
                     OverlaySupportEntry.of(context).dismiss();
                   }),

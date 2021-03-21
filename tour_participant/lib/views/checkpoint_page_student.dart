@@ -5,7 +5,7 @@ class CheckpointPageStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[50],
+      backgroundColor: Colors.grey[350],
       appBar: checkpointAppBar(),
       drawer: MainDrawer(currentIndex: 0),
       body: ListCheckpointsStudent(),
