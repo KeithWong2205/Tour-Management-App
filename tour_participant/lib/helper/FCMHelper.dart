@@ -161,7 +161,7 @@ class FCMHelper {
       //         ));
       showOverlayNotification((context) {
         return Card(
-          color: Colors.blue,
+          color: Colors.white,
           margin: const EdgeInsets.symmetric(horizontal: 4),
           child: SafeArea(
             child: ListTile(
@@ -172,7 +172,10 @@ class FCMHelper {
                     Icons.warning,
                     color: Colors.amber,
                   ))),
-              title: new Text(title),
+              title: new Text(
+                title,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               subtitle: new Text(message),
               trailing: IconButton(
                   icon: Icon(
