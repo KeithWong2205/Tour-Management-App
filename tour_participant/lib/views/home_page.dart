@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tour_participant/helper/FCMHelper.dart';
+import 'package:tour_participant/helper/SharedPreferencesHelper.dart';
 import 'package:tour_participant/widgets/widgets.dart';
 
 //Home screen where there is a bottom tab navi
@@ -70,5 +72,15 @@ class _HomeTabNaviState extends State<HomeTabNavi> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    FCMHelper.configure(context);
+    AppDataHelper.getUser().then((user) {
+      FCMHelper.subscribe(topic: user.groupID);
+      FCMHelper.subscribe(topic: user.id);
+    });
   }
 }
