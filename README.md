@@ -10,7 +10,7 @@
  <li> Push notifications, real-time update application </li>
  <li> Integration to native camera library for device camera access </li>
 </ul>
-***
+
 ### Features: </br>
 <ol>
  <li> Role-based authentication (Login, register, password management)</li>
@@ -19,7 +19,7 @@
  <li> Chat channel, with real-time updates on messages</li>
  <li> Customed personal profile for users</li>
  <li> Push notifications on certain events</li>
-***
+
 ### Setting up environment (for all platform to follow)
 1. **Dart** </br>
 To download the Dark SDK, first head to the website [DarkSDK Download](https://dart.dev/get-dart) and follow the instruction for installing the Dart SDK for your specific platform </br>
