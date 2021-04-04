@@ -38,10 +38,10 @@ Set up the project name, then set up the services via the dashboard: </br>
 * Choose to *Add app* via the dashboard and follow the instructions given for each specific platform (Android and iOS app).
 ***
 ### Running the application
-1. After cloning the application from git, please replace the setup files from Firebase to your accordance (.plist and .json files for adding to apps).
-2. Launch any editor that have been set up with all plugins installed. 
-3. From the editor, launch a simulator device (either iOS or Android)
-4. From the editor, launch *Terminal* (for MAC) or *Command line* (for Windows), run **flutter clean** in which the path of the application is located, this is to clean up all the builds and runnable.
-5. You can either choose to debug the app from the editor toolbars or type in **flutter run** to run on any running devices
-6. If you want to create a runnable **.apk** file which you can install on a physical device, type in **flutter build apk** and the editor will take care of the rest.
-7. The application when running in *debug* or *profile* mode will have a **Hot Reload** function for any changes to be made immediately, however, that function will not work in *release* mode or built .apk since they are running final product and not subceptible to changes.
+* After cloning the application from git, please replace the setup files from Firebase to your accordance (.plist and .json files for adding to apps).
+* Launch any editor that have been set up with all plugins installed. 
+* From the editor, launch a simulator device (either iOS or Android)
+* From the editor, launch *Terminal* (for MAC) or *Command line* (for Windows), run **flutter clean** in which the path of the application is located, this is to clean up all the builds and runnable.
+* You can either choose to debug the app from the editor toolbars or type in **flutter run** to run on any running devices
+* If you want to create a runnable **.apk** file which you can install on a physical device, type in **flutter build apk** and the editor will take care of the rest.
+* The application when running in *debug* or *profile* mode will have a **Hot Reload** function for any changes to be made immediately, however, that function will not work in *release* mode or built .apk since they are running final product and not subceptible to changes.
