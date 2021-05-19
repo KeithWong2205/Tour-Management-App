@@ -1,5 +1,6 @@
 name: tour_participant
 description: Flutter application for student who joins the tour.
+publish_to: none
 
 
 version: 1.0.0+1
