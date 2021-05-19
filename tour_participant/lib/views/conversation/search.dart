@@ -28,7 +28,8 @@ class _SearchState extends State<Search> {
       setState(() {
         isLoading = true;
       });
-      await firebaseService.searchByName(searchEditingController.text)
+      await firebaseService
+          .searchByName(searchEditingController.text)
           .then((snapshot) {
         searchResultSnapshot = snapshot;
         searchResultSnapshot.docs
@@ -45,23 +46,24 @@ class _SearchState extends State<Search> {
   Widget userList() {
     return haveUserSearched
         ? Expanded(
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: searchResultSnapshot.docs.length,
-          itemBuilder: (context, index) {
-            return userTile(
-              searchResultSnapshot.docs[index].data()["name"],
-              searchResultSnapshot.docs[index].data()["email"],
-              searchResultSnapshot.docs[index].data()["id"],
-            );
-          }),
-        )
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: searchResultSnapshot.docs.length,
+                itemBuilder: (context, index) {
+                  return userTile(
+                    searchResultSnapshot.docs[index].data()["name"],
+                    searchResultSnapshot.docs[index].data()["email"],
+                    searchResultSnapshot.docs[index].data()["id"],
+                  );
+                }),
+          )
         : Container();
   }
 
   /// 1.create a chatroom, send user to the chatroom, other userdetails
   sendMessage(String userId, String userName) {
-    AppDataHelper.getUser().then((user) => handleSendMessage(user.id, userId, userName));
+    AppDataHelper.getUser()
+        .then((user) => handleSendMessage(user.id, userId, userName));
   }
 
   void handleSendMessage(String uid1, String uid2, String userName) async {
@@ -82,7 +84,7 @@ class _SearchState extends State<Search> {
             builder: (context) => Chat(
                   chatRoomId: chatRoomId,
                   receiverId: uid2,
-              receiverName: userName,
+                  receiverName: userName,
                 )));
   }
 
@@ -98,17 +100,11 @@ class _SearchState extends State<Search> {
             children: [
               Text(
                 userName ?? "",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16
-                ),
+                style: TextStyle(color: Colors.black, fontSize: 16),
               ),
               Text(
                 userEmail ?? "",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16
-                ),
+                style: TextStyle(color: Colors.black, fontSize: 16),
               )
             ],
           ),
@@ -122,17 +118,17 @@ class _SearchState extends State<Search> {
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
                   color: Colors.blue,
-                  border: Border.all(width: 1.0,
-                  color: Colors.white70),
-                  borderRadius: BorderRadius.circular(24)
-              ),
-              child: Text("Messages",
+                  border: Border.all(width: 1.0, color: Colors.white70),
+                  borderRadius: BorderRadius.circular(24)),
+              child: Text(
+                "Messages",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),),
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           )
         ],
@@ -143,7 +139,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Container(
           padding: EdgeInsets.symmetric(vertical: 2.0),
@@ -151,30 +147,30 @@ class _SearchState extends State<Search> {
             children: [
               Expanded(
                   child: Container(
-                    height: 42.0,
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24.0),
-                        border: Border.all(color: Colors.white70, width: 2.0)
-                    ),
-                    child: TextField(
-                      controller: searchEditingController,
-                      style: simpleTextStyle(),
-                      decoration: InputDecoration(
-                          hintText: "Search username ...",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                          ),
-                          border: InputBorder.none
+                height: 42.0,
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(24.0),
+                    border: Border.all(color: Colors.white70, width: 2.0)),
+                child: TextField(
+                  controller: searchEditingController,
+                  style: simpleTextStyle(),
+                  decoration: InputDecoration(
+                      hintText: "Search username ...",
+                      hintStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
                       ),
-                    ),
-                  )
+                      border: InputBorder.none),
+                ),
+              )),
+              SizedBox(
+                width: 8.0,
+                height: 8.0,
               ),
-              SizedBox(width: 8.0, height: 8.0,),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   initiateSearch();
                 },
                 child: Container(
@@ -187,30 +183,31 @@ class _SearchState extends State<Search> {
                               const Color(0x0FFFFFFF)
                             ],
                             begin: FractionalOffset.topLeft,
-                            end: FractionalOffset.bottomRight
-                        ),
-                        borderRadius: BorderRadius.circular(40)
-                    ),
+                            end: FractionalOffset.bottomRight),
+                        borderRadius: BorderRadius.circular(40)),
                     padding: EdgeInsets.all(12),
-                    child: Image.asset("assets/search_white.png",
-                      height: 24, width: 24,)),
+                    child: Image.asset(
+                      "assets/search_white.png",
+                      height: 24,
+                      width: 24,
+                    )),
               )
             ],
           ),
         ),
         elevation: 0.0,
       ),
-      body: isLoading ? Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ) :  Container(
-        child: Column(
-          children: [
-            userList()
-          ],
-        ),
-      ),
+      body: isLoading
+          ? Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : Container(
+              child: Column(
+                children: [userList()],
+              ),
+            ),
     );
   }
 }
