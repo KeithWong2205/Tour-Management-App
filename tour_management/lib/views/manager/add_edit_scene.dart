@@ -109,6 +109,7 @@ class _AddEditSceneState extends State<AddEditScene> {
             centerTitle: true,
             automaticallyImplyLeading: false,
             actions: [
+              // ignore: deprecated_member_use
               FlatButton(
                 onPressed: () => Navigator.pop(context),
                 child: Icon(Icons.cancel, size: 24, color: Colors.white),
