@@ -114,6 +114,7 @@ class _ProfileEditSceneState extends State<ProfileEditScene> {
         title: Text("Edit Profile", style: TextStyle(fontSize: 24)),
         backgroundColor: Colors.amber,
         actions: [
+          // ignore: deprecated_member_use
           FlatButton(
             onPressed: () => Navigator.pop(context),
             child: Icon(Icons.cancel_presentation, size: 30, color: Colors.red),

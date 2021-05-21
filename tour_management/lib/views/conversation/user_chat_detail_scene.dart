@@ -26,6 +26,7 @@ class _UserChatDetailSceneState extends State<UserChatDetailScene> {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               actions: [
+                // ignore: deprecated_member_use
                 FlatButton(
                   onPressed: () => Navigator.pop(context),
                   child: Icon(Icons.cancel_presentation,
