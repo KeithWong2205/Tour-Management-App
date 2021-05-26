@@ -35,6 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text("Profile Panel", style: TextStyle(fontSize: 24)),
         backgroundColor: Colors.amber,
         actions: [
+          // ignore: deprecated_member_use
           FlatButton(
               onPressed: () {
                 Navigator.of(context).popUntil(ModalRoute.withName('/'));

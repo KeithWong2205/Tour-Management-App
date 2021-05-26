@@ -43,12 +43,16 @@ class _LoginFormState extends State<LoginForm> {
         listener: (BuildContext context, LoginState state) {
           if (state.loginFail) {
             Scaffold.of(context)
+              // ignore: deprecated_member_use
               ..hideCurrentSnackBar()
+              // ignore: deprecated_member_use
               ..showSnackBar(failedLoginSnack());
           }
           if (state.isSubmitting) {
             Scaffold.of(context)
+              // ignore: deprecated_member_use
               ..hideCurrentSnackBar()
+              // ignore: deprecated_member_use
               ..showSnackBar(loginSnack());
           }
           if (state.loginSuccess) {

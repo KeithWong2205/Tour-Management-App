@@ -60,6 +60,7 @@ class ListCheckpointsStudent extends StatelessWidget {
                         id: element.pointId,
                       )));
                   if (removedTodo != null) {
+                    // ignore: deprecated_member_use
                     Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
                         key: ArchSampleKeys.snackbar,
                         checkpoint: element,

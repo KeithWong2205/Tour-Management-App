@@ -267,6 +267,7 @@ class _CheckpointDetailSceneState extends State<CheckpointDetailScene> {
               var disableRateCheckpoint = false;
               if (state is FeedbackManLoadSuccess) {
                 if (state.props.isEmpty) {
+                  // ignore: deprecated_member_use
                   feedbackList = List();
                 } else {
                   feedbackList = state.fbackLists;

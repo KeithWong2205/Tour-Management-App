@@ -33,12 +33,16 @@ class _ResetFormState extends State<ResetForm> {
         listener: (BuildContext context, ResetState state) {
           if (state.isSubmitting) {
             Scaffold.of(context)
+              // ignore: deprecated_member_use
               ..hideCurrentSnackBar()
+              // ignore: deprecated_member_use
               ..showSnackBar(resetSnack());
           }
           if (state.resetFail) {
             Scaffold.of(context)
+              // ignore: deprecated_member_use
               ..hideCurrentSnackBar()
+              // ignore: deprecated_member_use
               ..showSnackBar(failedResetSnack());
           }
           if (state.resetSuccess) {

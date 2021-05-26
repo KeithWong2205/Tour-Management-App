@@ -62,6 +62,7 @@ class ListCheckPointsGuide extends StatelessWidget {
                         id: element.pointId,
                       )));
                   if (removedTodo != null) {
+                    // ignore: deprecated_member_use
                     Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
                         key: ArchSampleKeys.snackbar,
                         checkpoint: element,
@@ -89,6 +90,7 @@ class ListCheckPointsGuide extends StatelessWidget {
                   BlocProvider.of<CheckpointManBloc>(context).add(
                       CheckpointManUpdated(
                           element.copyWith(complete: !element.pointComplete)));
+                  // ignore: deprecated_member_use
                   Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Completion notification sent...')));
                 },

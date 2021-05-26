@@ -114,6 +114,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
         title: Text("Edit Profile", style: TextStyle(fontSize: 24)),
         backgroundColor: Colors.amber,
         actions: [
+          // ignore: deprecated_member_use
           FlatButton(
             onPressed: () => Navigator.pop(context),
             child: Icon(Icons.cancel, size: 24, color: Colors.white),

@@ -101,8 +101,10 @@ class MainDrawer extends StatelessWidget {
   }
 
   List<Widget> generateDrawerItems(BuildContext context) {
+    // ignore: deprecated_member_use
     List<Widget> widgets = List();
     widgets.add(header());
+    // ignore: deprecated_member_use
     List<Widget> menuItems = List();
     menuItems.add(listItem(listTitle: checkpoint(context)));
     menuItems.add(listItem(listTitle: conversation(context)));

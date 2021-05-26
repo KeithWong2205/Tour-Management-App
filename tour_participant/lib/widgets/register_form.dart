@@ -54,7 +54,9 @@ class _RegisterFormState extends State<RegisterForm> {
         listener: (BuildContext context, RegState state) {
           if (state.isSubmitting) {
             Scaffold.of(context)
+              // ignore: deprecated_member_use
               ..hideCurrentSnackBar()
+              // ignore: deprecated_member_use
               ..showSnackBar(registerSnack());
           }
           if (state.regSuccess) {
@@ -63,7 +65,9 @@ class _RegisterFormState extends State<RegisterForm> {
           }
           if (state.regFail) {
             Scaffold.of(context)
+              // ignore: deprecated_member_use
               ..hideCurrentSnackBar()
+              // ignore: deprecated_member_use
               ..showSnackBar(failedRegSnack());
           }
         },

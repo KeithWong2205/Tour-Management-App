@@ -55,6 +55,7 @@ class ListCheckPointsManager extends StatelessWidget {
                 onDismissed: (direction) {
                   BlocProvider.of<CheckpointManBloc>(context)
                       .add(CheckpointManDelete(element));
+                  // ignore: deprecated_member_use
                   Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
                       checkpoint: element,
                       onUndo: () => BlocProvider.of<CheckpointManBloc>(context)
@@ -68,6 +69,7 @@ class ListCheckPointsManager extends StatelessWidget {
                         id: element.pointId,
                       )));
                   if (removedTodo != null) {
+                    // ignore: deprecated_member_use
                     Scaffold.of(context).showSnackBar(CheckpointDeleteSnack(
                         key: ArchSampleKeys.snackbar,
                         checkpoint: element,
